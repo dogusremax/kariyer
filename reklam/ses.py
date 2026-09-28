@@ -4,7 +4,7 @@ from scipy.io import wavfile
 
 SR = 44100
 OFF = 3.0  # açılış (ARANIYOR) süresi; ana zaman çizelgesi bu kadar kayar
-DUR = 30.0 + OFF
+DUR = 31.0 + OFF
 N = int(SR * DUR)
 rng = np.random.default_rng(3)
 
@@ -197,7 +197,7 @@ chords(3.2, 6.3, PROG, 1500)
 add(pad, 6.3, lp(saw_pad([note(57), note(64), note(69)], 2.5, .6), 700), .5)  # kırılma: kapalı pad
 chords(8.7, 24.7, PROG, 2200)
 # final: F - G - C (majör çözülüş)
-for t0, c, d in ((25.2, 'F', 1.5), (26.7, 'G', 1.6), (28.3, 'C', 1.7)):
+for t0, c, d in ((25.2, 'F', 1.5), (26.7, 'G', 1.6), (28.3, 'C', 2.7)):
     add(pad, t0, lp(saw_pad([note(n) for n in CH[c]] + [note(CH[c][0] + 12), note(CH[c][1] + 12)], d, .08), 3500), .7)
     add(mus, t0, bass(note(ROOT[c]), d), .9)
 
@@ -279,8 +279,8 @@ add(fx, 26.1, hit(), .8)
 add(fx, 27.3, clink(), .25, -.2)
 add(fx, 27.8, pop(), .4)
 add(fx, 28.3, boom(1.7), .9)
-add(fx, 28.85, stamp(), 1.1)  # BAŞLADI! damgası
-add(fx, 28.85, hit(.9), .7)
+add(fx, 29.6, stamp(), 1.1)  # BAŞLADI! damgası
+add(fx, 29.6, hit(.9), .7)
 
 # ---------- açılış: ARANIYOR (zamanlar ana çizelgeye göre negatif) ----------
 H = -OFF

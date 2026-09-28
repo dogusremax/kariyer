@@ -186,7 +186,7 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased}
 
 <script>
 (function(){
-const HOOK=3,DUR=33;window.DUR=DUR;
+const HOOK=3,DUR=34;window.DUR=DUR;
 const $=id=>document.getElementById(id);
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const E={lin:p=>p,out:p=>1-Math.pow(1-p,3),inq:p=>p*p*p,io:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,
@@ -276,7 +276,7 @@ const speeds=[];
 for(let i=0;i<14;i++){const d=document.createElement('div');d.className='speed';d.style.top=(60+rnd()*840)+'px';d.style.width=(160+rnd()*320)+'px';$('speeds').appendChild(d);speeds.push({d,sp:1400+rnd()*1400,off:rnd()*1600})}
 
 /* ---------- RENDER ---------- */
-const slams=[-2.95,-2.2,-1.7,.2,.7,1.1,1.45,5.1,8.7,10.75,14.0,20.35,20.6,28.85];
+const slams=[-2.95,-2.2,-1.7,.2,.7,1.1,1.45,5.1,8.7,10.75,14.0,20.35,20.6,29.6];
 function render(T){
   renderHook(T);renderMain(T-HOOK,T);
 }
@@ -367,7 +367,7 @@ function renderMain(t,T){
   kf($('tel'),t,[[27.8,{o:0,y:80}],[28.3,{s:1},'back'],[31,{}]]);
   if(t>28.3)$('tel').style.transform=`scale(${1+Math.sin((t-28.3)*6)*.035})`;
   show($('s7c'),t,28.2,31,{o:0,y:30},{o:1});show($('s7d'),t,28.5,31,{o:0,y:30},{o:1});
-  kf($('stamp2'),t,[[28.85,{o:0,s:3.2,r:-24}],[29.1,{r:-7}],[31,{r:-7}]]);
+  kf($('stamp2'),t,[[29.6,{o:0,s:3.2,r:-24}],[29.85,{r:-7}],[32,{r:-7}]]);
 
   // köşe logosu
   kf($('logoTop'),t,[[.4,{o:0}],[.9,{o:.9}],[24.8,{o:.9}],[25.2,{o:0}]]);
