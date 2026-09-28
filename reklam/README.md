@@ -12,7 +12,7 @@ Kariyer sayfasındaki (`../index.html`) içerik, renkler (RE/MAX lacivert/kırm�
 | 15–21 sn | Doğuşla 1. Vites: 11 basamak (DOĞ → ZİRVE), balon yükselir |
 | 21–26 sn | Maaş tavanı yok: grafik tavanı kırar · Fikirtepe, K. Kıbrıs, Golden Visa, Dubai, Londra |
 | 26–30 sn | Deneyim aramıyoruz. Karakter arıyoruz. |
-| 30–34 sn | Masanız hazır. Sıra sizde. · Hemen Başvur · yenifikirtepeburada.com |
+| 30–34 sn | Her şey hazır. Seni bekliyor. · Hemen Başvur · yenifikirtepeburada.com |
 
 ## Yeniden üretme
 
