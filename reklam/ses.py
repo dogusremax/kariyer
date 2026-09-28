@@ -17,6 +17,8 @@ def add(buf, t0, x, amp=1.0, pan=0.0):
     if i >= N:
         return
     x = x[: N - i]
+    if isinstance(pan, tuple):  # (başlangıç, bitiş): ses soldan sağa vb. akar
+        pan = np.linspace(pan[0], pan[1], len(x))
     l, r = np.cos((pan + 1) * np.pi / 4), np.sin((pan + 1) * np.pi / 4)
     buf[i:i + len(x), 0] += x * amp * l * 1.414
     buf[i:i + len(x), 1] += x * amp * r * 1.414
@@ -79,19 +81,34 @@ def hat(d=.05, a=1.0):
     return hp(noise(d), 7000) * np.exp(-t * 90) * a
 
 
-def whoosh(d=.7, rev=False):
+def whoosh(d=.7, rev=False, down=False):
+    """Geçiş sesi: tok gövdeli 'vuuş' (tonal süpürme + rezonanslı hava + yumuşak kuyruk)."""
     t = tt(d)
-    n = noise(d)
-    out = np.zeros_like(n)
-    blk = 1024
-    for i in range(0, len(n), blk):
-        p = i / len(n)
-        fc = 300 + 5000 * (np.sin(np.pi * p) ** 2)
-        out[i:i + blk] = bp(n[i:i + blk], fc * .6, min(fc * 1.6, 20000))
-    env = np.sin(np.pi * np.clip(t / d, 0, 1)) ** 2
+    p = t / d
     if rev:
-        env = (t / d) ** 3
-    return out * env
+        env = p ** 3
+    else:
+        pk = .62
+        env = np.where(p < pk, (p / pk) ** 2, ((1 - p) / (1 - pk)) ** 1.6)
+    shape = np.sin(np.pi * np.clip(p / (.62 * 2), 0, 1))  # tepe noktasında en parlak
+    # rezonanslı hava (ince 'fıss' yerine dar bantlı, yumuşak)
+    n = noise(d)
+    air = np.zeros_like(n)
+    blk = 512
+    for i in range(0, len(n), blk):
+        fc = 260 + 1500 * shape[i]
+        air[i:i + blk] = bp(n[i:i + blk], fc / 1.35, fc * 1.35)
+    air = lp(air, 4200)
+    # tonal gövde: doppler gibi yükselip inen perde
+    f = (95 + 190 * (1 - shape)) if down else (80 + 200 * shape)
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    body = lp(np.sin(ph) + .35 * signal.sawtooth(ph), 700)
+    x = (air / (np.std(air) + 1e-9) * .5 + body * .55) * env
+    if not rev:  # tepe noktasında hafif 'tum'
+        i0 = int(.62 * d * SR)
+        tk = np.arange(len(x) - i0) / SR
+        x[i0:] += np.sin(2 * np.pi * (48 + 40 * np.exp(-tk * 20)) * tk) * np.exp(-tk * 9) * .45
+    return x / (np.max(np.abs(x)) + 1e-9)
 
 
 def riser(d=1.7):
@@ -226,37 +243,37 @@ for t, p in ((.2, 0), (.7, -.2), (1.1, .2), (1.45, 0)):
     add(fx, t, hit(), .9, p)
 for i in range(6):  # vinç zinciri / metal tıkırtı
     add(fx, .35 + i * .45, clink()[:int(.15 * SR)], .08, .6)
-add(fx, 3.1, whoosh(.6), .6, -.5)
+add(fx, 3.1, whoosh(.6), .75, (-.9, .9))
 add(fx, 3.3, lp(noise(1.4), 120) * np.sin(np.linspace(0, np.pi, int(1.4 * SR))), 1.2)  # binalar yükseliyor
 wl = np.sort(rng.uniform(3.9, 6.2, 18))
 for i, t in enumerate(wl):  # pencere ışıkları
     add(fx, t, tick(), .06, rng.uniform(-.8, .8))
 add(fx, 5.1, hit(1.2), 1.0)
-add(fx, 6.2, whoosh(.8), .6, .5)
-add(fx, 6.9, whoosh(1.1, rev=True), .35)
+add(fx, 6.2, whoosh(.8), .75, (.9, -.9))
+add(fx, 6.9, whoosh(1.1, rev=True), .4, (-.5, .5))
 add(fx, 8.0, clink(), .45, .1)
 add(fx, 8.0, riser(.7), .35)
 add(fx, 8.7, boom(1.8), 1.0)
-add(fx, 10.05, whoosh(.6), .6, -.4)
+add(fx, 10.05, whoosh(.6), .75, (-.9, .9))
 add(fx, 10.75, stamp(), .6)      # pin iniyor
-add(fx, 10.9, whoosh(.6), .45, .3)
+add(fx, 10.9, whoosh(.6), .5, (.3, -.3))
 for i in range(4):
     add(fx, 11.6 + i * .55, tick(), .35, -.3 + i * .2)
 add(fx, 14.0, stamp(), 1.0)
-add(fx, 15.2, whoosh(.6), .6, .4)
+add(fx, 15.2, whoosh(.6), .75, (.9, -.9))
 for t in (15.6, 16.25, 16.9, 17.55, 18.2):
     add(fx, t, buzz(), .7)
     add(fx, t + .02, ping(), .45, .2)
 add(fx, 19.0, hit(.8), .7)
-add(fx, 20.1, whoosh(.5), .7, -.8)
-add(fx, 20.2, whoosh(.5), .7, .8)
+add(fx, 20.1, whoosh(.5), .7, (-.9, .1))
+add(fx, 20.2, whoosh(.5), .7, (.9, -.1))
 add(fx, 20.35, hit(), .8, -.3)
 add(fx, 20.6, hit(), .8, .3)
 add(fx, 22.2, pop(), .35)
-add(fx, 22.2, whoosh(.5), .35)
+add(fx, 22.2, whoosh(.5), .4)
 add(fx, 23.5, riser(1.7), .7)
 add(fx, 25.2, boom(2.6), 1.1)
-add(fx, 25.2, whoosh(2.3, rev=False), .35)  # balon yükseliyor
+add(fx, 25.2, whoosh(2.3), .45)  # balon yükseliyor
 add(fx, 25.5, hit(), .7)
 add(fx, 26.1, hit(), .8)
 add(fx, 27.3, clink(), .25, -.2)
@@ -267,14 +284,14 @@ add(fx, 28.3, boom(1.7), .9)
 H = -OFF
 add(fx, H + .05, boom(1.6), 1.0)
 add(fx, H + .05, hit(), .9)
-add(fx, H + .33, whoosh(.45), .7, -.3)
+add(fx, H + .33, whoosh(.45, down=True), .75, (-.3, .3))
 add(fx, H + .8, stamp(), 1.0)
 add(fx, H + 1.3, pop(), .5)
 add(fx, H + 1.35, hit(.5), .45)
 add(fx, H + 1.75, tick(), .4)
 add(fx, H + 1.95, pop(), .35, .2)
 add(fx, H + 2.1, riser(.9), .45)
-add(fx, H + 2.75, whoosh(.5), .7, .5)
+add(fx, H + 2.75, whoosh(.5), .75, (-.9, .9))
 for t in beat_times(H + .1, -.1):
     add(mus, t, kick(), .9)
     add(mus, t, bass(note(33), .45), .7)
