@@ -279,6 +279,8 @@ add(fx, 26.1, hit(), .8)
 add(fx, 27.3, clink(), .25, -.2)
 add(fx, 27.8, pop(), .4)
 add(fx, 28.3, boom(1.7), .9)
+add(fx, 28.85, stamp(), 1.1)  # BAŞLADI! damgası
+add(fx, 28.85, hit(.9), .7)
 
 # ---------- açılış: ARANIYOR (zamanlar ana çizelgeye göre negatif) ----------
 H = -OFF
@@ -318,7 +320,7 @@ mix = mus * .75 + padw * .5 + reverb(fx, 1.4, .3) * .9
 mix = hp(mix.T, 25).T
 mix = np.tanh(mix / np.max(np.abs(mix)) * 1.8) / np.tanh(1.8)
 fade = np.ones(N)
-fade[-int(.8 * SR):] = np.linspace(1, 0, int(.8 * SR))
+fade[-int(.5 * SR):] = np.linspace(1, 0, int(.5 * SR))
 fade[:int(.01 * SR)] = np.linspace(0, 1, int(.01 * SR))
 mix *= fade[:, None] * .89
 wavfile.write(__import__('sys').argv[1], SR, (mix * 32767).astype(np.int16))
