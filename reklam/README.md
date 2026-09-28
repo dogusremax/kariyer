@@ -7,10 +7,10 @@ Kariyer sayfasındaki (`../index.html`) içerik, renkler (RE/MAX lacivert/kırm�
 | Süre | Sahne |
 |---|---|
 | 0–5 sn | Hero videosu · "Kariyerin tam burada yükseliyor." |
-| 5–10 sn | Sayaçlar: 11.729 konut · 110+ ülke · 11 ders · 2 pazar |
+| 5–10 sn | Sayaçlar: 11.729 konut · 110+ ülke · 11 ders · 4 pazar (Türkiye, K. Kıbrıs, Dubai, Yunanistan) |
 | 10–15 sn | Neden RE/MAX Doğuş? Bölge · Eğitim · Teknoloji · Global |
 | 15–21 sn | Doğuşla 1. Vites: 11 basamak (DOĞ → ZİRVE), balon yükselir |
-| 21–26 sn | Maaş tavanı yok: grafik tavanı kırar · Fikirtepe, K. Kıbrıs, Golden Visa, Dubai, Londra |
+| 21–26 sn | Maaş tavanı yok: grafik tavanı kırar · Fikirtepe, K. Kıbrıs, Golden Visa, Dubai, Yunanistan, Londra |
 | 26–30 sn | Deneyim aramıyoruz. Karakter arıyoruz. |
 | 30–34 sn | Her şey hazır. Seni bekliyor. · Hemen Başvur · yenifikirtepeburada.com |
 
