@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>RE/MAX Doğuş Kariyer Reklam Filmi</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{
+  --navy:#003DA5;--navy-ink:#081B38;--navy-deep:#0C2B5E;--red:#DC1C2E;--red-hi:#FF4D5E;
+  --cloud:#F3F6FB;--steel:#5A6B85;--line:#DDE5F0;--white:#fff;
+  --disp:'Archivo',sans-serif;--body:'Manrope',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000;overflow:hidden}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--navy-ink);font-family:var(--body);color:#fff;transform-origin:0 0}
+.scene{position:absolute;inset:0;overflow:hidden}
+.abs{position:absolute;will-change:transform,opacity}
+.disp{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.02}
+.eyebrow{font-family:var(--body);font-weight:800;font-size:30px;letter-spacing:.22em;text-transform:uppercase}
+.mask{overflow:hidden;display:block}
+.mask>span{display:inline-block;will-change:transform}
+.red{color:var(--red)} .redhi{color:var(--red-hi)}
+
+/* S1 */
+#heroCanvas{position:absolute;inset:0}
+#s1 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,27,56,.55) 0%,rgba(8,27,56,0) 30%,rgba(8,27,56,.15) 50%,rgba(8,27,56,.92) 78%,#081B38 100%)}
+.chip{font-weight:700;font-size:28px;padding:14px 26px;border-radius:999px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.28);backdrop-filter:blur(6px);white-space:nowrap}
+.chip b{color:var(--red-hi);margin-right:10px}
+
+/* S2 */
+#s2{background:linear-gradient(180deg,#003DA5 0%,#0C2B5E 100%)}
+.stat{left:90px;right:90px}
+.stat .n{font-family:var(--disp);font-weight:900;font-size:170px;letter-spacing:-.03em;line-height:1}
+.stat .l{font-size:38px;font-weight:700;opacity:.85;margin-top:6px}
+.stat .rule{height:4px;background:var(--red);margin-top:26px;transform-origin:0 50%}
+.tower{bottom:0;background:rgba(255,255,255,.06);border-top:6px solid rgba(255,255,255,.14);transform-origin:50% 100%}
+
+/* S3 */
+#s3{background:var(--cloud);color:var(--navy-ink)}
+.card{width:440px;height:470px;background:#fff;border-radius:34px;padding:44px 40px;box-shadow:0 30px 60px -30px rgba(8,27,56,.35);border:1.5px solid var(--line)}
+.card .ic{width:96px;height:96px;border-radius:26px;background:var(--navy);display:flex;align-items:center;justify-content:center;margin-bottom:34px}
+.card .ic svg{width:56px;height:56px}
+.card .k{font-weight:800;font-size:24px;letter-spacing:.2em;color:var(--red);text-transform:uppercase}
+.card .t{font-family:var(--disp);font-weight:800;font-size:44px;line-height:1.08;margin-top:14px;letter-spacing:-.01em}
+.card .d{font-size:26px;font-weight:600;line-height:1.35;color:var(--steel);margin-top:16px}
+
+/* S4 */
+#s4{background:radial-gradient(120% 70% at 20% 100%,#0C2B5E 0%,#081B38 60%)}
+.step{height:70px;width:470px;border-radius:14px;display:flex;align-items:center;padding:0 26px;gap:22px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.16)}
+.step .no{font-weight:800;font-size:22px;letter-spacing:.14em;opacity:.7}
+.step .w{font-family:var(--disp);font-weight:900;font-size:38px;letter-spacing:.02em}
+.step.top{background:var(--red);border-color:var(--red)}
+
+/* S5 */
+#s5{background:var(--red)}
+.pill{font-weight:800;font-size:32px;padding:18px 30px;border-radius:999px;background:#fff;color:var(--navy-ink);white-space:nowrap}
+
+/* S6 */
+#s6{background:#fff;color:var(--navy-ink)}
+.chk{left:90px;right:90px;display:flex;gap:30px;align-items:flex-start;font-size:42px;font-weight:700;line-height:1.25}
+.chk .b{flex:0 0 72px;height:72px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center}
+
+/* S7 */
+#s7{background:radial-gradient(90% 60% at 50% 38%,#0B4BC0 0%,#003DA5 35%,#081B38 100%)}
+.cta{font-family:var(--disp);font-weight:800;font-size:46px;padding:34px 70px;border-radius:999px;background:var(--red);color:#fff;box-shadow:0 20px 50px -10px rgba(220,28,46,.6);white-space:nowrap}
+
+/* global */
+#foot{left:0;right:0;bottom:56px;text-align:center;font-weight:800;font-size:26px;letter-spacing:.16em}
+#tag{left:60px;top:70px;font-weight:800;font-size:24px;letter-spacing:.2em}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- S1 · Açılış: Yeni Fikirtepe -->
+  <section class="scene" id="s1">
+    <canvas id="heroCanvas" width="1080" height="1920"></canvas>
+    <div class="shade"></div>
+    <img class="abs" id="s1logo" src="assets/logo-beyaz.png" style="left:50%;top:120px;width:300px;margin-left:-150px">
+    <div class="abs" id="s1chips" style="left:90px;top:1060px;display:flex;gap:14px;flex-wrap:wrap;width:900px">
+      <div class="chip"><b>●</b>Fikirtepe, Kadıköy</div>
+      <div class="chip">Global RE/MAX ağı</div>
+    </div>
+    <h1 class="abs disp" style="left:90px;top:1170px;font-size:132px">
+      <span class="mask"><span id="h1a">Kariyerin</span></span>
+      <span class="mask"><span id="h1b">tam burada</span></span>
+      <span class="mask"><span id="h1c" class="redhi">yükseliyor.</span></span>
+    </h1>
+    <p class="abs" id="s1sub" style="left:90px;right:90px;top:1600px;font-size:36px;font-weight:600;line-height:1.35;opacity:.9">
+      Türkiye'nin en büyük kentsel dönüşümü Yeni Fikirtepe'nin merkezinde, gayrimenkul danışmanı olun.
+    </p>
+  </section>
+
+  <!-- S2 · Rakamlar -->
+  <section class="scene" id="s2">
+    <div id="towers"></div>
+    <div class="abs eyebrow" id="s2eb" style="left:90px;top:230px;color:#fff;opacity:.8">Yeni Fikirtepe · RE/MAX Doğuş</div>
+    <div class="abs stat" id="st0" style="top:330px"><div class="n" data-to="11729">0</div><div class="l">Fikirtepe'de yükselen konut</div><div class="rule"></div></div>
+    <div class="abs stat" id="st1" style="top:680px"><div class="n" data-to="110" data-suf="+">0</div><div class="l">Ülkede RE/MAX ağı</div><div class="rule"></div></div>
+    <div class="abs stat" id="st2" style="top:1030px"><div class="n" data-to="11">0</div><div class="l">Derslik hazır eğitim programı</div><div class="rule"></div></div>
+    <div class="abs stat" id="st3" style="top:1380px"><div class="n" data-to="2">0</div><div class="l">Pazar: Türkiye + K. Kıbrıs</div><div class="rule"></div></div>
+  </section>
+
+  <!-- S3 · Neden Doğuş -->
+  <section class="scene" id="s3">
+    <div class="abs eyebrow red" id="s3eb" style="left:90px;top:220px">Neden RE/MAX Doğuş?</div>
+    <h2 class="abs disp" style="left:90px;top:290px;font-size:96px">
+      <span class="mask"><span id="s3a">Sıradan bir</span></span>
+      <span class="mask"><span id="s3b">ofis değil,</span></span>
+      <span class="mask"><span id="s3c" style="color:var(--navy)">bir kariyer</span></span>
+      <span class="mask"><span id="s3d" style="color:var(--navy)">altyapısı.</span></span>
+    </h2>
+    <div class="abs card" id="c0" style="left:80px;top:760px">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4h2v17M4 21h8M8 5h12l-3 3M8 5l4 4M18 8v5"/><rect x="16" y="13" width="4" height="3"/></svg></div>
+      <div class="k">Bölge</div><div class="t">Yeni Fikirtepe'nin merkezindeyiz</div><div class="d">Binlerce yeni konut, bitmeyen alıcı trafiği</div>
+    </div>
+    <div class="abs card" id="c1" style="left:560px;top:760px">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5M22 9v6"/></svg></div>
+      <div class="k">Eğitim</div><div class="t">11 derslik 1. Vites programı</div><div class="d">Mentor eşliğinde, uygulamalı</div>
+    </div>
+    <div class="abs card" id="c2" style="left:80px;top:1270px">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 18h4M9 8l2 2 4-4"/></svg></div>
+      <div class="k">Teknoloji</div><div class="t">Kendi yazılımlarımızla çalışırsınız</div><div class="d">Angaryayı teknoloji üstlenir</div>
+    </div>
+    <div class="abs card" id="c3" style="left:560px;top:1270px">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.8 2.8 4 6 4 9.5s-1.2 6.7-4 9.5c-2.8-2.8-4-6-4-9.5s1.2-6.7 4-9.5z"/></svg></div>
+      <div class="k">Global</div><div class="t">Kıbrıs · Dubai · Londra</div><div class="d">110+ ülkede RE/MAX iş birliği</div>
+    </div>
+  </section>
+
+  <!-- S4 · Doğuşla 1. Vites -->
+  <section class="scene" id="s4">
+    <div class="abs eyebrow redhi" id="s4eb" style="left:90px;top:220px">Doğuşla 1. Vites</div>
+    <h2 class="abs disp" style="left:90px;top:290px;font-size:110px">
+      <span class="mask"><span id="s4a">11 derste</span></span>
+      <span class="mask"><span id="s4b">sıfırdan sahaya.</span></span>
+    </h2>
+    <p class="abs" id="s4sub" style="left:90px;right:90px;top:560px;font-size:34px;font-weight:600;opacity:.8;line-height:1.35">Deneyimsiz gelirsiniz, mentor eşliğinde donanımlı sahaya çıkarsınız.</p>
+    <div id="steps"></div>
+    <img class="abs" id="balloon4" src="assets/balon.png" style="width:120px;left:0;top:0">
+  </section>
+
+  <!-- S5 · Kazanç -->
+  <section class="scene" id="s5">
+    <div class="abs eyebrow" id="s5eb" style="left:90px;top:220px;opacity:.85">Kazanç modeli</div>
+    <h2 class="abs disp" style="left:90px;top:290px;font-size:140px">
+      <span class="mask"><span id="s5a">Maaş</span></span>
+      <span class="mask"><span id="s5b">tavanı yok.</span></span>
+    </h2>
+    <div class="abs disp" id="s5c" style="left:90px;top:620px;font-size:60px;color:var(--navy-ink)">Emeğinin karşılığı var.</div>
+    <svg class="abs" id="chart" viewBox="0 0 900 560" style="left:90px;top:760px;width:900px;height:560px;overflow:visible">
+      <line id="ceil" x1="0" y1="170" x2="900" y2="170" stroke="#fff" stroke-width="5" stroke-dasharray="18 14" opacity=".7"/>
+      <text id="ceilT" x="0" y="150" fill="#fff" font-family="Manrope" font-weight="800" font-size="26" letter-spacing="4" opacity=".75">SABİT MAAŞ TAVANI</text>
+      <g id="bars"></g>
+      <path id="arrow" d="" fill="none" stroke="#081B38" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="arrowHead" d="M-26,-4 L0,-34 L26,-4" fill="none" stroke="#081B38" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="abs eyebrow" id="s5mk" style="left:90px;top:1380px;opacity:.85">Çok pazarlı kazanç</div>
+    <div class="abs" id="pills" style="left:90px;top:1440px;width:900px;display:flex;flex-wrap:wrap;gap:18px">
+      <div class="pill">Fikirtepe</div><div class="pill">K. Kıbrıs</div><div class="pill">Golden Visa</div><div class="pill">Dubai</div><div class="pill">Londra</div>
+    </div>
+  </section>
+
+  <!-- S6 · Kimi arıyoruz -->
+  <section class="scene" id="s6">
+    <div class="abs eyebrow red" id="s6eb" style="left:90px;top:260px">Kimi arıyoruz?</div>
+    <h2 class="abs disp" style="left:90px;top:330px;font-size:116px">
+      <span class="mask"><span id="s6a">Deneyim</span></span>
+      <span class="mask"><span id="s6b">aramıyoruz.</span></span>
+      <span class="mask"><span id="s6c" class="red">Karakter</span></span>
+      <span class="mask"><span id="s6d" class="red">arıyoruz.</span></span>
+    </h2>
+    <div class="abs chk" id="k0" style="top:1000px"><div class="b"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><div>İnsanlarla konuşmaktan enerji alıyorsanız</div></div>
+    <div class="abs chk" id="k1" style="top:1190px"><div class="b"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><div>Sabit maaş yerine performans kazancını tercih ediyorsanız</div></div>
+    <div class="abs chk" id="k2" style="top:1380px"><div class="b"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><div>Öğrenmeye ve disiplinli çalışmaya hazırsanız</div></div>
+  </section>
+
+  <!-- S7 · Kapanış / CTA -->
+  <section class="scene" id="s7">
+    <img class="abs" id="balloon7" src="assets/balon.png" style="width:300px;left:390px;top:0">
+    <h2 class="abs disp" style="left:0;right:0;top:880px;font-size:128px;text-align:center">
+      <span class="mask"><span id="s7a">Masanız hazır.</span></span>
+      <span class="mask"><span id="s7b" class="redhi">Sıra sizde.</span></span>
+    </h2>
+    <div class="abs" id="s7cta" style="left:0;right:0;top:1200px;display:flex;justify-content:center"><div class="cta">Hemen Başvur →</div></div>
+    <div class="abs disp" id="s7url" style="left:0;right:0;top:1395px;text-align:center;font-size:52px;font-weight:700">yenifikirtepeburada.com</div>
+    <div class="abs" id="s7note" style="left:0;right:0;top:1475px;text-align:center;font-size:30px;font-weight:600;opacity:.75">Deneyim şart değil · Başvurular 2 iş günü içinde yanıtlanır</div>
+    <img class="abs" id="s7logo" src="assets/logo-beyaz.png" style="left:50%;top:1600px;width:260px;margin-left:-130px">
+    <div class="abs" id="s7ig" style="left:0;right:0;top:1745px;text-align:center;font-size:28px;font-weight:700;opacity:.7">Instagram · @remaxdogus</div>
+  </section>
+
+  <div class="abs" id="tag">RE/MAX DOĞUŞ · KARİYER</div>
+  <div class="abs" id="foot">YENIFIKIRTEPEBURADA.COM</div>
+</div>
+
+<script>
+const FPS = 30, DURATION = 34;
+const $ = id => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const lerp = (a, b, k) => a + (b - a) * k;
+const eOut = k => 1 - Math.pow(1 - k, 3);
+const eOut5 = k => 1 - Math.pow(1 - k, 5);
+const eIO = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+const eBack = k => { const c = 1.7; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+
+function set(el, { o, x = 0, y = 0, s = 1, r = 0 } = {}) {
+  el.style.transform = `translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;
+  if (o !== undefined) el.style.opacity = o;
+}
+// Maskeli satır: aşağıdan yukarı kayarak girer
+function rise(id, t, t0, dur = .7) {
+  const k = eOut5(prog(t, t0, t0 + dur));
+  $(id).style.transform = `translateY(${(1 - k) * 110}%)`;
+}
+// Yukarı kayarak + opaklıkla giriş
+function fadeUp(el, t, t0, dur = .6, dist = 50) {
+  const k = eOut(prog(t, t0, t0 + dur));
+  set(el, { o: k, y: (1 - k) * dist });
+}
+
+// Sahne zamanlaması (saniye)
+const SC = [
+  ['s1', 0, 5.6], ['s2', 5.0, 10.4], ['s3', 9.8, 15.6], ['s4', 15.0, 21.6],
+  ['s5', 21.0, 26.6], ['s6', 26.0, 30.6], ['s7', 30.0, DURATION + 1],
+];
+const WIPE = .55;
+
+// --- Dinamik öğeler ---
+const towers = $('towers');
+const TW = [[40, 150, 520], [210, 120, 820], [350, 170, 640], [540, 130, 980], [690, 160, 720], [870, 170, 900]];
+TW.forEach(([x, w, h]) => {
+  const d = document.createElement('div'); d.className = 'abs tower';
+  Object.assign(d.style, { left: x + 'px', width: w + 'px', height: h + 'px' }); towers.appendChild(d);
+});
+
+const LESSONS = ['DOĞ', 'ARA', 'BULUŞ', 'KEŞFET', 'KÖKLEŞ', 'PARILDA', 'YAYIL', 'KAZAN', 'KORU', 'BAĞLAN', 'ZİRVE'];
+const stepEls = LESSONS.map((w, i) => {
+  const d = document.createElement('div'); d.className = 'abs step' + (i === 10 ? ' top' : '');
+  d.innerHTML = `<span class="no">DERS ${String(i + 1).padStart(2, '0')}</span><span class="w">${w}</span>`;
+  Object.assign(d.style, { left: (70 + i * 46) + 'px', top: (1740 - i * 80) + 'px' });
+  $('steps').appendChild(d); return d;
+});
+
+const BARS = [70, 110, 150, 210, 290, 390, 500];
+const barsG = $('bars');
+const barEls = BARS.map((h, i) => {
+  const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  r.setAttribute('x', 20 + i * 125); r.setAttribute('width', 86); r.setAttribute('rx', 10);
+  r.setAttribute('fill', i === BARS.length - 1 ? '#081B38' : 'rgba(255,255,255,.9)');
+  barsG.appendChild(r); return r;
+});
+const ARROW = BARS.map((h, i) => [63 + i * 125, 560 - h - 40]);
+
+// Hero kareleri (build/hero/001.jpg ...)
+const HERO_N = 165, heroImgs = [];
+const heroReady = Promise.all(Array.from({ length: HERO_N }, (_, i) => new Promise(res => {
+  const im = new Image(); im.onload = im.onerror = () => res(); im.src = `build/hero/${String(i + 1).padStart(3, '0')}.jpg`; heroImgs[i] = im;
+})));
+const hctx = $('heroCanvas').getContext('2d');
+
+function fmt(n) { return Math.round(n).toLocaleString('tr-TR'); }
+
+function render(t) {
+  // Sahne görünürlüğü + alttan yukarı perde geçişi
+  SC.forEach(([id, a, b], i) => {
+    const el = $(id);
+    const vis = t >= a && t < b;
+    el.style.display = vis ? 'block' : 'none';
+    if (!vis) return;
+    const k = i === 0 ? 1 : eIO(prog(t, a, a + WIPE));
+    el.style.clipPath = `inset(${(1 - k) * 100}% 0 0 0)`;
+    el.style.zIndex = i + 1;
+  });
+
+  // Global etiketler (sahneye göre renk)
+  const dark = (t >= 10.1 && t < 15.3) || (t >= 26.3 && t < 30.3);
+  const col = dark ? 'rgba(8,27,56,.55)' : 'rgba(255,255,255,.6)';
+  $('tag').style.color = col; $('foot').style.color = col;
+  const gOn = t > 5.3 && t < 30.3 ? 1 : 0;
+  $('tag').style.opacity = gOn; $('foot').style.opacity = gOn;
+  $('tag').style.zIndex = $('foot').style.zIndex = 20;
+
+  // S1
+  if (t < 5.6) {
+    const f = Math.min(HERO_N - 1, Math.floor(t * FPS));
+    const im = heroImgs[f];
+    if (im && im.complete && im.naturalWidth) {
+      const z = 1 + t * .02;
+      hctx.setTransform(z, 0, 0, z, 540 * (1 - z), 960 * (1 - z));
+      hctx.drawImage(im, 0, 0, 1080, 1920);
+    } else { hctx.fillStyle = '#0C2B5E'; hctx.fillRect(0, 0, 1080, 1920); }
+    fadeUp($('s1logo'), t, .2, .8, -30);
+    fadeUp($('s1chips'), t, .6, .6, 30);
+    rise('h1a', t, .9); rise('h1b', t, 1.2); rise('h1c', t, 1.5);
+    fadeUp($('s1sub'), t, 2.3, .7, 30);
+  }
+
+  // S2 · sayaçlar + yükselen kuleler
+  if (t >= 5 && t < 10.4) {
+    const T = t - 5;
+    towers.childNodes.forEach((d, i) => {
+      const k = eOut(prog(T, .3 + i * .12, 2.2 + i * .12));
+      d.style.transform = `scaleY(${k})`;
+    });
+    fadeUp($('s2eb'), T, .4, .5, 20);
+    for (let i = 0; i < 4; i++) {
+      const el = $('st' + i), n = el.querySelector('.n'), T0 = .6 + i * .45;
+      fadeUp(el, T, T0, .6, 60);
+      const k = eOut(prog(T, T0, T0 + 1.6));
+      n.textContent = fmt(+n.dataset.to * k) + (n.dataset.suf || '');
+      el.querySelector('.rule').style.transform = `scaleX(${eOut(prog(T, T0 + .2, T0 + 1.2))})`;
+    }
+  }
+
+  // S3 · 4 sütun
+  if (t >= 9.8 && t < 15.6) {
+    const T = t - 9.8;
+    fadeUp($('s3eb'), T, .4, .5, 20);
+    rise('s3a', T, .5); rise('s3b', T, .7); rise('s3c', T, 1.0); rise('s3d', T, 1.2);
+    for (let i = 0; i < 4; i++) {
+      const k = prog(T, 1.8 + i * .3, 2.5 + i * .3);
+      set($('c' + i), { o: clamp(k * 2), y: (1 - eOut(k)) * 120, s: lerp(.9, 1, eBack(k)) });
+    }
+  }
+
+  // S4 · 11 basamak merdiven + balon
+  if (t >= 15 && t < 21.6) {
+    const T = t - 15;
+    fadeUp($('s4eb'), T, .4, .5, 20);
+    rise('s4a', T, .5); rise('s4b', T, .75);
+    fadeUp($('s4sub'), T, 1.1, .6, 20);
+    const st0 = 1.4, gap = .33;
+    let top = -1;
+    stepEls.forEach((d, i) => {
+      const k = prog(T, st0 + i * gap, st0 + i * gap + .45);
+      if (k > 0) top = i;
+      set(d, { o: clamp(k * 1.5), x: (1 - eOut(k)) * -80 });
+    });
+    // balon en üst basamağın üzerinde süzülür
+    const cont = clamp((T - st0) / gap, 0, 10.4);
+    const bx = 70 + cont * 46 + 330, by = 1740 - cont * 80 - 175 + Math.sin(T * 2.4) * 8;
+    set($('balloon4'), { o: eOut(prog(T, st0, st0 + .5)), x: bx, y: by, r: Math.sin(T * 1.7) * 3 });
+  }
+
+  // S5 · kazanç grafiği
+  if (t >= 21 && t < 26.6) {
+    const T = t - 21;
+    fadeUp($('s5eb'), T, .4, .5, 20);
+    rise('s5a', T, .5); rise('s5b', T, .75);
+    fadeUp($('s5c'), T, 1.1, .6, 20);
+    barEls.forEach((r, i) => {
+      const k = eOut(prog(T, 1.4 + i * .15, 2.1 + i * .15)), h = BARS[i] * k;
+      r.setAttribute('y', 560 - h); r.setAttribute('height', h);
+    });
+    // ok çizgisi
+    const k = eIO(prog(T, 1.7, 3.0)), n = (ARROW.length - 1) * k;
+    const pts = []; for (let i = 0; i <= Math.floor(n); i++) pts.push(ARROW[i]);
+    const fi = Math.floor(n), fr = n - fi;
+    let hx = ARROW[0][0], hy = ARROW[0][1], ang = 0;
+    if (fi < ARROW.length - 1) {
+      const a = ARROW[fi], b = ARROW[fi + 1];
+      hx = lerp(a[0], b[0], fr); hy = lerp(a[1], b[1], fr); pts.push([hx, hy]);
+      ang = Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI + 90;
+    } else {
+      [hx, hy] = ARROW[ARROW.length - 1];
+      const a = ARROW[ARROW.length - 2]; ang = Math.atan2(hy - a[1], hx - a[0]) * 180 / Math.PI + 90;
+    }
+    $('arrow').setAttribute('d', 'M' + pts.map(p => p.join(',')).join(' L'));
+    const ho = k > .02 ? 1 : 0;
+    $('arrowHead').setAttribute('transform', `translate(${hx},${hy}) rotate(${ang})`);
+    $('arrowHead').style.opacity = ho; $('arrow').style.opacity = ho;
+    // tavan kırılır
+    const br = prog(T, 2.55, 3.0);
+    $('ceil').style.opacity = .7 * (1 - br); $('ceilT').style.opacity = .75 * (1 - br);
+    $('ceil').setAttribute('transform', `translate(0,${-br * 30})`);
+    fadeUp($('s5mk'), T, 3.0, .5, 20);
+    [...$('pills').children].forEach((p, i) => {
+      const k = prog(T, 3.2 + i * .15, 3.7 + i * .15);
+      set(p, { o: clamp(k * 2), s: lerp(.6, 1, eBack(k)) });
+    });
+  }
+
+  // S6 · kimi arıyoruz
+  if (t >= 26 && t < 30.6) {
+    const T = t - 26;
+    fadeUp($('s6eb'), T, .4, .5, 20);
+    rise('s6a', T, .5); rise('s6b', T, .7); rise('s6c', T, 1.2); rise('s6d', T, 1.4);
+    for (let i = 0; i < 3; i++) {
+      const k = prog(T, 1.9 + i * .35, 2.5 + i * .35);
+      set($('k' + i), { o: clamp(k * 1.6), x: (1 - eOut(k)) * 80 });
+      $('k' + i).querySelector('.b').style.transform = `scale(${lerp(0, 1, eBack(k))})`;
+    }
+  }
+
+  // S7 · kapanış
+  if (t >= 30) {
+    const T = t - 30;
+    const kb = eOut(prog(T, .1, 2.0));
+    set($('balloon7'), { o: 1, y: lerp(1900, 330, kb) + Math.sin(T * 2) * 10, r: Math.sin(T * 1.5) * 2.5 });
+    rise('s7a', T, .9); rise('s7b', T, 1.15);
+    const kc = prog(T, 1.6, 2.2);
+    const pulse = T > 2.4 ? 1 + Math.sin((T - 2.4) * 5) * .025 : 1;
+    set($('s7cta'), { o: clamp(kc * 2), s: lerp(.7, 1, eBack(kc)) * pulse });
+    fadeUp($('s7url'), T, 1.9, .6, 20);
+    fadeUp($('s7note'), T, 2.1, .6, 20);
+    fadeUp($('s7logo'), T, 2.3, .6, 20);
+    fadeUp($('s7ig'), T, 2.5, .6, 20);
+  }
+}
+
+// Önizleme modu: ?capture yoksa gerçek zamanlı döngü
+window.render = render; window.heroReady = heroReady; window.DURATION = DURATION; window.FPS = FPS;
+const fit = () => { const s = Math.min(innerWidth / 1080, innerHeight / 1920); $('stage').style.transform = `scale(${s})`; };
+if (!location.search.includes('capture')) {
+  fit(); addEventListener('resize', fit);
+  document.fonts.ready.then(() => heroReady).then(() => {
+    const t0 = performance.now();
+    const loop = () => { render(((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+    loop();
+  });
+}
+</script>
+</body>
+</html>
