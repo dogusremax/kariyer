@@ -3,7 +3,8 @@ from scipy import signal
 from scipy.io import wavfile
 
 SR = 44100
-DUR = 30.0
+OFF = 3.0  # açılış (ARANIYOR) süresi; ana zaman çizelgesi bu kadar kayar
+DUR = 30.0 + OFF
 N = int(SR * DUR)
 rng = np.random.default_rng(3)
 
@@ -12,7 +13,7 @@ fx = np.zeros((N, 2))    # efektler (reverb'e de gider)
 
 
 def add(buf, t0, x, amp=1.0, pan=0.0):
-    i = int(t0 * SR)
+    i = int((t0 + OFF) * SR)
     if i >= N:
         return
     x = x[: N - i]
@@ -261,6 +262,30 @@ add(fx, 26.1, hit(), .8)
 add(fx, 27.3, clink(), .25, -.2)
 add(fx, 27.8, pop(), .4)
 add(fx, 28.3, boom(1.7), .9)
+
+# ---------- açılış: ARANIYOR (zamanlar ana çizelgeye göre negatif) ----------
+H = -OFF
+add(fx, H + .05, boom(1.6), 1.0)
+add(fx, H + .05, hit(), .9)
+add(fx, H + .33, whoosh(.45), .7, -.3)
+add(fx, H + .8, stamp(), 1.0)
+add(fx, H + 1.3, pop(), .5)
+add(fx, H + 1.35, hit(.5), .45)
+add(fx, H + 1.75, tick(), .4)
+add(fx, H + 1.95, pop(), .35, .2)
+add(fx, H + 2.1, riser(.9), .45)
+add(fx, H + 2.75, whoosh(.5), .7, .5)
+for t in beat_times(H + .1, -.1):
+    add(mus, t, kick(), .9)
+    add(mus, t, bass(note(33), .45), .7)
+for t in beat_times(H + .1, H + 2.2, B / 2):
+    add(mus, t, hat(a=.2), 1, .3)
+t = H + 2.2
+step = .2
+while t < H + 2.95:
+    add(mus, t, clap(.2), .3 + .4 * (t - H - 2.2) / .75)
+    step = max(.06, step * .8)
+    t += step
 
 # ---------- miks ----------
 def reverb(x, d=1.6, mix=.25):
