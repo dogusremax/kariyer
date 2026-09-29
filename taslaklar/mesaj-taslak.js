@@ -22,14 +22,41 @@ const MOTIVASYON = [
   'Bir sunum daha, bir gösterim daha. Fark buradan çıkar.',
 ];
 
+// Kişiye özel ayarlar
+//  mod 'destek': sıralama/puan/eksik yok; sadece destek mesajı gider, ofis ortalamasına katılmaz
+//  takim: birlikte çalıştığı takım arkadaşı (mesajda takdir satırı çıkar)
+const OZEL = {
+  aysun: { mod: 'destek', takim: 'orhan' },
+  orhan: { takim: 'aysun' },
+};
+const DESTEK_CUMLE = [
+  'Önce sen, sonra her şey. Biz buradayız.',
+  'Her gün biraz daha güçlü, adım adım.',
+  'Uzakta olsan da ofisin bir köşesi hep senin.',
+  'Bazen en büyük başarı, kendine iyi bakmaktır.',
+];
+
 const sayi = (c, k) => k === 'sunum' ? (c.sunum1 || 0) + (c.sunum2 || 0) : (c[k] || 0);
 const haftaNo = t => Math.floor((t - new Date(t.getFullYear(), 0, 1)) / 6048e5);
+const ozel = d => OZEL[d.id] || {};
+const adi = (L, id) => (L.find(x => x.id === id) || {}).first || '';
+const toplamAkt = c => Object.values(c || {}).reduce((s, v) => s + (v || 0), 0);
+
+function destekMesaji(d, L, gun, cumle) {
+  const ark = adi(L, ozel(d).takim), akt = toplamAkt(d.counts);
+  const selam = gun === 'carsamba' ? `Merhaba ${d.first} 🌿\nHafta ortasına geldik, seni düşündük.` : `Günaydın ${d.first} ☀️\nYeni bir hafta başladı.`;
+  const katki = akt ? `\nBu hafta uygulamada ${akt} aktiviten görünüyor. Uzaktan bile işin içinde olman hepimize güç veriyor, emeğine sağlık. 👏\n` : `\nUzaktan da olsa ekibin bir parçası olman hepimize güç veriyor.\n`;
+  const takim = ark ? `\n🤝 ${ark} ile paslaştığınız işler emin ellerde, ihtiyacın olan her şey için bir mesaj uzağındayız.\n` : '';
+  const kapanis = gun === 'carsamba' ? 'Güzel bir akşam dileriz, RE/MAX Doğuş 💙' : 'Bir telefon kadar yakınız, haftan güzel geçsin. 💙\n— {BROKER}';
+  return `${selam}\n\n_"${cumle}"_\n${katki}${takim}\n${kapanis}`;
+}
 
 // ---------- 1) ÇARŞAMBA ----------
 function carsamba(veri, tarih = new Date()) {
   const L = veri.siralama, n = L.length;
   const mot = MOTIVASYON[haftaNo(tarih) % MOTIVASYON.length];
   return L.map((d, i) => {
+    if (ozel(d).mod === 'destek') return { id: d.id, ad: d.name, metin: destekMesaji(d, L, 'carsamba', DESTEK_CUMLE[haftaNo(tarih) % DESTEK_CUMLE.length]) };
     const sira = i + 1, ust = L[i - 1];
     let durum;
     if (d.puan === 0 && d.aktifGun === 0) {
@@ -37,7 +64,7 @@ function carsamba(veri, tarih = new Date()) {
     } else if (sira === 1) {
       durum = `Şu an *1. sıradasın* (${d.puan} puan) 🏆 Arkandaki fark ${d.puan - L[1].puan} puan. Tempoyu koru, hafta sonuna kadar bırakma!`;
     } else {
-      const fark = ust.puan - d.puan + 1, alt = L[i + 1];
+      const fark = ust.puan - d.puan + 1, alt = L.slice(i + 1).find(x => ozel(x).mod !== 'destek');
       if (fark <= 60) {
         const arama = Math.ceil(fark / 10);
         durum = `Şu an *${sira}. sıradasın* (${d.puan} puan). ${ust.first} ile aranda ${fark} puan var, *${arama} etki araması* bu farkı kapatır! 🎯`;
@@ -56,7 +83,7 @@ Hafta ortasına geldik, *Çarşamba* akşamı! 🗓️
 _"${mot}"_
 
 📊 ${durum}
-${d.aktifGun === 0 && d.puan === 0 ? '' : eksik.length ? `\nHafta sonuna kadar yetiştirebileceklerin:\n${eksik.join('\n')}\n` : '\nHaftalık hedeflerinin hepsini tutturmuşsun, harikasın! 👏\n'}
+${ozel(d).takim ? `\n🤝 Takım arkadaşın ${adi(L, ozel(d).takim)} ile paslaştığınız işler de bu emeğin parçası, birlikte güçlüsünüz.\n` : ''}${d.aktifGun === 0 && d.puan === 0 ? '' : eksik.length ? `\nHafta sonuna kadar yetiştirebileceklerin:\n${eksik.join('\n')}\n` : '\nHaftalık hedeflerinin hepsini tutturmuşsun, harikasın! 👏\n'}
 Aktivitelerini uygulamaya girmeyi unutma 👉 dogusportal.com
 İyi akşamlar, RE/MAX Doğuş`;
     return { id: d.id, ad: d.name, metin };
@@ -66,9 +93,10 @@ Aktivitelerini uygulamaya girmeyi unutma 👉 dogusportal.com
 // ---------- 2) PAZARTESİ KARNE ----------
 function pazartesi(veri, onceki, broker = '{BROKER}') {
   const L = veri.siralama, n = L.length;
-  const ort = Math.round(L.reduce((s, x) => s + x.puan, 0) / n);
+  const say = L.filter(x => ozel(x).mod !== 'destek'), ort = Math.round(say.reduce((s, x) => s + x.puan, 0) / say.length);
   const eski = {}; (onceki ? onceki.siralama : []).forEach((x, i) => eski[x.id] = { sira: i + 1, puan: x.puan });
   return L.map((d, i) => {
+    if (ozel(d).mod === 'destek') return { id: d.id, ad: d.name, metin: destekMesaji(d, L, 'pazartesi', DESTEK_CUMLE[(haftaNo(new Date()) + 1) % DESTEK_CUMLE.length]).replace('{BROKER}', broker) };
     const sira = i + 1, c = d.counts, e = eski[d.id];
     const trend = (!e || d.puan === 0) ? '' : e.sira > sira ? ` ⬆️ (geçen hafta ${e.sira}.)` : e.sira < sira ? ` ⬇️ (geçen hafta ${e.sira}.)` : ' ➡️ (sıranı korudun)';
 
@@ -93,6 +121,8 @@ function pazartesi(veri, onceki, broker = '{BROKER}') {
     else if (d.aktivitePuan >= ort) yorum = `Sahada emek veriyorsun ${d.first}, bu çok değerli. Bu emeği sonuca çevirmek için gösterim ve teklif aşamasına ağırlık verelim; kapanış yakın.`;
     else if (e && d.puan > e.puan) yorum = `Yükselişin gözümden kaçmadı ${d.first}! Doğru yoldasın, istikrarı koruyalım.`;
     else yorum = `${d.first}, potansiyelin bu listenin çok üstünde. Küçük ama her gün yapılan adımlarla bu hafta farkı birlikte göreceğiz.`;
+
+    if (ozel(d).takim) yorum += ` ${adi(L, ozel(d).takim)} ile takım çalışman için de ayrıca teşekkürler, birbirinize verdiğiniz destek çok kıymetli.`;
 
     // Bu haftanın planı: en kritik 3 eksik → somut görev
     const GOREV = {
