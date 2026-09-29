@@ -91,7 +91,7 @@ Aktivitelerini uygulamaya girmeyi unutma 👉 dogusportal.com
 }
 
 // ---------- 2) PAZARTESİ KARNE ----------
-function pazartesi(veri, onceki, broker = '{BROKER}') {
+function pazartesi(veri, onceki, broker = 'U.T / M.T') {
   const L = veri.siralama, n = L.length;
   const say = L.filter(x => ozel(x).mod !== 'destek'), ort = Math.round(say.reduce((s, x) => s + x.puan, 0) / say.length);
   const eski = {}; (onceki ? onceki.siralama : []).forEach((x, i) => eski[x.id] = { sira: i + 1, puan: x.puan });
@@ -115,11 +115,11 @@ function pazartesi(veri, onceki, broker = '{BROKER}') {
 
     // Broker yorumu: profile göre
     let yorum;
-    if (d.aktifGun === 0 && d.puan === 0) yorum = `${d.first}, geçen hafta seni listede göremedim. Her şey yolunda mı? Bir kahve içip konuşalım, bu hafta birlikte planlayalım.`;
+    if (d.aktifGun === 0 && d.puan === 0) yorum = `${d.first}, geçen hafta seni listede göremedik. Her şey yolunda mı? Bir kahve içip konuşalım, bu hafta birlikte planlayalım.`;
     else if (sira === 1) yorum = `Haftanın lideri sensin ${d.first}! Ekibe örnek oluyorsun. Bu hafta da çıtayı sen belirliyorsun, emeğine sağlık.`;
     else if (d.kapanis) yorum = `Kapanış yapmak her şeyin özeti, tebrikler ${d.first}! Şimdi yeni portföy ve aramalarla gelecek kapanışların zeminini hazırlayalım.`;
     else if (d.aktivitePuan >= ort) yorum = `Sahada emek veriyorsun ${d.first}, bu çok değerli. Bu emeği sonuca çevirmek için gösterim ve teklif aşamasına ağırlık verelim; kapanış yakın.`;
-    else if (e && d.puan > e.puan) yorum = `Yükselişin gözümden kaçmadı ${d.first}! Doğru yoldasın, istikrarı koruyalım.`;
+    else if (e && d.puan > e.puan) yorum = `Yükselişin gözümüzden kaçmadı ${d.first}! Doğru yoldasın, istikrarı koruyalım.`;
     else yorum = `${d.first}, potansiyelin bu listenin çok üstünde. Küçük ama her gün yapılan adımlarla bu hafta farkı birlikte göreceğiz.`;
 
     if (ozel(d).takim) yorum += ` ${adi(L, ozel(d).takim)} ile takım çalışman için de ayrıca teşekkürler, birbirinize verdiğiniz destek çok kıymetli.`;
