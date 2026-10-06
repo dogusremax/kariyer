@@ -1,13 +1,13 @@
-# Medyan Kadıköy — Durum ve Fiyat (bilgilendirici reklam filmi)
+# Medyan Kadıköy — Durum Raporu (bilgilendirici reklam filmi)
 
-`medyan-kadikoy.mp4` · 1080×1920 (9:16) · 58 sn · 30 fps · müzik altlığı (seslendirme sonra eklenecek)
+`medyan-kadikoy.mp4` · 1080×1920 (9:16) · 48 sn · 30 fps · müzik altlığı (seslendirme sonra eklenecek)
 
 Seslendirme metni ve sahne süreleri: [`seslendirme-metni.md`](seslendirme-metni.md)
 
 ## Seslendirme gelince
 
 1. Ses dosyasını `build/vo.wav` olarak koyun.
-2. Her cümlenin başladığı saniyeye göre `film.html` içindeki `STARTS` dizisini güncelleyin (7 sahne başlangıcı) ve gerekirse `DURATION`'ı uzatın.
+2. Her cümlenin başladığı saniyeye göre `film.html` içindeki `STARTS` dizisini güncelleyin (6 sahne başlangıcı) ve gerekirse `DURATION`'ı uzatın.
 3. `music.py` içindeki `DUR` ve `TRANSITIONS` değerlerini aynı saniyelere çekip yeniden üretin.
 4. Render + miks (müzik sesin altında kalır):
 

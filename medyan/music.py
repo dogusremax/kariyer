@@ -9,14 +9,14 @@ import numpy as np
 from scipy.signal import butter, sosfilt
 
 SR = 44100
-DUR = 58.0
+DUR = 48.0
 BPM = 96
 BEAT = 60 / BPM
 N = int(SR * DUR)
 t = np.arange(N) / SR
 out = np.zeros((N, 2))
 
-TRANSITIONS = [5.0, 13.0, 25.0, 33.0, 43.0, 50.0]
+TRANSITIONS = [5.0, 13.0, 25.0, 33.0, 40.0]
 
 
 def hz(m):
@@ -122,7 +122,7 @@ for tr in TRANSITIONS:
 # Final akor
 fn = int(4 * SR)
 fin = sum(saw(hz(m), fn, d) for m in [48, 60, 64, 67, 72] for d in (-.005, .005))
-add(lp(fin, 2200) * env(fn, .02, 3.5) * .05, 50.0)
+add(lp(fin, 2200) * env(fn, .02, 3.5) * .05, 40.0)
 
 # Genel zarf + normalizasyon
 fade = np.ones(N)
