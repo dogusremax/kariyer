@@ -197,10 +197,9 @@ html,body{background:#000;overflow:hidden}
       <span class="mask"><span id="s6a">1+1'den 4+1'e</span></span>
     </h2>
     <div class="abs" id="s6h" style="left:80px;right:80px;top:410px;display:flex;font-size:24px;font-weight:800;letter-spacing:.14em;opacity:.55">
-      <div style="width:200px">TİP</div><div style="flex:1">BRÜT</div><div>TAHMİNİ*</div>
+      <div style="width:200px">TİP</div><div style="flex:1">BRÜT</div><div>OTOPARK</div>
     </div>
     <div id="types"></div>
-    <div class="abs" id="s6fn" style="left:80px;right:80px;top:1090px;font-size:24px;font-weight:600;opacity:.6;line-height:1.4">* ≈127.000 TL/m² ortalamasıyla örnek hesap. Kat, cephe ve bloğa göre değişir.</div>
     <div class="abs eyebrow" id="s6eb2" style="left:90px;top:1220px;opacity:.85">Sosyal alanlar</div>
     <div class="abs" id="pills" style="left:80px;width:920px;top:1280px;display:flex;flex-wrap:wrap;gap:16px">
       <div class="pill">10.000 m² ortak alan</div><div class="pill">2 açık + 2 kapalı havuz</div><div class="pill">Sauna · buhar odası</div>
@@ -285,12 +284,10 @@ const evEls = EVENTS.map(([y, txt, sub], i) => {
 // .d genişliği 96 + dot kenar boşluğu → nokta merkezi x ≈ 90+96+34+23 = 243; çizgiyi ona hizala
 document.querySelectorAll('.tl-line,.tl-fill').forEach(e => e.style.left = '240px');
 // --- Daire tipleri (S6)
-const PPM = 127000;
 const TYPES = [['1+1', 47.5], ['2+1', 81.03], ['3+1', 119.61], ['3+1', 128.73], ['4+1', 153.72]];
 const tyEls = TYPES.map(([k, m], i) => {
   const d = document.createElement('div'); d.className = 'abs ty'; d.style.top = (460 + i * 120) + 'px';
-  const mil = (m * PPM / 1e6).toFixed(1).replace('.', ',');
-  d.innerHTML = `<div class="k">${k}</div><div class="m">${m.toLocaleString('tr-TR')} m²</div><div class="p">≈${mil} mn TL</div>`;
+  d.innerHTML = `<div class="k">${k}</div><div class="m">${m.toLocaleString('tr-TR')} m²</div><div class="p">${i < 2 ? 1 : 2} araç</div>`;
   $('types').appendChild(d); return d;
 });
 
@@ -397,7 +394,6 @@ function render(t) {
     rise('s6a', T, .5);
     fadeUp($('s6h'), T, .9, .4, 10);
     tyEls.forEach((d, i) => { const k = prog(T, 1.0 + i * .3, 1.6 + i * .3); set(d, { o: clamp(k * 1.6), x: (1 - eOut(k)) * 60 }); });
-    fadeUp($('s6fn'), T, 2.6, .5, 10);
     fadeUp($('s6eb2'), T, 3.4, .5, 20);
     [...$('pills').children].forEach((p, i) => { const k = prog(T, 3.6 + i * .17, 4.1 + i * .17); set(p, { o: clamp(k * 2), s: lerp(.6, 1, eBack(k)) }); });
   }

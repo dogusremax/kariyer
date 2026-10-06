@@ -10,7 +10,7 @@ Her satırı ayrı ayrı okuyup sahne arasında yarım saniye nefes bırakabilir
 | 3 | 0:13–0:25 | Zaman çizelgesi 2018 → Eylül 2026 | **İki bin on sekizde duran proje, Aralık iki bin yirmi dörtte yeniden başladı. Aralık iki bin yirmi beşte C Blok'ta inşaat seviyesi yüzde sekseni geçti. Eylül iki bin yirmi altıda ise C ve D bloklarda anahtar teslimi başladı.** |
 | 4 | 0:25–0:33 | Durum tablosu: teslim ✓ · oturum ⏳ · iskân yok · A–B açıklanmadı | **Oturumun Ekim ile yıl sonu arasında başlaması bekleniyor. İskân henüz yok, tapular kat irtifaklı. A ve B blokların teslim tarihi ise açıklanmadı.** |
 | 5 | 0:33–0:43 | ≈127.000 TL/m² sayacı ve karşılaştırma çubukları | **Fiyatlara gelince: ikinci el dairelerde metrekare yaklaşık yüz yirmi yedi bin lira. Bu, Fikirtepe ortalamasıyla aynı seviyede; satış ofisinin liste fiyatının ise yüzde yirmi ile otuz beş altında.** |
-| 6 | 0:43–0:50 | Daire tipleri ve tahmini fiyatlar · sosyal alanlar | **Daireler bir artı birden dört artı bire, kırk yedi ile yüz elli dört metrekare arasında. Projede on bin metrekare ortak yaşam alanı ve açık-kapalı havuzlar var.** |
+| 6 | 0:43–0:50 | Daire tipleri, otopark · sosyal alanlar | **Daireler bir artı birden dört artı bire, kırk yedi ile yüz elli dört metrekare arasında. Projede on bin metrekare ortak yaşam alanı ve açık-kapalı havuzlar var.** |
 | 7 | 0:50–0:58 | Balon · RE/MAX Doğuş · iletişim | **Medyan Kadıköy'de almak ya da satmak mı istiyorsunuz? Fikirtepe'yi en iyi bilen ofisle konuşun: RE/MAX Doğuş.** |
 
 ## Düz metin (kayıt için)
