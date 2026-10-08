@@ -1,35 +1,33 @@
-# İki Yaka Fikirtepe — Durum Raporu · Seslendirme Metni
+# İki Yaka Fikirtepe — Doğru Bilinenler · Seslendirme Metni
 
-Toplam ≈ 55 sn · 9:16 dikey · sakin, bilgilendirici ton. Fiyat yok.
-Ses geldiğinde sahne süreleri sese göre ayarlanır.
+Toplam ≈ 50 sn · 9:16 dikey · sakin, bilgilendirici ton. Fiyat yok.
+Yalnızca birden fazla kaynakta tutarlı olan bilgiler kullanıldı. Ses geldiğinde sahne süreleri sese göre ayarlanır.
 
 | # | Ekranda | Seslendirme |
 |---|---|---|
-| 1 | İki kule + ticari blok · "Tamamlanma ≈%77" | İki Yaka Fikirtepe'de son durum ne? Proje yüzde yetmiş yedi seviyesinde görünüyor. |
-| 2 | Künye: 2 kule · 25 kat · ≈575 konut · 21 mağaza | Barsan Yapı'nın projesi: yirmi beş katlı iki konut kulesi ve bir ticari blok; yaklaşık 575 konut ve 21 mağaza. Projede deniz manzaralı bir seyir terası var. |
-| 3 | Zaman çizelgesi 2014 → 2026 | Proje hafriyat aşamasında satışa çıktı, ilk teslim hedefi 2019'du. Hedef önce 2024'e, ilanlarda ise 2026'nın üçüncü çeyreğine kaydı. Mayıs 2026 verilerine göre tamamlanma oranı yüzde yetmiş yedi. |
-| 4 | Durum tablosu | Üçüncü çeyrek geride kaldı ama henüz resmi bir teslim ya da iskân açıklaması yok. Teslim tarihi için geliştiricinin yazılı takvimini sormak gerekiyor. |
-| 5 | Daire tipleri · sosyal alanlar | Daireler 1+1'den 3+1'e, yaklaşık elli ile yüz seksen üç metrekare arasında. Projede yarı açık havuz, kapalı havuz, fitness, sauna ve hamam var. |
+| 1 | İki kule + ticari blok · "Doğru bilinenler" | İki Yaka Fikirtepe'de son durum ne? Doğru bilinenleri derledik. |
+| 2 | Künye: Barsan Yapı · 2 kule · 25 kat · ticari blok · 1+1 → 3+1 | Proje Barsan Yapı'nın; yirmi beş katlı iki konut kulesi ve bir ticari bloktan oluşuyor. Daireler 1+1'den 3+1'e. |
+| 3 | Zaman çizelgesi 2014 → Ekim 2026 | Proje hafriyat aşamasında satışa çıktı ve ilk teslim hedefi 2019'du. Ekim 2026 itibarıyla İki Yaka için resmi bir teslim ya da iskân açıklaması bulunmuyor. |
+| 4 | "Karıştırılmasın" tablosu | Eylül'de Fikirtepe'de teslimler başladı; ancak bu, Bakanlık ve Emlak Konut'un Yeni Fikirtepe ikinci etabı. İki Yaka ayrı bir proje. Teslim tarihini mutlaka yazılı olarak teyit edin. |
+| 5 | Daire tipleri · sosyal alanlar | Projede deniz manzaralı seyir terası, yarı açık ve kapalı havuz, fitness, sauna ve hamam bulunuyor. |
 | 6 | Balon · RE/MAX Doğuş · iletişim | İki Yaka'da almak ya da satmak mı istiyorsunuz? Fikirtepe'yi en iyi bilen ofisle konuşun: RE/MAX Doğuş. |
 
 ## ElevenLabs'e yapıştırılacak metin
 
-Rakamlar ve harfler yapay sesin doğru okuyacağı şekilde yazıldı.
-
 ```
-İki Yaka Fikirtepe'de son durum ne? Proje yüzde yetmiş yedi seviyesinde görünüyor. <break time="0.6s" />
+İki Yaka Fikirtepe'de son durum ne? Doğru bilinenleri derledik. <break time="0.6s" />
 
-Barsan Yapı'nın projesi: yirmi beş katlı iki konut kulesi ve bir ticari blok; yaklaşık beş yüz yetmiş beş konut ve yirmi bir mağaza. Projede deniz manzaralı bir seyir terası var. <break time="0.6s" />
+Proje Barsan Yapı'nın; yirmi beş katlı iki konut kulesi ve bir ticari bloktan oluşuyor. Daireler bir artı birden üç artı bire. <break time="0.6s" />
 
-Proje hafriyat aşamasında satışa çıktı, ilk teslim hedefi iki bin on dokuzdu. Hedef önce iki bin yirmi dörde, ilanlarda ise iki bin yirmi altının üçüncü çeyreğine kaydı. Mayıs iki bin yirmi altı verilerine göre tamamlanma oranı yüzde yetmiş yedi. <break time="0.6s" />
+Proje hafriyat aşamasında satışa çıktı ve ilk teslim hedefi iki bin on dokuzdu. Ekim iki bin yirmi altı itibarıyla İki Yaka için resmi bir teslim ya da iskân açıklaması bulunmuyor. <break time="0.6s" />
 
-Üçüncü çeyrek geride kaldı ama henüz resmi bir teslim ya da iskân açıklaması yok. Teslim tarihi için geliştiricinin yazılı takvimini sormak gerekiyor. <break time="0.6s" />
+Eylül'de Fikirtepe'de teslimler başladı; ancak bu, Bakanlık ve Emlak Konut'un Yeni Fikirtepe ikinci etabı. İki Yaka ayrı bir proje. Teslim tarihini mutlaka yazılı olarak teyit edin. <break time="0.6s" />
 
-Daireler bir artı birden üç artı bire, yaklaşık elli ile yüz seksen üç metrekare arasında. Projede yarı açık havuz, kapalı havuz, fitness, sauna ve hamam var. <break time="0.6s" />
+Projede deniz manzaralı seyir terası, yarı açık ve kapalı havuz, fitness, sauna ve hamam bulunuyor. <break time="0.6s" />
 
 İki Yaka'da almak ya da satmak mı istiyorsunuz? Fikirtepe'yi en iyi bilen ofisle konuşun: Rimaks Doğuş.
 ```
 
 ## Ekrandaki bilgi notu (son kare)
 
-Bilgiler ilan verileri, proje sayfaları ve basından derlenmiştir (8 Ekim 2026). Tamamlanma oranı ve teslim tarihleri geliştirici tarafından resmi olarak teyit edilmemiştir. RE/MAX Doğuş'un proje geliştiricisiyle bağlantısı yoktur.
+Bilgiler proje sayfaları, ilan verileri ve basından derlenmiştir (8 Ekim 2026). Yalnızca birden fazla kaynakta tutarlı bilgiler kullanılmıştır; teslim durumu geliştiriciden teyit edilmelidir. RE/MAX Doğuş'un proje geliştiricisiyle bağlantısı yoktur.

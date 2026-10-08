@@ -2,7 +2,29 @@
 
 8 Ekim 2026 · Filmde kullanılan bilgilerin dayanağı. Fiyat bilgisi bilerek dışarıda bırakıldı.
 
-> Kısa özet: Barsan Yapı'nın Fikirtepe projesi İki Yaka, 25 katlı iki konut kulesi ve bir ticari bloktan oluşuyor. İlk teslim hedefi 2019'du; ilan sitelerinde hedef önce Ekim–Aralık 2024'e, sonra **2026'nın 3. çeyreğine** kaydı. Bir proje sitesi Mayıs 2026 itibarıyla tamamlanma oranını **≈%77** gösteriyor. 3. çeyrek geride kaldı ama resmi teslim veya iskân açıklaması bulunamadı.
+> Kısa özet: Barsan Yapı'nın Fikirtepe projesi İki Yaka, 25 katlı iki konut kulesi ve bir ticari bloktan oluşuyor; ilk teslim hedefi 2019'du. Ekim 2026 itibarıyla kamuya açık kaynaklarda resmi teslim veya iskân açıklaması bulunamadı.
+>
+> **Eylül 2026 karışıklığı:** Google'ın yapay zekâ özeti "Yeni Fikirtepe (İki Yaka Fikirtepe)" diyerek iki projeyi birleştiriyor. Eylül'de teslimi başlayan 2. etap (3 Eylül) ve Maksem Yapı'nın yaptığı 3. etap, Bakanlık adına Emlak Konut'un yürüttüğü **Yeni Fikirtepe** projesine ait (KAP: Fikirtepe 3472/1 parsel, Maksem Yapı sözleşmesi). İki Yaka bunlardan ayrı, özel bir proje.
+>
+> **19 Eylül 2026 "İKİ YAKA FİKİRTEPE | OPEN HOUSE" Instagram paylaşımı (kwtansu):** Bu ortamdan açılamadı; metninde "3. Etap" geçtiği için Yeni Fikirtepe'yi kastediyor olabilir. Açılıp kontrol edilmeli.
+
+## Filmin son sürümünde kullanılanlar (yalnızca tutarlı bilgiler)
+
+- Geliştirici Barsan Yapı (Barsan Global Lojistik + Denge Yapı Mimarlık, 2014)
+- 25 katlı 2 konut kulesi + ticari blok
+- Daire tipleri 1+1, 2+1, 3+1 (m² verilmedi)
+- Hafriyat aşamasında satış, ilk teslim hedefi 2019
+- Sosyal alanlar (kaynaklarda ortak geçenler)
+- Eylül 2026 teslimlerinin Yeni Fikirtepe 2. Etap'a ait olduğu
+- İki Yaka için resmi teslim/iskân açıklaması bulunamadığı
+
+## Filmden çıkarılanlar (tek kaynağa dayalı ya da çelişkili)
+
+- Tamamlanma ≈%77 (tek proje sitesi)
+- "2026 3. çeyrek" teslim hedefi (tek ilan)
+- Ekim–Aralık 2024 teslim hedefi (ilan siteleri, tutarsız)
+- Konut sayısı (275 / 570 / 575) ve mağaza sayısı
+- Arsa alanı ve m² aralıkları
 
 ## Künye
 
