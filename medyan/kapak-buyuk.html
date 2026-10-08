@@ -37,5 +37,10 @@ h1 .hl{color:#FB5160}
   <div class="kay">İZLE <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 </div>
 <script>document.body.className=['reel','red'].filter(k=>location.search.includes(k)).join(' ');</script>
+<script>
+// Başlığı her kapakta aynı genişliğe (860px) oturt — kapaklar yan yana eş görünsün
+document.fonts.ready.then(()=>{const h=document.querySelector('h1');h.style.alignSelf='flex-start';h.style.display='inline-block';
+const w=h.getBoundingClientRect().width;h.style.fontSize=(parseFloat(getComputedStyle(h).fontSize)*860/w)+'px';document.body.dataset.fit='1';});
+</script>
 </body>
 </html>
