@@ -193,7 +193,7 @@ html,body{background:#000;overflow:hidden}
 </div>
 
 <script>
-const FPS = 30, DURATION = 57;
+const FPS = 30, DURATION = 62.5;
 const $ = id => document.getElementById(id);
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const prog = (t, a, b) => clamp((t - a) / (b - a));
@@ -212,8 +212,8 @@ const fmt = n => Math.round(n).toLocaleString('tr-TR');
 
 // Sahne zamanlaması — seslendirme gelince yalnızca buradaki başlangıçları sese göre kaydırın.
 const SCENES = ['s1', 's2', 's3', 's4', 's6', 's7'];
-// Tahmini; seslendirme gelince duraklamalara göre güncellenecek
-const STARTS = [0, 5, 14.5, 28, 39, 49];
+// Seslendirmedeki duraklamalara göre (ses/seslendirme.mp3)
+const STARTS = [0, 5.3, 16.6, 29.85, 41.15, 52.7];
 const WIPE = .55;
 const SC = STARTS.map((a, i) => [SCENES[i], a, (STARTS[i + 1] ?? DURATION + 1) + WIPE + .05]);
 const LIGHT = ['s2', 's4'];
@@ -309,13 +309,13 @@ function render(t) {
     const T = t - S3;
     fadeUp($('s3eb'), T, .4, .5, 20);
     rise('s3a', T, .5); rise('s3b', T, .75);
-    const step = 2.1, t0 = 1.4;
+    const EV_T = [1.2, 1.9, 5.0, 7.0, 9.0];
     evEls.forEach((d, i) => {
-      const k = prog(T, t0 + i * step, t0 + i * step + .6);
+      const k = prog(T, EV_T[i], EV_T[i] + .6);
       set(d, { o: clamp(k * 1.6), x: (1 - eOut(k)) * 60 });
       d.querySelector('.dot').style.transform = `scale(${lerp(.2, 1, eBack(k))})`;
     });
-    const fill = eIO(prog(T, t0, t0 + 4 * step + .4));
+    const fill = eIO(prog(T, EV_T[0], EV_T[4] + .4));
     $('tlfill').style.transform = `scaleY(${fill * (4 * 200 + 23) / 1180})`;
   }
   // S4 · durum
@@ -328,7 +328,7 @@ function render(t) {
       set(m, { sy: k, sx: 1, o: clamp(k * 3) });
     });
     for (let i = 0; i < 4; i++) {
-      const t0 = [1.0, 1.6, 4.0, 6.9][i], k = prog(T, t0, t0 + .6);
+      const t0 = [1.0, 1.4, 3.6, 8.3][i], k = prog(T, t0, t0 + .6);
       set($('r' + i), { o: clamp(k * 1.6), x: (1 - eOut(k)) * 80 });
       $('r' + i).querySelector('.ic').style.transform = `scale(${lerp(0, 1, eBack(k))})`;
     }
@@ -340,8 +340,8 @@ function render(t) {
     rise('s6a', T, .5);
     fadeUp($('s6h'), T, .9, .4, 10);
     tyEls.forEach((d, i) => { const k = prog(T, 1.0 + i * .3, 1.6 + i * .3); set(d, { o: clamp(k * 1.6), x: (1 - eOut(k)) * 60 }); });
-    fadeUp($('s6eb2'), T, 5.2, .5, 20);
-    [...$('pills').children].forEach((p, i) => { const k = prog(T, 5.4 + i * .17, 5.9 + i * .17); set(p, { o: clamp(k * 2), s: lerp(.6, 1, eBack(k)) }); });
+    fadeUp($('s6eb2'), T, 6.3, .5, 20);
+    [...$('pills').children].forEach((p, i) => { const k = prog(T, 6.5 + i * .17, 7.0 + i * .17); set(p, { o: clamp(k * 2), s: lerp(.6, 1, eBack(k)) }); });
   }
   // S7 · kapanış
   if (t >= S7) {
