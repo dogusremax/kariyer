@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Mina Towers Kapak</title>
+<link rel="stylesheet" href="assets/pj.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000}
+/* ?reel → 1080×1920, varsayılan 1080×1440 · ?red → kırmızı tema, varsayılan lacivert */
+#c{position:relative;width:1080px;height:1440px;overflow:hidden;font-family:'Plus Jakarta Sans',sans-serif;color:#fff;
+  background:radial-gradient(120% 70% at 85% 0%,#121a52 0%,#050A30 55%,#03061f 100%);
+  padding:0 70px;display:flex;flex-direction:column;justify-content:center}
+.reel #c{height:1920px}
+.logo{position:absolute;right:70px;top:70px;width:250px}
+.reel .logo{top:300px}
+.tag{align-self:flex-start;background:#DC1C2E;border-radius:22px;padding:18px 34px;font-weight:800;font-size:62px;letter-spacing:-.01em}
+h1{font-size:190px;font-weight:800;line-height:.92;letter-spacing:-.05em;margin-top:44px}
+h1 .hl{color:#FB5160}
+.sub{font-size:58px;font-weight:700;line-height:1.15;margin-top:50px;letter-spacing:-.02em}
+.sub span{opacity:.6}
+.kay{margin-top:56px;font-size:40px;font-weight:800;letter-spacing:.3em;display:flex;align-items:center;gap:22px;color:#FB5160}
+.kay svg{stroke:#FB5160}
+.red #c{background:linear-gradient(160deg,#910B19 0%,#DC1C2E 45%,#FB5160 100%)}
+.red .tag{background:#050A30}
+.red h1 .hl{color:#050A30}
+.red .kay{color:#fff}
+.red .kay svg{stroke:#fff}
+</style>
+</head>
+<body>
+<div id="c">
+  <img class="logo" src="assets/dogus-logo.png" alt="RE/MAX Doğuş">
+  <div class="tag">Son durum!</div>
+  <h1>Mina<br><span class="hl">Towers</span></h1>
+  <div class="sub">Teslim süreci gündemde.<br><span>Hedef tarih ne?<br>Doğru bilinenler.</span></div>
+  <div class="kay">İZLE <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+</div>
+<script>document.body.className=['reel','red'].filter(k=>location.search.includes(k)).join(' ');</script>
+<script>document.fonts.ready.then(()=>document.body.dataset.fit='1')</script>
+</body>
+</html>

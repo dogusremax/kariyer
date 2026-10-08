@@ -1,0 +1,54 @@
+/* Karusel teması — dogusportal karuselleriyle aynı dil:
+   koyu lacivert (#050A30) ve kırmızı degrade zeminler, Plus Jakarta Sans, mercan vurgu */
+:root{--disp:'Plus Jakarta Sans',sans-serif;--body:'Plus Jakarta Sans',sans-serif;--gold:#FB5160;--coral:#FB5160;--knavy:#050A30}
+.disp{letter-spacing:-.035em}
+.eyebrow{font-weight:800}
+/* Zeminler: lacivert ↔ kırmızı sırayla */
+#s1,#s3,#s6{background:radial-gradient(120% 70% at 85% 0%,#121a52 0%,#050A30 55%,#03061f 100%)!important}
+#s2,#s4,#s7{background:linear-gradient(160deg,#910B19 0%,#DC1C2E 45%,#FB5160 100%)!important;color:#fff!important;--navy:#050A30;--red:#050A30}
+/* Büyük soluk sahne numarası */
+.bignum{position:absolute;left:30px;top:40px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1000px;font-weight:800;line-height:1;letter-spacing:-.06em;color:rgba(120,140,255,.07);pointer-events:none}
+#s2 .bignum,#s4 .bignum,#s7 .bignum{color:rgba(255,255,255,.08)}
+/* Kuleler (S1) */
+.tower .lit{--wc:#FFC857}
+.tower .body{background:#0d1a4a;border-color:rgba(120,140,255,.18)}
+.chip{background:#DC1C2E}
+/* Künye kartları (kırmızı zemin) */
+.kv{background:rgba(5,10,48,.22)!important;border:2px solid rgba(255,255,255,.14)!important;box-shadow:none!important;color:#fff}
+.kv .n{color:#fff!important}
+.meta{color:rgba(255,255,255,.85)!important}
+.meta b{color:#fff!important}
+/* Zaman çizelgesi (lacivert) */
+.tl-line{background:rgba(255,255,255,.1)!important}
+.tl-fill{background:#FB5160!important}
+.ev .dot{background:#050A30!important;border-color:#FB5160!important}
+.ev.hl .dot{background:#FB5160!important}
+.ev.hl .t{color:#FB5160!important}
+/* Durum satırları (kırmızı zemin) */
+.row{background:rgba(5,10,48,.22)!important;border:2px solid rgba(255,255,255,.14)!important;border-radius:26px!important}
+.row .ic{border-radius:18px!important}
+.row .tx{color:#fff}
+.row .tx small{color:rgba(255,255,255,.75)!important}
+.mini{border-radius:16px 16px 0 0}
+/* Daire tipleri ve sosyal alanlar (lacivert) */
+.ty{border-bottom-color:rgba(255,255,255,.1)!important}
+.pill{background:rgba(255,255,255,.05)!important;border:2px solid rgba(255,255,255,.1)!important}
+/* Kapanış (kırmızı zemin) */
+.cta{background:#050A30!important;box-shadow:0 20px 50px -10px rgba(5,10,48,.6)!important}
+.redhi{color:#FB5160}
+#s7 .redhi,#s2 .redhi,#s4 .redhi{color:#050A30}
+/* Logo ve ilerleme çubuğu */
+#klogo{position:absolute;right:60px;top:56px;width:200px;z-index:21}
+#kprog{position:absolute;left:60px;right:60px;bottom:100px;height:30px;z-index:21;display:flex;align-items:center;gap:22px}
+#kprog .tr{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.2);overflow:hidden}
+#kprog .fl{height:100%;background:#fff;border-radius:3px}
+#kprog .nm{font-weight:700;font-size:24px;color:rgba(255,255,255,.7);min-width:50px;text-align:right}
+#tag,#src{color:rgba(255,255,255,.6)!important}
+/* Okunabilirlik düzeltmesi: numara yazıların arkasından çekildi, harf ve satır aralığı açıldı */
+.bignum{left:auto!important;right:-30px;top:auto!important;bottom:150px;font-size:620px!important;color:rgba(120,140,255,.05)!important}
+#s2 .bignum,#s4 .bignum,#s7 .bignum{color:rgba(255,255,255,.06)!important}
+.disp{letter-spacing:-.015em!important;line-height:1.1!important}
+.mask{padding-bottom:.08em;margin-bottom:-.04em}
+.ev .t,.row .tx,.meta{letter-spacing:0}
+#s1chip{top:810px!important}
+.tower{max-height:860px!important}
