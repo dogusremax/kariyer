@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>İki Yaka Fikirtepe Durum Raporu</title>
 <link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/pj.css">
 <style>
 :root{
   --navy:#003DA5;--navy-ink:#081B38;--navy-deep:#0C2B5E;--red:#DC1C2E;--red-hi:#FF4D5E;
@@ -84,6 +85,7 @@ html,body{background:#000;overflow:hidden}
 #tag{left:60px;top:70px;font-weight:800;font-size:24px;letter-spacing:.2em;z-index:20}
 #src{left:60px;right:60px;bottom:52px;text-align:center;font-weight:700;font-size:22px;letter-spacing:.06em;z-index:20}
 </style>
+<link rel="stylesheet" href="assets/karusel.css">
 </head>
 <body>
 <div id="stage">
@@ -356,16 +358,19 @@ function render(t) {
   }
 }
 
-window.render = render; window.heroReady = Promise.resolve(); window.DURATION = DURATION; window.FPS = FPS;
+ window.heroReady = Promise.resolve(); window.DURATION = DURATION; window.FPS = FPS;
 const fit = () => { const s = Math.min(innerWidth / 1080, innerHeight / 1920); $('stage').style.transform = `scale(${s})`; };
 if (!location.search.includes('capture')) {
   fit(); addEventListener('resize', fit);
   document.fonts.ready.then(() => {
     const t0 = performance.now();
-    const loop = () => { render(((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+    const loop = () => { window.render(((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
     loop();
   });
 }
 </script>
+<script>window.render = render;</script>
+<script src="assets/karusel.js"></script>
+<script>window.heroReady = Promise.resolve(); window.DURATION = DURATION; window.FPS = FPS;</script>
 </body>
 </html>
