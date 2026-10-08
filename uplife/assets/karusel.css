@@ -44,3 +44,11 @@
 #kprog .fl{height:100%;background:#fff;border-radius:3px}
 #kprog .nm{font-weight:700;font-size:24px;color:rgba(255,255,255,.7);min-width:50px;text-align:right}
 #tag,#src{color:rgba(255,255,255,.6)!important}
+/* Okunabilirlik düzeltmesi: numara yazıların arkasından çekildi, harf ve satır aralığı açıldı */
+.bignum{left:auto!important;right:-30px;top:auto!important;bottom:150px;font-size:620px!important;color:rgba(120,140,255,.05)!important}
+#s2 .bignum,#s4 .bignum,#s7 .bignum{color:rgba(255,255,255,.06)!important}
+.disp{letter-spacing:-.015em!important;line-height:1.1!important}
+.mask{padding-bottom:.08em;margin-bottom:-.04em}
+.ev .t,.row .tx,.meta{letter-spacing:0}
+#s1chip{top:810px!important}
+.tower{max-height:860px!important}
