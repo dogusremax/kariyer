@@ -192,7 +192,7 @@ html,body{background:#000;overflow:hidden}
 </div>
 
 <script>
-const FPS = 30, DURATION = 58;
+const FPS = 30, DURATION = 66;
 const $ = id => document.getElementById(id);
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const prog = (t, a, b) => clamp((t - a) / (b - a));
@@ -211,8 +211,8 @@ const fmt = n => Math.round(n).toLocaleString('tr-TR');
 
 // Sahne zamanlaması — seslendirme gelince yalnızca buradaki başlangıçları sese göre kaydırın.
 const SCENES = ['s1', 's2', 's3', 's4', 's6', 's7'];
-// Tahmini; seslendirme gelince duraklamalara göre güncellenecek
-const STARTS = [0, 4, 14.5, 26, 43, 50];
+// Seslendirmedeki duraklamalara göre (ses/seslendirme.mp3)
+const STARTS = [0, 4.15, 15.45, 25.85, 48.1, 54.85];
 const WIPE = .55;
 const SC = STARTS.map((a, i) => [SCENES[i], a, (STARTS[i + 1] ?? DURATION + 1) + WIPE + .05]);
 const LIGHT = ['s2', 's4'];
@@ -308,7 +308,7 @@ function render(t) {
     const T = t - S3;
     fadeUp($('s3eb'), T, .4, .5, 20);
     rise('s3a', T, .5); rise('s3b', T, .75);
-    const EV_T = [1.0, 2.0, 4.5, 7.0, 8.6];
+    const EV_T = [0.9, 1.5, 2.7, 5.0, 6.8];
     evEls.forEach((d, i) => {
       const k = prog(T, EV_T[i], EV_T[i] + .6);
       set(d, { o: clamp(k * 1.6), x: (1 - eOut(k)) * 60 });
@@ -327,7 +327,7 @@ function render(t) {
       set(m, { sy: k, sx: 1, o: clamp(k * 3) });
     });
     for (let i = 0; i < 4; i++) {
-      const t0 = [1.0, 6.0, 9.5, 12.5][i], k = prog(T, t0, t0 + .6);
+      const t0 = [1.4, 7.1, 8.2, 9.4][i], k = prog(T, t0, t0 + .6);
       set($('r' + i), { o: clamp(k * 1.6), x: (1 - eOut(k)) * 80 });
       $('r' + i).querySelector('.ic').style.transform = `scale(${lerp(0, 1, eBack(k))})`;
     }
@@ -339,8 +339,8 @@ function render(t) {
     rise('s6a', T, .5);
     fadeUp($('s6h'), T, .9, .4, 10);
     tyEls.forEach((d, i) => { const k = prog(T, 1.0 + i * .3, 1.6 + i * .3); set(d, { o: clamp(k * 1.6), x: (1 - eOut(k)) * 60 }); });
-    fadeUp($('s6eb2'), T, 1.8, .5, 20);
-    [...$('pills').children].forEach((p, i) => { const k = prog(T, 2.0 + i * .2, 2.5 + i * .2); set(p, { o: clamp(k * 2), s: lerp(.6, 1, eBack(k)) }); });
+    fadeUp($('s6eb2'), T, 0.6, .5, 20);
+    [...$('pills').children].forEach((p, i) => { const k = prog(T, 0.8 + i * .2, 1.3 + i * .2); set(p, { o: clamp(k * 2), s: lerp(.6, 1, eBack(k)) }); });
   }
   // S7 · kapanış
   if (t >= S7) {

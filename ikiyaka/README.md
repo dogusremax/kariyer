@@ -1,6 +1,6 @@
 # İki Yaka Fikirtepe — Durum Raporu (bilgilendirici reklam filmi)
 
-`ikiyaka-fikirtepe.mp4` · 1080×1920 (9:16) · 58 sn · 30 fps · müzik altlığı (seslendirme eklenecek)
+`ikiyaka-fikirtepe.mp4` · 1080×1920 (9:16) · 66 sn · 30 fps · ElevenLabs seslendirme (Yunus) + müzik altlığı
 
 Seslendirme metni: [`seslendirme-metni.md`](seslendirme-metni.md) · Araştırma ve kaynaklar: [`arastirma-notu.md`](arastirma-notu.md)
 
@@ -15,7 +15,7 @@ Seslendirme metni: [`seslendirme-metni.md`](seslendirme-metni.md) · Araştırma
 python3 music.py && node render.mjs
 ffmpeg -y -i build/frames.mp4 -i build/vo.wav -i build/music.wav \
   -filter_complex "[2]volume=0.3[m];[1]apad[v];[v][m]amix=inputs=2:duration=shortest:normalize=0,alimiter=limit=0.95[a]" \
-  -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -t 58 -movflags +faststart ikiyaka-fikirtepe.mp4
+  -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -t 66 -movflags +faststart ikiyaka-fikirtepe.mp4
 ```
 
 Gerekenler: Node + Playwright (Chromium), ffmpeg (libx264), Python 3 + numpy + scipy.
