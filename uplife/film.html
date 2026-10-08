@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Uplife Kadıköy Durum Raporu</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{
+  --navy:#003DA5;--navy-ink:#081B38;--navy-deep:#0C2B5E;--red:#DC1C2E;--red-hi:#FF4D5E;
+  --cloud:#F3F6FB;--steel:#5A6B85;--line:#DDE5F0;--gold:#FFC857;--green:#1FA463;--amber:#F2A33A;
+  --disp:'Archivo',sans-serif;--body:'Manrope',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000;overflow:hidden}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--navy-ink);font-family:var(--body);color:#fff;transform-origin:0 0}
+.scene{position:absolute;inset:0;overflow:hidden;display:none}
+.abs{position:absolute;will-change:transform,opacity}
+.disp{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.02}
+.eyebrow{font-weight:800;font-size:28px;letter-spacing:.22em;text-transform:uppercase}
+.mask{overflow:hidden;display:block}
+.mask>span{display:inline-block;will-change:transform}
+.redhi{color:var(--red-hi)} .red{color:var(--red)} .gold{color:var(--gold)}
+
+/* Kuleler */
+.tower{position:absolute;bottom:0;width:190px;transform-origin:50% 100%}
+.tower .body{position:absolute;inset:0;border-radius:10px 10px 0 0;background:#13305f;border:2px solid rgba(255,255,255,.12);border-bottom:0;overflow:hidden}
+.tower .win{position:absolute;inset:22px 18px 0;background:
+  repeating-linear-gradient(90deg,transparent 0 10px,var(--wc) 10px 34px,transparent 34px 42px),
+  linear-gradient(transparent,transparent);
+  -webkit-mask:repeating-linear-gradient(180deg,#000 0 22px,transparent 22px 38px);
+          mask:repeating-linear-gradient(180deg,#000 0 22px,transparent 22px 38px)}
+.tower .lit{--wc:var(--gold);opacity:0}
+.tower .dim{--wc:rgba(255,255,255,.08)}
+.tower .lbl{position:absolute;left:0;right:0;bottom:24px;text-align:center;font-family:var(--disp);font-weight:900;font-size:64px;color:#fff;text-shadow:0 6px 20px rgba(0,0,0,.5)}
+.tower .fl{position:absolute;left:0;right:0;top:-54px;text-align:center;font-weight:800;font-size:24px;letter-spacing:.08em;opacity:.75}
+
+/* S1 */
+#s1{background:radial-gradient(120% 60% at 50% 100%,#123a7a 0%,#081B38 60%)}
+.star{position:absolute;width:4px;height:4px;border-radius:50%;background:#fff}
+.chip{display:inline-flex;align-items:center;gap:14px;font-weight:800;font-size:32px;padding:16px 30px;border-radius:999px;background:var(--red);color:#fff;white-space:nowrap}
+
+/* S2 */
+#s2{background:var(--cloud);color:var(--navy-ink)}
+.kv{width:440px;height:230px;border-radius:30px;background:#fff;border:1.5px solid var(--line);padding:34px 36px;box-shadow:0 24px 50px -30px rgba(8,27,56,.35)}
+.kv .n{font-family:var(--disp);font-weight:900;font-size:96px;line-height:1;color:var(--navy);letter-spacing:-.03em}
+.kv .l{font-size:32px;font-weight:700;margin-top:12px}
+.meta{left:90px;right:90px;font-size:34px;font-weight:600;color:var(--steel);line-height:1.5}
+.meta b{color:var(--navy-ink);font-weight:800}
+
+/* S3 */
+#s3{background:linear-gradient(180deg,#0C2B5E 0%,#081B38 100%)}
+.tl-line{left:200px;top:560px;width:6px;height:1180px;background:rgba(255,255,255,.14);border-radius:3px}
+.tl-fill{left:200px;top:560px;width:6px;height:1180px;background:var(--red-hi);border-radius:3px;transform-origin:50% 0}
+.ev{left:90px;right:70px;height:170px;display:flex;align-items:flex-start;gap:0}
+.ev .d{width:96px;flex:0 0 96px;font-family:var(--disp);font-weight:900;font-size:30px;line-height:1.05;text-align:right;padding-top:6px;opacity:.85}
+.ev .dot{flex:0 0 46px;width:46px;height:46px;border-radius:50%;background:#0C2B5E;border:6px solid var(--red-hi);margin:0 34px 0 34px}
+.ev .t{font-size:36px;font-weight:700;line-height:1.28}
+.ev .t small{display:block;font-size:24px;font-weight:700;letter-spacing:.12em;opacity:.55;margin-top:6px;text-transform:uppercase}
+.ev.hl .dot{background:var(--red-hi)}
+.ev.hl .t{color:var(--gold)}
+
+/* S4 */
+#s4{background:#fff;color:var(--navy-ink)}
+.row{left:80px;right:80px;height:170px;border-radius:28px;display:flex;align-items:center;gap:30px;padding:0 36px;background:var(--cloud);border:1.5px solid var(--line)}
+.row .ic{flex:0 0 84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.row .ic svg{width:46px;height:46px}
+.row .tx{font-size:38px;font-weight:800;line-height:1.2}
+.row .tx small{display:block;font-size:28px;font-weight:600;color:var(--steel);margin-top:6px}
+.mini{width:150px;height:250px;border-radius:14px 14px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:18px;font-family:var(--disp);font-weight:900;font-size:56px;color:#fff;transform-origin:50% 100%}
+.mini span{font-family:var(--body);font-size:22px;font-weight:800;letter-spacing:.06em;margin-top:6px}
+
+/* S6 */
+#s6{background:var(--navy-ink)}
+.ty{left:80px;right:80px;height:120px;display:flex;align-items:center;border-bottom:2px solid rgba(255,255,255,.12)}
+.ty .k{width:200px;font-family:var(--disp);font-weight:900;font-size:58px}
+.ty .m{flex:1;font-size:44px;font-weight:700;opacity:.8}
+.ty .p{font-family:var(--disp);font-weight:800;font-size:46px;color:var(--gold);text-align:right}
+.pill{font-weight:800;font-size:28px;padding:16px 26px;border-radius:999px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.22);white-space:nowrap}
+
+/* S7 */
+#s7{background:radial-gradient(90% 60% at 50% 34%,#0B4BC0 0%,#003DA5 35%,#081B38 100%)}
+.cta{font-family:var(--disp);font-weight:800;font-size:44px;padding:30px 60px;border-radius:999px;background:var(--red);color:#fff;box-shadow:0 20px 50px -10px rgba(220,28,46,.6);white-space:nowrap}
+
+#tag{left:60px;top:70px;font-weight:800;font-size:24px;letter-spacing:.2em;z-index:20}
+#src{left:60px;right:60px;bottom:52px;text-align:center;font-weight:700;font-size:22px;letter-spacing:.06em;z-index:20}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- S1 · Açılış -->
+  <section class="scene" id="s1">
+    <div id="stars"></div>
+    <div class="abs eyebrow" id="s1eb" style="left:90px;top:200px;color:var(--gold)">Fikirtepe · Durum raporu · Ekim 2026</div>
+    <h1 class="abs disp" style="left:90px;top:270px;font-size:140px">
+      <span class="mask"><span id="s1a">Uplife</span></span>
+      <span class="mask"><span id="s1b">Kadıköy'de</span></span>
+      <span class="mask"><span id="s1c" class="redhi">son durum.</span></span>
+    </h1>
+    <div class="abs" id="s1chip" style="left:90px;top:740px"><div class="chip">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      Teslim hedefi: Aralık 2026</div></div>
+    <div id="towers1"></div>
+  </section>
+
+  <!-- S2 · Künye -->
+  <section class="scene" id="s2">
+    <div class="abs eyebrow red" id="s2eb" style="left:90px;top:200px">Proje künyesi</div>
+    <h2 class="abs disp" style="left:90px;top:265px;font-size:104px">
+      <span class="mask"><span id="s2a">850</span></span>
+      <span class="mask"><span id="s2b" style="color:var(--navy)">bağımsız bölüm</span></span>
+    </h2>
+    <div class="abs kv" id="kv0" style="left:80px;top:560px"><div class="n">4</div><div class="l">kule</div></div>
+    <div class="abs kv" id="kv1" style="left:560px;top:560px"><div class="n">22–23</div><div class="l">kat</div></div>
+    <div class="abs kv" id="kv2" style="left:80px;top:820px"><div class="n" data-to="830">0</div><div class="l">konut</div></div>
+    <div class="abs kv" id="kv3" style="left:560px;top:820px"><div class="n" data-to="20">0</div><div class="l">ticari ünite</div></div>
+    <div class="abs meta" id="s2m" style="top:1120px">
+      <div><b>Geliştirici / yüklenici:</b> Teknik Yapı</div>
+      <div><b>Konum:</b> Prestij Caddesi, Dumlupınar Mah., Fikirtepe</div>
+      <div><b>Kuleler:</b> 3 × 23 kat, 1 × 22 kat</div>
+      <div><b>Arsa:</b> ≈16 dönüm</div>
+      <div><b>Yeşil alan:</b> projenin %40'ı yeşil alan ve sosyal donatı</div>
+      <div><b>Otopark:</b> yer altında</div>
+      <div><b>Lansman:</b> 9 Şubat 2017</div>
+    </div>
+  </section>
+
+  <!-- S3 · Zaman çizelgesi -->
+  <section class="scene" id="s3">
+    <div class="abs eyebrow redhi" id="s3eb" style="left:90px;top:200px">Teslim takvimi</div>
+    <h2 class="abs disp" style="left:90px;top:265px;font-size:100px">
+      <span class="mask"><span id="s3a">2019 hedefinden</span></span>
+      <span class="mask"><span id="s3b" class="gold">Aralık 2026'ya.</span></span>
+    </h2>
+    <div class="abs tl-line"></div>
+    <div class="abs tl-fill" id="tlfill"></div>
+    <div id="events"></div>
+  </section>
+
+  <!-- S4 · Bugünkü durum -->
+  <section class="scene" id="s4">
+    <div class="abs eyebrow red" id="s4eb" style="left:90px;top:200px">Bugün itibarıyla</div>
+    <h2 class="abs disp" style="left:90px;top:265px;font-size:104px">
+      <span class="mask"><span id="s4a">Hedef Aralık 2026,</span></span>
+      <span class="mask"><span id="s4b" style="color:var(--navy)">resmi teslim yok.</span></span>
+    </h2>
+    <div class="abs" id="minis" style="left:120px;top:520px;width:840px;height:270px;display:flex;gap:30px;align-items:flex-end;justify-content:center">
+      <div class="mini" style="background:var(--amber)">A<span>İLK SIRADA</span></div>
+      <div class="mini" style="background:#AEB9CC">B<span>BEKLİYOR</span></div>
+      <div class="mini" style="background:#AEB9CC">C<span>BEKLİYOR</span></div>
+      <div class="mini" style="background:#AEB9CC">D<span>BEKLİYOR</span></div>
+    </div>
+    <div class="abs row" id="r0" style="top:870px"><div class="ic" style="background:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div><div class="tx">Teslim hedefi: Aralık 2026<small>İlan ve haberlere göre</small></div></div>
+    <div class="abs row" id="r1" style="top:1075px"><div class="ic" style="background:var(--red)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6M12 16.5v.5"/><circle cx="12" cy="12" r="9"/></svg></div><div class="tx">Resmi teslim / iskân açıklaması yok<small>Geliştirici teyidi bulunamadı</small></div></div>
+    <div class="abs row" id="r2" style="top:1280px"><div class="ic" style="background:#AEB9CC"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></div><div class="tx">Tapu kat irtifaklı<small>İlan beyanı · bir kaynakta teslim 2027</small></div></div>
+    <div class="abs row" id="r3" style="top:1485px"><div class="ic" style="background:var(--navy)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></div><div class="tx">A Blok ilk sırada<small>İlk teslim edilecek blok (ilan beyanı)</small></div></div>
+  </section>
+
+  <!-- S6 · Daire tipleri -->
+  <section class="scene" id="s6">
+    <div class="abs eyebrow gold" id="s6eb" style="left:90px;top:200px">Daire tipleri · yaklaşık m²</div>
+    <h2 class="abs disp" style="left:90px;top:265px;font-size:96px">
+      <span class="mask"><span id="s6a">1+1'den 3+1'e</span></span>
+    </h2>
+    <div class="abs" id="s6h" style="left:80px;right:80px;top:410px;display:flex;font-size:24px;font-weight:800;letter-spacing:.14em;opacity:.55">
+      <div style="width:200px">TİP</div><div style="flex:1">ALAN</div>
+    </div>
+    <div id="types"></div>
+    <div class="abs eyebrow" id="s6eb2" style="left:90px;top:900px;opacity:.85">Sosyal alanlar</div>
+    <div class="abs" id="pills" style="left:80px;width:920px;top:960px;display:flex;flex-wrap:wrap;gap:16px">
+      <div class="pill">Açık havuz</div><div class="pill">Kapalı havuz</div><div class="pill">Çocuk havuzu</div><div class="pill">Fitness</div><div class="pill">Sauna · Türk hamamı</div><div class="pill">Spa</div><div class="pill">Kafe · restoran</div><div class="pill">Çocuk oyun alanı</div><div class="pill">24 saat güvenlik</div><div class="pill">Kapalı otopark</div><div class="pill">%40 yeşil alan</div>
+    </div>
+  </section>
+
+  <!-- S7 · Kapanış -->
+  <section class="scene" id="s7">
+    <img class="abs" id="balloon" src="assets/balon.png" style="width:240px;left:420px;top:0">
+    <h2 class="abs disp" style="left:60px;right:60px;top:600px;font-size:84px;text-align:center">
+      <span class="mask"><span id="s7a">Uplife Kadıköy'de</span></span>
+      <span class="mask"><span id="s7b">almak ya da satmak</span></span>
+      <span class="mask"><span id="s7c" class="redhi">mı istiyorsunuz?</span></span>
+    </h2>
+    <div class="abs" id="s7d" style="left:0;right:0;top:960px;text-align:center;font-size:40px;font-weight:700;opacity:.9">Fikirtepe'yi en iyi bilen ofisle konuşun.</div>
+    <div class="abs" id="s7cta" style="left:0;right:0;top:1060px;display:flex;justify-content:center"><div class="cta">WhatsApp · 0216 315 15 15</div></div>
+    <div class="abs disp" id="s7url" style="left:0;right:0;top:1230px;text-align:center;font-size:50px;font-weight:700">yenifikirtepeburada.com</div>
+    <img class="abs" id="s7logo" src="assets/logo-beyaz.png" style="left:50%;top:1330px;width:250px;margin-left:-125px">
+    <div class="abs" id="s7addr" style="left:0;right:0;top:1470px;text-align:center;font-size:28px;font-weight:600;opacity:.75">Dumlupınar Mah., Fikirtepe · Kadıköy</div>
+    <div class="abs" id="s7disc" style="left:80px;right:80px;top:1600px;text-align:center;font-size:21px;font-weight:600;opacity:.55;line-height:1.45">Bilgiler ilan verileri, proje sayfaları ve basından derlenmiştir (8 Ekim 2026). Teslim tarihleri geliştirici tarafından resmi olarak teyit edilmemiştir. RE/MAX Doğuş'un proje geliştiricisiyle bağlantısı yoktur. Her ofis bağımsız olarak sahip olunur ve işletilir.</div>
+  </section>
+
+  <div class="abs" id="tag">RE/MAX DOĞUŞ · FİKİRTEPE RAPORU</div>
+  <div class="abs" id="src">Kaynak: ilan verileri · proje sayfaları · basın — 8 Ekim 2026</div>
+</div>
+
+<script>
+const FPS = 30, DURATION = 57;
+const $ = id => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const lerp = (a, b, k) => a + (b - a) * k;
+const eOut = k => 1 - Math.pow(1 - k, 3);
+const eOut5 = k => 1 - Math.pow(1 - k, 5);
+const eIO = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+const eBack = k => { const c = 1.7; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+function set(el, { o, x = 0, y = 0, s = 1, r = 0, sx, sy } = {}) {
+  el.style.transform = `translate(${x}px,${y}px) scale(${sx ?? s},${sy ?? s}) rotate(${r}deg)`;
+  if (o !== undefined) el.style.opacity = o;
+}
+function rise(id, t, t0, dur = .7) { const k = eOut5(prog(t, t0, t0 + dur)); $(id).style.transform = `translateY(${(1 - k) * 110}%)`; }
+function fadeUp(el, t, t0, dur = .6, dist = 50) { const k = eOut(prog(t, t0, t0 + dur)); set(el, { o: k, y: (1 - k) * dist }); }
+const fmt = n => Math.round(n).toLocaleString('tr-TR');
+
+// Sahne zamanlaması — seslendirme gelince yalnızca buradaki başlangıçları sese göre kaydırın.
+const SCENES = ['s1', 's2', 's3', 's4', 's6', 's7'];
+// Tahmini; seslendirme gelince duraklamalara göre güncellenecek
+const STARTS = [0, 5, 14.5, 28, 39, 49];
+const WIPE = .55;
+const SC = STARTS.map((a, i) => [SCENES[i], a, (STARTS[i + 1] ?? DURATION + 1) + WIPE + .05]);
+const LIGHT = ['s2', 's4'];
+
+// --- Yıldızlar
+for (let i = 0; i < 70; i++) {
+  const s = document.createElement('div'); s.className = 'star';
+  const r = Math.sin(i * 12.9898) * 43758.5453, f = r - Math.floor(r), g = (Math.sin(i * 78.233) * 12345.678) % 1;
+  Object.assign(s.style, { left: (f * 1080) + 'px', top: (Math.abs(g) * 900) + 'px', opacity: .2 + (i % 5) * .12 });
+  $('stars').appendChild(s);
+}
+// --- Kuleler (S1)
+const TOW = [['A', 90, 960, ''], ['B', 330, 960, ''], ['C', 570, 960, ''], ['D', 810, 920, '']];
+const towEls = TOW.map(([n, x, h, f]) => {
+  const d = document.createElement('div'); d.className = 'tower';
+  Object.assign(d.style, { left: (x - 10) + 'px', height: h + 'px' });
+  d.innerHTML = `<div class="body"><div class="win dim"></div><div class="win lit"></div></div><div class="fl">${f}</div><div class="lbl">${n}</div>`;
+  $('towers1').appendChild(d); return d;
+});
+// --- Zaman çizelgesi (S3)
+const EVENTS = [
+  ['2016', 'Talep toplama başladı', 'Aralık 2016'],
+  ['2017', 'Lansman · "36 ayda teslim" sözü', '9 Şubat 2017'],
+  ['2019', 'İlk teslim hedefi', '2019 sonu'],
+  ['2020+', 'Teslim takvimi ertelendi', '2020 – 2025'],
+  ['2026', 'İlan ve haberler: teslim Aralık 2026', 'Ekim 2026 itibarıyla'],
+];
+const evEls = EVENTS.map(([y, txt, sub], i) => {
+  const d = document.createElement('div'); d.className = 'abs ev' + (i === EVENTS.length - 1 ? ' hl' : '');
+  d.style.top = (540 + i * 200) + 'px';
+  d.innerHTML = `<div class="d">${y}</div><div class="dot"></div><div class="t">${txt}<small>${sub}</small></div>`;
+  $('events').appendChild(d); return d;
+});
+// .d genişliği 96 + dot kenar boşluğu → nokta merkezi x ≈ 90+96+34+23 = 243; çizgiyi ona hizala
+document.querySelectorAll('.tl-line,.tl-fill').forEach(e => e.style.left = '240px');
+// --- Daire tipleri (S6)
+const TYPES = [['1+1', '≈56–61 m²'], ['2+1', '≈87–113 m²'], ['3+1', '≈129 m²']];
+const tyEls = TYPES.map(([k, m], i) => {
+  const d = document.createElement('div'); d.className = 'abs ty'; d.style.top = (460 + i * 120) + 'px';
+  d.innerHTML = `<div class="k">${k}</div><div class="m">${m}</div>`;
+  $('types').appendChild(d); return d;
+});
+
+function render(t) {
+  const [S1, S2, S3, S4, S6, S7] = STARTS;
+  SC.forEach(([id, a, b], i) => {
+    const el = $(id), vis = t >= a && t < b;
+    el.style.display = vis ? 'block' : 'none';
+    if (!vis) return;
+    const k = i === 0 ? 1 : eIO(prog(t, a, a + WIPE));
+    el.style.clipPath = `inset(${(1 - k) * 100}% 0 0 0)`;
+    el.style.zIndex = i + 1;
+  });
+  // Üst etiket ve kaynak satırı: açık zeminli sahnelerde koyu
+  const cur = (SC.filter(([id, a]) => t >= a + WIPE * .5).pop() || SC[0])[0];
+  const col = LIGHT.includes(cur) ? 'rgba(8,27,56,.5)' : 'rgba(255,255,255,.55)';
+  $('tag').style.color = $('src').style.color = col;
+  $('tag').style.opacity = t > .4 && cur !== 's7' ? 1 : 0;
+  $('src').style.opacity = t > S2 + WIPE && cur !== 's7' ? 1 : 0;
+
+  // S1
+  if (t < S2 + 1) {
+    const T = t;
+    fadeUp($('s1eb'), T, .2, .6, 20);
+    rise('s1a', T, .35); rise('s1b', T, .55); rise('s1c', T, .8);
+    towEls.forEach((d, i) => {
+      const k = eOut(prog(T, .3 + i * .15, 1.9 + i * .15));
+      set(d, { sy: k, sx: 1 });
+      d.querySelector('.lbl').style.opacity = prog(T, 1.6 + i * .15, 2.0 + i * .15);
+      d.querySelector('.fl').style.opacity = .75 * prog(T, 1.6 + i * .15, 2.0 + i * .15);
+      // inşaat sürüyor: tüm kulelerde sönük, titrek şantiye ışığı
+      const lk = prog(T, 2.4 + i * .15, 3.0 + i * .15);
+      d.querySelector('.lit').style.opacity = lk * (.22 + .08 * Math.sin(T * 5 + i * 1.7));
+    });
+    const kc = prog(T, 2.6, 3.2);
+    set($('s1chip'), { o: clamp(kc * 2), s: lerp(.7, 1, eBack(kc)) });
+  }
+  // S2 · künye
+  if (t >= S2 && t < S3 + 1) {
+    const T = t - S2;
+    fadeUp($('s2eb'), T, .4, .5, 20);
+    rise('s2a', T, .5); rise('s2b', T, .75);
+    for (let i = 0; i < 4; i++) {
+      const k = prog(T, 1.2 + i * .35, 1.9 + i * .35);
+      set($('kv' + i), { o: clamp(k * 2), y: (1 - eOut(k)) * 80, s: lerp(.92, 1, eBack(k)) });
+      const n = $('kv' + i).querySelector('[data-to]');
+      if (n) n.textContent = fmt(+n.dataset.to * eOut(prog(T, 1.4 + i * .35, 3.0 + i * .35)));
+    }
+    fadeUp($('s2m'), T, 3.6, .7, 30);
+  }
+  // S3 · zaman çizelgesi
+  if (t >= S3 && t < S4 + 1) {
+    const T = t - S3;
+    fadeUp($('s3eb'), T, .4, .5, 20);
+    rise('s3a', T, .5); rise('s3b', T, .75);
+    const step = 2.1, t0 = 1.4;
+    evEls.forEach((d, i) => {
+      const k = prog(T, t0 + i * step, t0 + i * step + .6);
+      set(d, { o: clamp(k * 1.6), x: (1 - eOut(k)) * 60 });
+      d.querySelector('.dot').style.transform = `scale(${lerp(.2, 1, eBack(k))})`;
+    });
+    const fill = eIO(prog(T, t0, t0 + 4 * step + .4));
+    $('tlfill').style.transform = `scaleY(${fill * (4 * 200 + 23) / 1180})`;
+  }
+  // S4 · durum
+  if (t >= S4 && t < S6 + 1) {
+    const T = t - S4;
+    fadeUp($('s4eb'), T, .4, .5, 20);
+    rise('s4a', T, .5); rise('s4b', T, .75);
+    [...$('minis').children].forEach((m, i) => {
+      const k = eOut(prog(T, 1.0 + i * .15, 1.7 + i * .15));
+      set(m, { sy: k, sx: 1, o: clamp(k * 3) });
+    });
+    for (let i = 0; i < 4; i++) {
+      const t0 = [1.0, 1.6, 4.0, 6.9][i], k = prog(T, t0, t0 + .6);
+      set($('r' + i), { o: clamp(k * 1.6), x: (1 - eOut(k)) * 80 });
+      $('r' + i).querySelector('.ic').style.transform = `scale(${lerp(0, 1, eBack(k))})`;
+    }
+  }
+  // S6 · tipler
+  if (t >= S6 && t < S7 + 1) {
+    const T = t - S6;
+    fadeUp($('s6eb'), T, .4, .5, 20);
+    rise('s6a', T, .5);
+    fadeUp($('s6h'), T, .9, .4, 10);
+    tyEls.forEach((d, i) => { const k = prog(T, 1.0 + i * .3, 1.6 + i * .3); set(d, { o: clamp(k * 1.6), x: (1 - eOut(k)) * 60 }); });
+    fadeUp($('s6eb2'), T, 5.2, .5, 20);
+    [...$('pills').children].forEach((p, i) => { const k = prog(T, 5.4 + i * .17, 5.9 + i * .17); set(p, { o: clamp(k * 2), s: lerp(.6, 1, eBack(k)) }); });
+  }
+  // S7 · kapanış
+  if (t >= S7) {
+    const T = t - S7;
+    const kb = eOut(prog(T, .1, 2.0));
+    set($('balloon'), { o: 1, y: lerp(1900, 240, kb) + Math.sin(T * 2) * 10, r: Math.sin(T * 1.5) * 2.5 });
+    rise('s7a', T, .6); rise('s7b', T, .8); rise('s7c', T, 1.0);
+    fadeUp($('s7d'), T, 1.6, .6, 20);
+    const kc = prog(T, 2.2, 2.8), pulse = T > 3 ? 1 + Math.sin((T - 3) * 5) * .02 : 1;
+    set($('s7cta'), { o: clamp(kc * 2), s: lerp(.7, 1, eBack(kc)) * pulse });
+    fadeUp($('s7url'), T, 2.6, .6, 20);
+    fadeUp($('s7logo'), T, 2.8, .6, 20);
+    fadeUp($('s7addr'), T, 3.0, .6, 20);
+    fadeUp($('s7disc'), T, 3.2, .6, 10);
+  }
+}
+
+window.render = render; window.heroReady = Promise.resolve(); window.DURATION = DURATION; window.FPS = FPS;
+const fit = () => { const s = Math.min(innerWidth / 1080, innerHeight / 1920); $('stage').style.transform = `scale(${s})`; };
+if (!location.search.includes('capture')) {
+  fit(); addEventListener('resize', fit);
+  document.fonts.ready.then(() => {
+    const t0 = performance.now();
+    const loop = () => { render(((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+    loop();
+  });
+}
+</script>
+</body>
+</html>
