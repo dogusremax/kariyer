@@ -2,29 +2,13 @@
 
 8 Ekim 2026 · Filmde kullanılan bilgilerin dayanağı. Fiyat bilgisi bilerek dışarıda bırakıldı.
 
-> Kısa özet: Barsan Yapı'nın Fikirtepe projesi İki Yaka, 25 katlı iki konut kulesi ve bir ticari bloktan oluşuyor; ilk teslim hedefi 2019'du. Ekim 2026 itibarıyla kamuya açık kaynaklarda resmi teslim veya iskân açıklaması bulunamadı.
+> **Güncel sonuç (8 Ekim 2026, tarayıcı araştırmasıyla):**
 >
-> **Eylül 2026 karışıklığı:** Google'ın yapay zekâ özeti "Yeni Fikirtepe (İki Yaka Fikirtepe)" diyerek iki projeyi birleştiriyor. Eylül'de teslimi başlayan 2. etap (3 Eylül) ve Maksem Yapı'nın yaptığı 3. etap, Bakanlık adına Emlak Konut'un yürüttüğü **Yeni Fikirtepe** projesine ait (KAP: Fikirtepe 3472/1 parsel, Maksem Yapı sözleşmesi). İki Yaka bunlardan ayrı, özel bir proje.
->
-> **19 Eylül 2026 "İKİ YAKA FİKİRTEPE | OPEN HOUSE" Instagram paylaşımı (kwtansu):** Bu ortamdan açılamadı; metninde "3. Etap" geçtiği için Yeni Fikirtepe'yi kastediyor olabilir. Açılıp kontrol edilmeli.
-
-## Filmin son sürümünde kullanılanlar (yalnızca tutarlı bilgiler)
-
-- Geliştirici Barsan Yapı (Barsan Global Lojistik + Denge Yapı Mimarlık, 2014)
-- 25 katlı 2 konut kulesi + ticari blok
-- Daire tipleri 1+1, 2+1, 3+1 (m² verilmedi)
-- Hafriyat aşamasında satış, ilk teslim hedefi 2019
-- Sosyal alanlar (kaynaklarda ortak geçenler)
-- Eylül 2026 teslimlerinin Yeni Fikirtepe 2. Etap'a ait olduğu
-- İki Yaka için resmi teslim/iskân açıklaması bulunamadığı
-
-## Filmden çıkarılanlar (tek kaynağa dayalı ya da çelişkili)
-
-- Tamamlanma ≈%77 (tek proje sitesi)
-- "2026 3. çeyrek" teslim hedefi (tek ilan)
-- Ekim–Aralık 2024 teslim hedefi (ilan siteleri, tutarsız)
-- Konut sayısı (275 / 570 / 575) ve mağaza sayısı
-- Arsa alanı ve m² aralıkları
+> - **Yüksek güven:** İki Yaka, Barsan/Denge kökenli ayrı bir özel sektör projesi (2017 proje kayıtları, Kasım 2019 Fikirtepe Haber, 2026 sahibinden ilan başlıkları "Barsan İki Yaka"). Emlak Konut'un resmî Yeni Fikirtepe etap listesinde "İki Yaka" adlı bir etap yok.
+> - **Yüksek güven:** Eylül'deki resmî teslim, Emlak Konut "Yeni Fikirtepe 2. Etap Teslim Programı"na ait: 3470 ada 3 parsel · C Blok 3 Eylül 2026 09.00'da başlıyor, B Blok 5 Ekim 2026'da başlıyor. Belgede "İki Yaka" geçmiyor.
+> - **Orta güven (ilan/pazarlama):** 2026'da İki Yaka'da "hemen teslim" ilanları var (#1327329038, eski başlığı "Ağustos teslim"); 17 Haziran 2026 Emlakjet ilanında bina yaşı "0 (Oturuma Hazır)", kullanım "Boş", tapu "Kat İrtifakı"; @kwtansu 19 Eylül 2026 paylaşımı 2 Ekim 14.00–18.00 open house duyuruyor, "tapular hazır" diyor.
+> - **Düşük güven, filmde kullanılmadı:** projenin tamamının iskânlı olduğu, tüm tapuların kat mülkiyetine geçtiği, blok bazlı resmî teslim tarihi. Üçüncü taraf siteler çelişiyor (Ekim 2024 teslim / 2026 4. çeyrekte %89 / Endeksa "tamamlandı").
+> - "Tapular hazır", "iskânlı", "kat mülkiyetli" ve "projenin tamamı teslim edildi" eş anlamlı değildir.
 
 ## Künye
 
