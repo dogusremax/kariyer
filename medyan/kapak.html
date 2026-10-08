@@ -25,6 +25,15 @@ h1{font-size:118px;font-weight:800;line-height:1.02;letter-spacing:-.035em;margi
 .kay{margin-top:36px;font-size:28px;font-weight:800;letter-spacing:.32em;display:flex;align-items:center;gap:18px;opacity:.9}
 .src{position:absolute;left:76px;right:76px;bottom:44px;font-size:21px;font-weight:600;opacity:.6}
 .reel .src{bottom:290px}
+/* Lacivert tema (?navy) — karuseldeki lacivert slaytlar */
+.navy #c{background:radial-gradient(120% 70% at 85% 0%,#121a52 0%,#050A30 55%,#03061f 100%)}
+.navy .big{color:rgba(120,140,255,.07)}
+.navy .tag{background:#DC1C2E}
+.navy h1 .hl{color:#FB5160}
+.navy .it{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+.navy .ic{background:linear-gradient(160deg,#DC1C2E,#FB5160)}
+.navy .kay{color:#FB5160;opacity:1}
+.navy .kay svg{stroke:#FB5160}
 </style>
 </head>
 <body>
@@ -32,7 +41,7 @@ h1{font-size:118px;font-weight:800;line-height:1.02;letter-spacing:-.035em;margi
   <div class="big">4</div>
   <img class="logo" src="assets/dogus-logo.png" alt="RE/MAX Doğuş">
   <div class="tag">Medyan Kadıköy</div>
-  <h1>Anahtar teslimi<br>başladı</h1>
+  <h1>Anahtar teslimi<br><span class="hl">başladı</span></h1>
   <div class="sub">Fikirtepe'nin dev projesinde son durum</div>
   <div class="list">
     <div class="it"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l5-3v16M9 21V3l6 3v15M15 21v-9l5 2v7M2 21h20"/></svg></div>4 blok · 1.080 konut · 12 ticari</div>
@@ -44,6 +53,6 @@ h1{font-size:118px;font-weight:800;line-height:1.02;letter-spacing:-.035em;margi
   <div class="kay">İZLE <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
   <div class="src">KAP · Vakıf GYO · ilan verileri · basın — Ekim 2026</div>
 </div>
-<script>if(location.search.includes('reel'))document.body.className='reel';</script>
+<script>document.body.className=['reel','navy'].filter(k=>location.search.includes(k)).join(' ');</script>
 </body>
 </html>
