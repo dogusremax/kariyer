@@ -66,6 +66,11 @@ h1,h2,h3{font-family:var(--disp);line-height:1.12;text-wrap:balance;letter-spaci
 .opt .l{flex:0 0 30px;height:30px;border-radius:50%;background:var(--cloud);display:flex;align-items:center;justify-content:center;font:800 13px var(--disp);color:var(--navy)}
 .opt.sec{border-color:var(--navy);background:#EEF3FC}
 .opt.sec .l{background:var(--navy);color:#fff}
+.gizli-profil{display:flex;align-items:center;gap:12px;background:var(--cloud);border:1.5px dashed var(--line);border-radius:14px;padding:10px 14px;margin:-6px 0 20px}
+.gp-ikon{flex:0 0 34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font:800 16px var(--disp)}
+.gp-yazi{display:flex;flex-direction:column;min-width:0}
+.gp-yazi small{font-size:12px;font-weight:700;color:var(--steel)}
+.gp-yazi b{font-family:var(--disp);font-size:18px;font-weight:800;filter:blur(var(--b,7px));transition:filter .4s ease;user-select:none}
 .tepki{min-height:26px;margin-top:16px;font-weight:700;font-size:14.5px;color:var(--ok);opacity:0;transition:opacity .2s}
 .tepki.on{opacity:1}
 .alt{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:center}
@@ -125,8 +130,8 @@ form{display:grid;gap:14px}
     <!-- Giriş -->
     <section class="intro" id="ekranGiris">
       <span class="eyebrow">2 dakikalık test</span>
-      <h1>Gayrimenkul danışmanlığı <em>sana uygun mu?</em></h1>
-      <p class="lead">11 kısa soruya içinden geldiği gibi cevap ver; hangi danışman profiline yakın olduğunu ve güçlü yönlerini hemen gör. Doğru ya da yanlış cevap yok.</p>
+      <h1>Fikirtepe'de <em>11.729 konut</em> yükseliyor. Peki onları kim satacak?</h1>
+      <p class="lead">11 soruda gör: o kişi sen olabilir misin? Sorulara içinden geldiği gibi cevap ver, hangi danışman profili olduğunu ve en güçlü yönünü hemen öğren. Doğru ya da yanlış cevap yok.</p>
       <div class="facts">
         <div><b>11</b><span>soru</span></div>
         <div><b>2</b><span>dakika</span></div>
@@ -139,6 +144,10 @@ form{display:grid;gap:14px}
     <!-- Soru -->
     <section class="q" id="ekranSoru" hidden>
       <div class="prog"><div class="bar"><i id="bar"></i></div><span class="n" id="sayac">1 / 11</span></div>
+      <div class="gizli-profil" id="gizli" aria-hidden="true">
+        <div class="gp-ikon">?</div>
+        <div class="gp-yazi"><small id="gpDurum">Profilin şekilleniyor…</small><b id="gpAd">Sahanın Savaşçısı</b></div>
+      </div>
       <div id="soruAlan"></div>
       <p class="tepki" id="tepki"></p>
       <div class="alt"><button class="ghost" id="geri">← Geri</button><span></span></div>
@@ -155,7 +164,7 @@ form{display:grid;gap:14px}
       <div class="yetenek" id="yetenek"></div>
       <div class="cagri">
         <h3 id="cagriBaslik">Bu sonuçla seni ofiste görmek isteriz.</h3>
-        <p>Bilgilerini bırak, sonucunla birlikte Broker'ımıza iletelim. 2 iş günü içinde seni arayıp tanışalım.</p>
+        <p>Sonucunu gönder, seni ofisimize bir günlük <b>Gölge Gün</b>'e davet edelim: bir danışmanın yanında portföy gezer, müşteri görüşmesine katılır, işi içeriden görürsün. Broker'ımız 2 iş günü içinde seni arayıp günü birlikte belirler.</p>
       </div>
       <form id="form" novalidate>
         <div class="ikili">
@@ -174,7 +183,7 @@ form{display:grid;gap:14px}
           <p>Verilerin üçüncü kişilerle paylaşılmaz; başvuru süreci tamamlandıktan sonra en fazla 1 yıl saklanır ve ardından silinir. KVKK'nın 11. maddesindeki hakların için dogusremax@gmail.com adresine yazabilir ya da Dumlupınar Mah. Özen Sk. Nuhoğlu Yenitepe Sitesi 2. Etap A Blok D:2, Kadıköy / İstanbul adresine başvurabilirsin.</p>
         </div>
         <p class="hata" id="hata" role="alert" hidden></p>
-        <button class="btn wide" id="gonder">Sonucumu gönder, beni arayın →</button>
+        <button class="btn wide" id="gonder">Gölge Gün davetimi al →</button>
         <button type="button" class="ghost" id="tekrar">Testi baştan çöz</button>
       </form>
     </section>
@@ -182,8 +191,8 @@ form{display:grid;gap:14px}
     <!-- Teşekkür -->
     <section class="tamam" id="ekranTamam" hidden>
       <div class="tik">✓</div>
-      <h2>Harika, sonucun bize ulaştı!</h2>
-      <p>2 iş günü içinde seni arayacağız. O zamana kadar ofisi ve eğitim programını tanıyabilirsin.</p>
+      <h2>Davetin hazırlanıyor!</h2>
+      <p>Sonucun Broker'ımıza ulaştı. 2 iş günü içinde seni arayıp Gölge Gün'ünü birlikte planlayacağız. O zamana kadar ofisi ve eğitim programını tanıyabilirsin.</p>
       <div class="sec2">
         <a class="btn" href="./#program">Eğitim programını gör</a>
         <a class="lnk" href="https://www.instagram.com/remaxdogus/" target="_blank" rel="noopener">Instagram'da @remaxdogus</a>
@@ -268,6 +277,7 @@ function soru(){
   $('bar').style.width=(idx/SORULAR.length*100)+'%';
   $('tepki').classList.remove('on');
   $('geri').style.visibility=idx?'visible':'hidden';
+  gizliGuncelle();
   var h='<div class="anim"><h2>'+q.s+'</h2><div class="opts">';
   q.c.forEach(function(c,j){h+='<button class="opt'+(cev[idx]===j?' sec':'')+'" data-j="'+j+'"><span class="l">'+'ABCD'[j]+'</span><span>'+c[0]+'</span></button>'});
   $('soruAlan').innerHTML=h+'</div></div>';
@@ -278,6 +288,7 @@ $('soruAlan').addEventListener('click',function(e){
   cev[idx]=+b.dataset.j;
   $('soruAlan').querySelectorAll('.opt').forEach(function(o){o.classList.toggle('sec',o===b)});
   $('bar').style.width=((idx+1)/SORULAR.length*100)+'%';
+  gizliGuncelle();
   var t=SORULAR[idx].t;if(t){$('tepki').textContent=t;$('tepki').classList.add('on')}
   $('soruAlan').dataset.kilit='1';
   setTimeout(function(){delete $('soruAlan').dataset.kilit;idx++;if(idx<SORULAR.length)soru();else sonuc()},t?750:250);
@@ -286,6 +297,15 @@ $('geri').addEventListener('click',function(){if(idx>0){idx--;soru()}});
 $('basla').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
 $('tekrar').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
 
+// Cevap verdikçe önde giden profil bulanıklıktan çıkar
+function onde(){var p={i:0,d:0,y:0,g:0};for(var k=0;k<cev.length;k++){if(cev[k]==null)continue;var s=SORULAR[k].c[cev[k]][1];for(var x in s)p[x]+=s[x]}
+  return Object.keys(p).sort(function(a,b){return p[b]/MAX[b]-p[a]/MAX[a]})[0]}
+function gizliGuncelle(){
+  var n=cev.filter(function(c){return c!=null}).length,oran=n/SORULAR.length;
+  $('gpAd').textContent=PROFIL[onde()].ad;
+  $('gizli').style.setProperty('--b',Math.max(0,7-oran*9).toFixed(1)+'px');
+  $('gpDurum').textContent=n===0?'Profilin şekilleniyor…':oran<.45?'İpuçları birikiyor…':oran<.75?'Profilin belirginleşiyor!':'Neredeyse belli oldu!';
+}
 var SONUC={};
 function sonuc(){
   var p={i:0,d:0,y:0,g:0},top=0,mx=0;
@@ -325,7 +345,7 @@ form.addEventListener('submit',function(ev){
   .then(function(r){return r.json()})
   .then(function(j){if(!j.success)throw new Error(j.error||'');goster('ekranTamam')})
   .catch(function(e){
-    b.disabled=false;b.textContent='Sonucumu gönder, beni arayın →';
+    b.disabled=false;b.textContent='Gölge Gün davetimi al →';
     $('hata').textContent=(e&&e.message&&e.message.indexOf('etch')<0&&e.message.indexOf('JSON')<0&&e.message)||'Gönderim sırasında bir sorun oluştu. Tekrar dene ya da WhatsApp\'tan 0532 472 41 48 numarasına yaz.';
     $('hata').hidden=false;
   });
