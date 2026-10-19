@@ -210,6 +210,17 @@ details .ans{padding:0 26px 24px;color:var(--steel);font-size:15px;max-width:680
 .fgroup textarea{resize:vertical;min-height:90px}
 .form-card .btn{width:100%;justify-content:center;margin-top:8px}
 .form-ok{display:none;text-align:center;padding:30px 10px}
+.fchecks{display:flex;gap:22px;flex-wrap:wrap}
+.fcheck,.fkvkk{display:flex;gap:10px;align-items:flex-start;font-size:14px;font-weight:600;cursor:pointer}
+.fcheck input,.fkvkk input{width:18px;height:18px;flex:0 0 auto;margin-top:1px;accent-color:var(--red)}
+.fkvkk{font-weight:500;color:var(--steel);font-size:13px;line-height:1.5;margin:4px 0 12px}
+.flink{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--navy);text-decoration:underline;cursor:pointer}
+.fkvkk-metin{font-size:12.5px;line-height:1.55;color:var(--steel);background:#F4F6FA;border-radius:10px;padding:12px 14px;margin-bottom:14px}
+.fkvkk-metin p+p{margin-top:8px}
+.fhp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.ferr{color:#C0141F;font-size:14px;font-weight:700;margin:0 0 10px}
+.tried :invalid{border-color:#C0141F}
+[hidden]{display:none!important}
 .form-ok .tick{width:64px;height:64px;border-radius:50%;background:#E9F7EE;color:#1C8A45;font-size:30px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
 .wa-float{position:fixed;right:22px;bottom:22px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(37,211,102,.4);transition:transform .18s}
 .wa-float:hover{transform:scale(1.08)}
@@ -516,14 +527,12 @@ footer .logo{font-size:16px}
       </div>
     </div>
     <div class="form-card reveal">
-      <form id="applyForm" action="https://formspree.io/f/mdajqbgo" method="POST">
+      <form id="applyForm" novalidate>
         <h3>Danışman Adayı Başvuru Formu</h3>
         <p class="fc-sub">Bilgileriniz yalnızca işe alım süreci için kullanılır.</p>
-        <input type="hidden" name="kaynak" value="Kariyer Sayfası">
-        <input type="hidden" name="_subject" value="🧲 Yeni Danışman Adayı Başvurusu">
         <div class="frow">
           <div class="fgroup"><label for="ad">Ad Soyad *</label><input id="ad" name="ad_soyad" required autocomplete="name"></div>
-          <div class="fgroup"><label for="tel">Telefon *</label><input id="tel" name="telefon" type="tel" required autocomplete="tel" placeholder="05__ ___ __ __"></div>
+          <div class="fgroup"><label for="tel">Telefon *</label><input id="tel" name="telefon" type="tel" inputmode="tel" required autocomplete="tel" placeholder="05__ ___ __ __"></div>
         </div>
         <div class="fgroup"><label for="mail">E-posta</label><input id="mail" name="eposta" type="email" autocomplete="email"></div>
         <div class="frow">
@@ -536,11 +545,60 @@ footer .logo{font-size:16px}
               <option>Sigorta</option>
               <option>Mağazacılık / Perakende</option>
               <option>Gayrimenkul</option>
+              <option>Öğrenci / yeni mezun</option>
               <option>Diğer</option>
             </select>
           </div>
         </div>
-        <div class="fgroup"><label for="neden">Bu işi neden istiyorsunuz? (kısaca)</label><textarea id="neden" name="motivasyon" placeholder="Birkaç cümle yeterli..."></textarea></div>
+        <div class="frow">
+          <div class="fgroup"><label for="egitim">Eğitim durumu *</label>
+            <select id="egitim" name="egitim" required>
+              <option value="" disabled selected>Seçin</option>
+              <option>Lise</option><option>Ön lisans</option><option>Lisans</option><option>Yüksek lisans ve üzeri</option>
+            </select>
+          </div>
+          <div class="fgroup"><label for="deneyim">Gayrimenkul deneyimi *</label>
+            <select id="deneyim" name="deneyim" required>
+              <option value="" disabled selected>Seçin</option>
+              <option>Yok</option><option>1 yıldan az</option><option>1–3 yıl</option><option>3 yıldan fazla</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fgroup"><label for="myk">MYK Emlak Danışmanı belgesi *</label>
+            <select id="myk" name="myk" required>
+              <option value="" disabled selected>Seçin</option>
+              <option>Var</option><option>Yok</option><option>Sınav sürecindeyim</option>
+            </select>
+          </div>
+          <div class="fgroup"><label for="baslama">Ne zaman başlayabilirsiniz? *</label>
+            <select id="baslama" name="baslama" required>
+              <option value="" disabled selected>Seçin</option>
+              <option>Hemen</option><option>1 ay içinde</option><option>1–3 ay içinde</option><option>Henüz bilmiyorum</option>
+            </select>
+          </div>
+        </div>
+        <div class="fgroup fchecks">
+          <label class="fcheck"><input type="checkbox" name="ehliyet" value="1"> Ehliyetim var</label>
+          <label class="fcheck"><input type="checkbox" name="arac" value="1"> Aracım var</label>
+        </div>
+        <div class="fgroup"><label for="nereden">Bizi nereden duydunuz? *</label>
+          <select id="nereden" name="nereden" required>
+            <option value="" disabled selected>Seçin</option>
+            <option>Instagram</option><option>Tanıdık / referans</option><option>Kariyer.net</option><option>LinkedIn</option><option>sahibinden.com</option><option>Kariyer günü</option><option>Diğer</option>
+          </select>
+        </div>
+        <div class="fgroup" id="refAlan" hidden><label for="referans">Sizi kim yönlendirdi?</label><input id="referans" name="referans"></div>
+        <div class="fgroup"><label for="neden">Bu işi neden istiyorsunuz? (kısaca)</label><textarea id="neden" name="motivasyon" maxlength="2000" placeholder="Birkaç cümle yeterli..."></textarea></div>
+        <input type="hidden" name="utm" id="utm">
+        <div class="fhp" aria-hidden="true"><label for="webSitesi">Web sitesi</label><input id="webSitesi" name="web_sitesi" tabindex="-1" autocomplete="off"></div>
+        <label class="fkvkk"><input type="checkbox" id="kvkk" name="kvkk" value="1" required>
+          <span><button type="button" class="flink" id="kvkkAc" aria-controls="kvkkMetin" aria-expanded="false">Aydınlatma metnini</button> okudum; başvurumun değerlendirilmesi için kişisel verilerimin işlenmesini kabul ediyorum. *</span></label>
+        <div class="fkvkk-metin" id="kvkkMetin" hidden>
+          <p><b>Kişisel Verilerin Korunması Aydınlatma Metni.</b> RE/MAX Doğuş (UMT GROUP Gayrimenkul Yatırım Danışmanlık İnş. San. Tic. Ltd. Şti., veri sorumlusu) bu formda paylaştığınız kimlik, iletişim, eğitim ve mesleki bilgilerinizi yalnızca danışmanlık başvurunuzu değerlendirmek ve sizinle iletişime geçmek amacıyla, 6698 sayılı KVKK'nın 5/2-c ve 5/2-f maddelerine dayanarak işleriz.</p>
+          <p>Verileriniz üçüncü kişilerle paylaşılmaz; başvuru süreci tamamlandıktan sonra en fazla 1 yıl saklanır ve ardından silinir. KVKK'nın 11. maddesindeki haklarınız için dogusremax@gmail.com adresine yazabilir ya da Dumlupınar Mah. Özen Sk. Nuhoğlu Yenitepe Sitesi 2. Etap A Blok D:2, Kadıköy / İstanbul adresine başvurabilirsiniz.</p>
+        </div>
+        <p class="ferr" id="formErr" role="alert" hidden></p>
         <button type="submit" class="btn btn-red" id="sendBtn">Başvurumu Gönder →</button>
       </form>
       <div class="form-ok" id="formOk">
@@ -645,19 +703,39 @@ vol.addEventListener('input',calc);calc();
   update();
 })();
 
-// ---- form
-var form=document.getElementById('applyForm'),ok=document.getElementById('formOk'),btn=document.getElementById('sendBtn');
+// ---- form: başvuru RE/MAX Doğuş Apps Script'ine (danisman-takip, action=adayBasvuru) gider
+var BASVURU_URL='https://script.google.com/macros/s/AKfycbylNnt48KJxD-HBqoopEfYZjv4A06hKo3RjUclILLh9g8bDIno73dDti_PUFECC4F0utg/exec';
+var form=document.getElementById('applyForm'),ok=document.getElementById('formOk'),btn=document.getElementById('sendBtn'),err=document.getElementById('formErr');
+var qs=new URLSearchParams(location.search);
+document.getElementById('utm').value=(qs.get('kaynak')||qs.get('utm_source')||'').slice(0,60);
+var nereden=document.getElementById('nereden');
+nereden.addEventListener('change',function(){document.getElementById('refAlan').hidden=nereden.value!=='Tanıdık / referans'});
+document.getElementById('kvkkAc').addEventListener('click',function(){
+  var m=document.getElementById('kvkkMetin');m.hidden=!m.hidden;this.setAttribute('aria-expanded',String(!m.hidden));
+});
+function hataGoster(t){err.textContent=t;err.hidden=false}
 form.addEventListener('submit',function(ev){
   ev.preventDefault();
+  err.hidden=true;
+  if(!form.checkValidity()){
+    form.classList.add('tried');
+    var ilk=form.querySelector(':invalid');
+    hataGoster(ilk&&ilk.id==='kvkk'?'Devam etmek için aydınlatma metnini onaylayın.':'Lütfen * ile işaretli alanları doldurun.');
+    if(ilk)ilk.focus();
+    return;
+  }
+  var veri={action:'adayBasvuru'};
+  new FormData(form).forEach(function(v,k){veri[k]=v});
   btn.disabled=true;btn.textContent='Gönderiliyor...';
-  fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
-  .then(function(r){
-    if(r.ok){form.style.display='none';ok.style.display='block'}
-    else{throw new Error()}
+  fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(veri)})
+  .then(function(r){return r.json()})
+  .then(function(j){
+    if(!j.success)throw new Error(j.error||'');
+    form.style.display='none';ok.style.display='block';
   })
-  .catch(function(){
+  .catch(function(e){
     btn.disabled=false;btn.textContent='Başvurumu Gönder →';
-    alert('Gönderim sırasında bir sorun oluştu. Lütfen tekrar deneyin veya WhatsApp üzerinden yazın.');
+    hataGoster((e&&e.message&&e.message.indexOf('Fetch')<0&&e.message.indexOf('JSON')<0&&e.message)||'Gönderim sırasında bir sorun oluştu. Lütfen tekrar deneyin veya WhatsApp üzerinden yazın.');
   });
 });
 </script>
