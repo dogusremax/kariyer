@@ -260,6 +260,46 @@ body.acik .gunler button.sec,body.acik .saatler button.sec{background:#FFF1D4;bo
 body.acik .yol li,body.acik .gelisim{color:#34445E}
 body.acik .yol li::before{box-shadow:0 0 8px rgba(211,162,78,.7)}
 body.acik .alt-yazi{color:#8A94A6}
+/* Aydınlık tema renk paletleri: altın (varsayılan), RE/MAX, gökyüzü, gün batımı */
+body.acik{--a1:#8A5A12;--a2:#C8902F;--a3:#FFE3A6;--tint:#FFF1D4;--tint2:#FFF3DC;--btnink:#2A1C05;--btnsh:rgba(214,150,50,.45);--toz:#FFB547;--glow:rgba(255,190,100,.45);
+  --btn:linear-gradient(180deg,#F6DE9E,#E2B964 55%,#C99B4A);
+  --hero:radial-gradient(120% 55% at 50% -8%,#FFD596 0%,rgba(255,213,150,.55) 35%,rgba(255,213,150,0) 70%),radial-gradient(80% 40% at 100% 40%,rgba(255,170,120,.22),transparent 70%),linear-gradient(180deg,#FFEFD6,#FFF6E8 60%);
+  --hero2:radial-gradient(120% 45% at 50% -5%,#FFD596 0%,rgba(255,213,150,0) 70%),var(--bg);--gold:var(--a1);--gold2:var(--a2)}
+body.t-remax{--bg:#F7F9FD;--a1:#003DA5;--a2:#DC1C2E;--a3:#FF8A95;--tint:#EEF3FC;--tint2:#FDEEF0;--btnink:#fff;--btnsh:rgba(220,28,46,.45);--toz:#4F8DF7;--glow:rgba(0,61,165,.2);
+  --btn:linear-gradient(180deg,#F0384A,#DC1C2E 60%,#B5121F);
+  --hero:radial-gradient(80% 42% at 0% 0%,rgba(0,61,165,.2),transparent 70%),radial-gradient(80% 42% at 100% 8%,rgba(220,28,46,.18),transparent 70%),linear-gradient(180deg,#FFFFFF,#F7F9FD);
+  --hero2:radial-gradient(80% 35% at 0% 0%,rgba(0,61,165,.16),transparent 70%),radial-gradient(80% 35% at 100% 0%,rgba(220,28,46,.14),transparent 70%),var(--bg)}
+body.t-gok{--bg:#F1F8FF;--a1:#0B4F8A;--a2:#1E9BD7;--a3:#9FDDFF;--tint:#E3F3FD;--tint2:#E8F6FF;--btnink:#fff;--btnsh:rgba(30,155,215,.45);--toz:#6EC6FF;--glow:rgba(30,155,215,.3);
+  --btn:linear-gradient(180deg,#46B9EE,#1E9BD7 60%,#137DB5);
+  --hero:radial-gradient(120% 55% at 50% -8%,#A9DBFF 0%,rgba(169,219,255,.5) 35%,rgba(169,219,255,0) 70%),radial-gradient(70% 35% at 100% 35%,rgba(120,220,200,.22),transparent 70%),linear-gradient(180deg,#E3F2FF,#F1F8FF 60%);
+  --hero2:radial-gradient(120% 45% at 50% -5%,#A9DBFF 0%,rgba(169,219,255,0) 70%),var(--bg)}
+body.t-gunbatimi{--bg:#FFF4EF;--a1:#B8325F;--a2:#FF6A4D;--a3:#FFC0A8;--tint:#FFEDE6;--tint2:#FFF0EA;--btnink:#fff;--btnsh:rgba(255,94,77,.45);--toz:#FF8A5B;--glow:rgba(255,120,90,.35);
+  --btn:linear-gradient(180deg,#FF9160,#FF5E4D 55%,#E0457B);
+  --hero:radial-gradient(120% 55% at 50% -8%,#FFB38A 0%,rgba(255,140,120,.45) 35%,rgba(255,140,120,0) 70%),radial-gradient(80% 40% at 100% 30%,rgba(224,69,123,.22),transparent 70%),linear-gradient(180deg,#FFE6DA,#FFF4EF 60%);
+  --hero2:radial-gradient(120% 45% at 50% -5%,#FFB38A 0%,rgba(255,140,120,0) 70%),var(--bg)}
+body.acik .btn{background:var(--btn);color:var(--btnink);box-shadow:0 10px 30px -10px var(--btnsh),inset 0 1px 0 rgba(255,255,255,.4)}
+body.acik .gold,body.acik .giris-bas h1 .k2{background:linear-gradient(100deg,var(--a1) 0%,var(--a2) 30%,var(--a3) 50%,var(--a2) 70%,var(--a1) 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+body.acik #ekranGiris{background:var(--hero)}
+body.acik #ekranTamam{background:var(--hero2)}
+body.acik .etiket,body.acik .giris-bas p b,body.acik .giris-bas .soru-yazi,body.acik .secili b{color:var(--a1)}
+body.acik .giris-bas h1 .k1{color:var(--a1);opacity:.8}
+body.acik .deste::before{background:radial-gradient(closest-side,var(--glow),transparent)}
+body.acik .toz i{background:var(--toz);box-shadow:0 0 8px var(--toz)}
+body.acik .ilerleme i{background:linear-gradient(90deg,var(--a1),var(--a2))}
+body.acik .opt .l{background:var(--tint);color:var(--a1);border:1px solid var(--a3)}
+body.acik .opt.sec{background:var(--tint);border-color:var(--a2)}
+body.acik .opt.sec .l,body.acik .opt .tik{background:var(--a2);color:#fff;border-color:var(--a2)}
+body.acik .icgoru{background:var(--tint2);border-color:var(--a3)}
+body.acik .halka{background:conic-gradient(var(--a2) calc(var(--p)*1%),rgba(12,30,63,.08) 0)}
+body.acik .halka span{color:var(--a1)}
+body.acik .kilit-ust .muhur,body.acik .tamam-bas .muhur{background:radial-gradient(circle at 35% 30%,var(--a3),var(--a2));color:#fff;box-shadow:0 0 30px var(--glow)}
+body.acik .gunler button.sec,body.acik .saatler button.sec{background:var(--tint);border-color:var(--a2);color:var(--a1)}
+body.acik .yol{border-left-color:var(--a3)}
+body.acik .yol li::before{background:var(--a2);box-shadow:0 0 8px var(--glow)}
+body.acik .guc li::before{color:var(--a2)}
+body.acik .cizgi{background:var(--a2)}
+body.acik .lnk{color:var(--a1)}
+body.acik .alan input:focus{border-color:var(--a2)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -460,7 +500,8 @@ var MAX={i:0,d:0,y:0,g:0},TAVAN=0;
 SORULAR.forEach(function(q){TAVAN+=Math.max.apply(null,q.c.map(function(c){var t=0;for(var k in c[1])t+=c[1][k];return t}));var m={i:0,d:0,y:0,g:0};q.c.forEach(function(c){for(var k in c[1])m[k]=Math.max(m[k],c[1][k])});for(var k in m)MAX[k]+=m[k]});
 
 var $=function(id){return document.getElementById(id)};
-if(/(^|[?&])tema=acik/.test(location.search))document.body.classList.add('acik');
+var TEMA=(location.search.match(/[?&]tema=([a-z]+)/)||[])[1];
+if(TEMA&&TEMA!=='gece'){document.body.classList.add('acik');if(TEMA!=='acik')document.body.classList.add('t-'+TEMA)}
 var esc=function(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
 var ekranlar=['ekranGiris','ekranSoru','ekranSonuc','ekranTamam'];
 function goster(id){ekranlar.forEach(function(e){$(e).hidden=e!==id});window.scrollTo(0,0)}
