@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ccc;font-family:Manrope,sans-serif;color:#1F2433}
+.s{width:1080px;height:1920px;position:relative;overflow:hidden;margin-bottom:20px;
+ background:radial-gradient(90% 55% at 50% 0%,#fff 0%,rgba(255,255,255,0) 70%),
+ radial-gradient(70% 40% at 100% 100%,rgba(243,217,160,.55),transparent 70%),
+ radial-gradient(60% 40% at 0% 70%,rgba(232,214,180,.45),transparent 70%),#FBF8F2}
+/* mermer damarları */
+.s::before{content:"";position:absolute;inset:0;opacity:.55;background:
+ linear-gradient(118deg,transparent 46%,rgba(190,170,140,.18) 47%,transparent 49%),
+ linear-gradient(64deg,transparent 30%,rgba(190,170,140,.14) 31%,transparent 33%),
+ linear-gradient(150deg,transparent 70%,rgba(200,175,140,.16) 71%,transparent 73%)}
+.s::after{content:"";position:absolute;inset:36px;border:2px solid rgba(200,144,47,.45);border-radius:40px;pointer-events:none}
+.logo{position:absolute;top:150px;left:50%;transform:translateX(-50%);height:96px;filter:drop-shadow(0 8px 16px rgba(40,30,10,.18))}
+.etiket{display:inline-block;font:800 30px Manrope;letter-spacing:.22em;color:#8A5A12;border:2px solid rgba(200,144,47,.6);border-radius:999px;padding:16px 40px;background:rgba(255,255,255,.6)}
+.ic{position:absolute;left:90px;right:90px;text-align:center}
+.cap{font-family:Cinzel,serif;font-weight:700;letter-spacing:.04em;line-height:1.05}
+.serif{font-family:"Cormorant Garamond",serif}
+.altin{background:linear-gradient(100deg,#8A5A12,#C8902F 45%,#E9C47A 55%,#8A5A12);-webkit-background-clip:text;background-clip:text;color:transparent}
+canvas{position:absolute;left:0;width:1080px}
+.paralar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.para{text-align:center}
+.para img{width:190px;height:190px;border-radius:50%;box-shadow:0 22px 40px -14px rgba(60,40,10,.55),0 0 0 6px #fff}
+.para b{display:block;margin-top:18px;font:700 34px Cinzel;color:#8A5A12;letter-spacing:.05em}
+.para small{display:block;font:600 26px Manrope;color:#5A6273;margin-top:4px}
+.kart{display:flex;align-items:center;gap:34px;background:rgba(255,255,255,.75);border:2px solid rgba(200,144,47,.35);border-radius:36px;padding:28px 40px;box-shadow:0 24px 50px -30px rgba(60,40,10,.5);text-align:left}
+.kart img{width:150px;height:150px;border-radius:50%;flex:none;box-shadow:0 0 0 5px #fff,0 14px 30px -12px rgba(60,40,10,.6)}
+.kart b{display:block;font:700 46px Cinzel;color:#8A5A12;letter-spacing:.04em}
+.kart span{display:block;font:600 italic 38px "Cormorant Garamond";color:#1F2433}
+.kart small{display:block;font:600 27px Manrope;color:#5A6273;margin-top:4px}
+.yer{position:absolute;left:50%;transform:translateX(-50%);width:600px;height:150px;border:4px dashed rgba(138,90,18,.55);border-radius:36px;display:grid;place-items:center;font:700 28px Manrope;color:rgba(138,90,18,.75);letter-spacing:.08em;background:rgba(255,255,255,.4)}
+.ok{font:800 120px Manrope;color:#C8902F;line-height:1;animation:none}
+.madde{display:flex;justify-content:center;gap:36px;font:700 32px Manrope;color:#3B4252}
+.madde span::before{content:"◆ ";color:#C8902F}
+.alt{position:absolute;bottom:200px;left:0;right:0;text-align:center;font:700 26px Manrope;letter-spacing:.2em;color:#8A7B63}
+.onay{position:absolute;bottom:250px;left:0;right:0;text-align:center;font:600 22px Manrope;color:transparent}
+</style></head><body>
+
+<!-- 1: Kanca -->
+<section class="s" id="s1">
+  <img class="logo" src="../img/logo-koyu.png" alt="">
+  <div class="ic" style="top:330px"><span class="etiket">◆ KARİYER KEŞİF TESTİ ◆</span></div>
+  <div class="ic" style="top:470px">
+    <div class="cap" style="font-size:66px;letter-spacing:.32em;color:#1F2433;opacity:.9">GAYRİMENKUL</div>
+    <div class="cap altin" style="font-size:150px;margin-top:10px">KARİYERİ</div>
+    <div class="serif" style="font:italic 600 84px 'Cormorant Garamond';color:#1F2433;margin-top:6px">sana uygun mu?</div>
+  </div>
+  <canvas id="c1" style="top:930px" width="1080" height="300"></canvas>
+  <div class="ic" style="top:1260px">
+    <div class="serif" style="font:italic 600 64px 'Cormorant Garamond';color:#8A5A12">Cevabı karakterinde.</div>
+    <p style="font:600 36px Manrope;color:#3B4252;margin-top:34px;line-height:1.45">Hermes mi, Athena mı, Herakles mi, Artemis mi?<br>İçindeki gücü keşfet.</p>
+  </div>
+  <div class="ic" style="top:1540px"><div class="madde"><span>11 soru</span><span>2 dakika</span><span>Ücretsiz</span></div></div>
+  <div class="alt">RE/MAX DOĞUŞ · FİKİRTEPE</div>
+</section>
+
+<!-- 2: Dört karakter -->
+<section class="s" id="s2">
+  <img class="logo" src="../img/logo-koyu.png" alt="">
+  <div class="ic" style="top:300px">
+    <div class="cap" style="font-size:84px;color:#1F2433">DÖRT KARAKTER</div>
+    <div class="cap altin" style="font-size:84px">DÖRT YETENEK</div>
+    <div class="serif" style="font:italic 600 54px 'Cormorant Garamond';color:#8A5A12;margin-top:14px">Sen hangisisin?</div>
+  </div>
+  <div class="ic" style="top:640px;display:grid;gap:26px">
+    <div class="kart"><img src="../img/dna/c-hermes.png"><div><b>HERMES</b><span>İletişimin Ustası</span><small>İnsanlarla hızlı bağ kurarsın</small></div></div>
+    <div class="kart"><img src="../img/dna/c-athena.png"><div><b>ATHENA</b><span>Stratejinin Mimarı</span><small>Planlı ve disiplinli ilerlersin</small></div></div>
+    <div class="kart"><img src="../img/dna/c-herakles.png"><div><b>HERAKLES</b><span>Mücadelenin Gücü</span><small>"Hayır" seni yıldırmaz</small></div></div>
+    <div class="kart"><img src="../img/dna/c-artemis.png"><div><b>ARTEMİS</b><span>Fırsat Avcısı</span><small>Fırsatı herkesten önce görürsün</small></div></div>
+  </div>
+  <div class="alt">TESTİ ÇÖZ, KARAKTERİNİ ÖĞREN</div>
+</section>
+
+<!-- 3: Çağrı + link alanı -->
+<section class="s" id="s3">
+  <img class="logo" src="../img/logo-koyu.png" alt="">
+  <div class="ic" style="top:330px">
+    <div class="serif" style="font:italic 600 64px 'Cormorant Garamond';color:#8A5A12">Deneyim şartı yok.</div>
+    <div class="cap" style="font-size:96px;color:#1F2433;margin-top:24px">GAYRİMENKUL</div>
+    <div class="cap altin" style="font-size:118px">DNA'NI</div>
+    <div class="cap" style="font-size:96px;color:#1F2433">KEŞFET</div>
+  </div>
+  <div class="ic" style="top:880px"><div class="paralar">
+    <div class="para"><img src="../img/dna/c-hermes.png"><b>HERMES</b></div>
+    <div class="para"><img src="../img/dna/c-athena.png"><b>ATHENA</b></div>
+    <div class="para"><img src="../img/dna/c-herakles.png"><b>HERAKLES</b></div>
+    <div class="para"><img src="../img/dna/c-artemis.png"><b>ARTEMİS</b></div>
+  </div></div>
+  <div class="ic" style="top:1210px"><p style="font:700 38px Manrope;color:#1F2433">Sonucunu hemen gör, kariyer yol haritanı al.</p>
+    <div class="ok" style="margin-top:22px">↓</div></div>
+  <div class="yer" style="top:1420px" id="yer">LİNK ÇIKARTMASI BURAYA</div>
+  <div class="alt">RE/MAX DOĞUŞ · FİKİRTEPE</div>
+</section>
+
+<script>
+function sarmal(c,faz){var x=c.getContext('2d'),W=c.width,H=c.height,orta=H/2,A=110,adim=14;x.clearRect(0,0,W,H);
+ for(var px=-20;px<=W+20;px+=adim){var a=px/W*Math.PI*3+faz,s=Math.sin(a);
+  if(Math.round(px/adim)%3===0){var g=x.createLinearGradient(0,orta+A*s,0,orta-A*s);g.addColorStop(0,'rgba(176,120,30,.75)');g.addColorStop(.5,'rgba(243,217,160,.55)');g.addColorStop(1,'rgba(200,144,47,.65)');
+   x.strokeStyle=g;x.lineWidth=5;x.lineCap='round';x.beginPath();x.moveTo(px,orta+A*s);x.lineTo(px,orta-A*s);x.stroke()}}
+ [1,-1].forEach(function(k){for(var px=-20;px<=W+20;px+=adim){var a=px/W*Math.PI*3+faz,z=Math.cos(a)*k,y=orta+A*Math.sin(a)*k;
+  var rr=5+7*(z+1)/2,al=.4+.6*(z+1)/2;x.fillStyle='rgba('+(z>0?'176,120,30,':'214,170,90,')+al+')';x.beginPath();x.arc(px,y,rr,0,7);x.fill();
+  if(z>.8){x.fillStyle='rgba(255,246,220,'+(z-.8)*4+')';x.beginPath();x.arc(px-2,y-2,rr*.45,0,7);x.fill()}}});}
+sarmal(document.getElementById('c1'),.6);
+if(location.search==='?temiz')document.getElementById('yer').style.visibility='hidden';
+</script></body></html>
