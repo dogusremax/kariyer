@@ -77,6 +77,19 @@ h1,h2,h3{font-family:var(--disp);line-height:1.12;text-wrap:balance;letter-spaci
 .anim{animation:gir .32s ease}
 @keyframes gir{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
 
+/* Unvan */
+.unvanlar{margin:0 0 18px}
+.unvanlar p{font:800 15px var(--disp);color:var(--navy-ink);margin-bottom:8px}
+.unvanlar div{display:flex;flex-wrap:wrap;gap:8px}
+.unvanlar span{background:var(--cloud);border-radius:999px;padding:7px 13px;font-weight:700;font-size:14px}
+.unvan{text-align:center;background:linear-gradient(160deg,var(--navy-deep),var(--navy));color:#fff;border-radius:20px;padding:22px 18px 20px;margin:4px 0 18px;animation:unvan .6s cubic-bezier(.2,1.4,.4,1)}
+.unvan .e{font-size:56px;line-height:1;display:block;margin-bottom:6px}
+.unvan small{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#C9D6EE}
+.unvan h2{font-size:clamp(26px,7vw,32px);color:#fff;margin:4px 0 6px}
+.unvan p{font-size:14.5px;color:#E3EAF7;max-width:34ch;margin:0 auto}
+@keyframes unvan{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.unvan{animation:none}}
+
 /* Sonuç */
 .sonuc .rozet{display:flex;align-items:center;gap:16px;margin:14px 0 14px}
 .halka{--p:0;width:92px;height:92px;flex:0 0 92px;border-radius:50%;background:conic-gradient(var(--red) calc(var(--p)*1%),var(--cloud) 0);display:flex;align-items:center;justify-content:center}
@@ -169,11 +182,13 @@ form{display:grid;gap:14px}
     <section class="intro" id="ekranGiris">
       <span class="eyebrow">2 dakikalık test</span>
       <h1>Fikirtepe'de <em>11.729 konut</em> yükseliyor. Peki onları kim satacak?</h1>
-      <p class="lead">11 soruda gör: o kişi sen olabilir misin? Sorulara içinden geldiği gibi cevap ver, hangi danışman profili olduğunu ve en güçlü yönünü hemen öğren. Doğru ya da yanlış cevap yok.</p>
+      <p class="lead">11 soruda gör: o kişi sen olabilir misin? İçinden geldiği gibi cevap ver, doğru ya da yanlış yok.</p>
+      <div class="unvanlar"><p>Testi bitir, unvanını al. Sen hangisisin?</p>
+        <div><span>🦁 Aslan</span><span>🦅 Kartal</span><span>🐬 Yunus</span><span>🐝 Arı</span></div></div>
       <div class="facts">
         <div><b>11</b><span>soru</span></div>
         <div><b>2</b><span>dakika</span></div>
-        <div><b>4</b><span>profil</span></div>
+        <div><b>4</b><span>unvan</span></div>
       </div>
       <div class="f isim"><label for="isim">Sana nasıl hitap edelim?</label><input id="isim" autocomplete="given-name" maxlength="30" placeholder="Adın (isteğe bağlı)"></div>
       <button class="btn wide" id="basla">Teste başla →</button>
@@ -185,7 +200,7 @@ form{display:grid;gap:14px}
       <div class="prog"><div class="bar"><i id="bar"></i></div><span class="n" id="sayac">1 / 11</span></div>
       <div class="gizli-profil" id="gizli" aria-hidden="true">
         <div class="gp-ikon">?</div>
-        <div class="gp-yazi"><small id="gpDurum">Profilin şekilleniyor…</small><b id="gpAd">Sahanın Savaşçısı</b></div>
+        <div class="gp-yazi"><small id="gpDurum">Unvanın şekilleniyor…</small><b id="gpAd">🦁 Aslan</b></div>
       </div>
       <div id="soruAlan"></div>
       <p class="tepki" id="tepki"></p>
@@ -194,7 +209,7 @@ form{display:grid;gap:14px}
 
     <!-- Sonuç -->
     <section class="sonuc" id="ekranSonuc" hidden>
-      <span class="eyebrow">Sonucun</span>
+      <div class="unvan" id="unvan"><span class="e" id="unvanE"></span><small>Unvanın</small><h2 id="unvanAd"></h2><p id="unvanMetin"></p></div>
       <div class="rozet">
         <div class="halka" id="halka"><span><b id="yuzde">0</b><small>uyum</small></span></div>
         <div><p class="tip" id="tipYazi">Senin profilin</p><h2 id="profilAd"></h2></div>
@@ -319,6 +334,13 @@ var PROFIL={
   y:{ad:'Sahanın Savaşçısı',m:'"Hayır" seni durdurmuyor, belirsizlikle başa çıkabiliyorsun. İlk ayların zorluğunu aşıp kalıcı olanlar en çok bu özelliğe sahip olanlar.'},
   g:{ad:'Girişimci Ruh',m:'Kendi işini kurmak, görünür olmak ve kazancını kendin belirlemek istiyorsun. RE/MAX modeli tam olarak bunun üzerine kurulu: markanın desteğiyle kendi işin.'}
 };
+// Testi bitirene verilen unvan (en güçlü yetenek)
+var UNVAN={
+  y:{e:'🦁',ad:'Aslan',c:'Tam bir Aslansın!',m:'Cesur, dirençli, sahanın hakimi. "Hayır" seni durdurmaz, hedefini bırakmazsın.'},
+  g:{e:'🦅',ad:'Kartal',c:'Tam bir Kartalsın!',m:'Yükseklerden bakar, fırsatı herkesten önce görürsün. Kendi işini kuracak vizyon sende var.'},
+  i:{e:'🐬',ad:'Yunus',c:'Tam bir Yunussun!',m:'Sıcak, zeki, herkesle bağ kuran. İnsanlar sana kendiliğinden güvenir.'},
+  d:{e:'🐝',ad:'Arı',c:'Tam bir Arısın!',m:'Çalışkan, düzenli, sistemli. Her gün biraz daha bal yaparsın; istikrar senin süper gücün.'}
+};
 var GUC={i:'İnsanlarla hızlı bağ kuruyorsun',d:'Planlı ve istikrarlı çalışıyorsun',y:'"Hayır" seni yıldırmıyor',g:'Kendi işini kurmak istiyorsun'};
 var GELISIM={i:'Çevreni büyütmek: her hafta 10 yeni kişiyle tanışmayı hedefle.',d:'Rutin kurmak: her sabah 1 saatlik sabit bir arama bloğu ayır.',y:'Reddedilmeye alışmak: ilk ay 50 "hayır" toplamayı bir oyuna çevir.',g:'Görünür olmak: haftada 2 kısa video ile bölgede tanınan yüz ol.'};
 // Profile göre 30 gün / 90 gün / 1 yıl yol haritası
@@ -368,9 +390,9 @@ function onde(){var p={i:0,d:0,y:0,g:0};for(var k=0;k<cev.length;k++){if(cev[k]=
   return Object.keys(p).sort(function(a,b){return p[b]/MAX[b]-p[a]/MAX[a]})[0]}
 function gizliGuncelle(){
   var n=cev.filter(function(c){return c!=null}).length,oran=n/SORULAR.length;
-  $('gpAd').textContent=PROFIL[onde()].ad;
+  var u=UNVAN[onde()];$('gpAd').textContent=u.e+' '+u.ad;
   $('gizli').style.setProperty('--b',Math.max(0,7-oran*9).toFixed(1)+'px');
-  $('gpDurum').textContent=n===0?'Profilin şekilleniyor…':oran<.45?'İpuçları birikiyor…':oran<.75?'Profilin belirginleşiyor!':'Neredeyse belli oldu!';
+  $('gpDurum').textContent=n===0?'Unvanın şekilleniyor…':oran<.45?'İpuçları birikiyor…':oran<.75?'Unvanın belirginleşiyor!':'Neredeyse belli oldu!';
 }
 var SONUC={};
 function sonuc(){
@@ -380,10 +402,11 @@ function sonuc(){
   var oran={};for(var k in p)oran[k]=Math.round(p[k]/MAX[k]*100);
   var en=Object.keys(oran).sort(function(a,b){return oran[b]-oran[a]})[0];
   var yuzde=Math.round(top/mx*100);
-  SONUC={puan:yuzde,profil:PROFIL[en].ad,detay:Object.keys(YETENEK).map(function(k){return YETENEK[k]+' '+oran[k]}).join(', '),
+  SONUC={puan:yuzde,unvan:UNVAN[en],profil:PROFIL[en].ad+' ('+UNVAN[en].ad+')',detay:Object.keys(YETENEK).map(function(k){return YETENEK[k]+' '+oran[k]}).join(', '),
     cevap:cev.map(function(j){return 'ABCD'[j]}).join('')};
   var sira=Object.keys(oran).sort(function(a,b){return oran[b]-oran[a]});
-  $('tipYazi').textContent=ISIM?ISIM+', senin profilin':'Senin profilin';
+  $('unvanE').textContent=UNVAN[en].e;$('unvanAd').textContent=ISIM?ISIM+', t'+UNVAN[en].c.slice(1):UNVAN[en].c;$('unvanMetin').textContent=UNVAN[en].m;
+  $('tipYazi').textContent='Danışman profilin';
   $('profilAd').textContent=PROFIL[en].ad;
   $('profilMetin').textContent=PROFIL[en].m;
   $('gucler').innerHTML='';sira.slice(0,2).forEach(function(k){var li=document.createElement('li');li.textContent=GUC[k];$('gucler').appendChild(li)});
@@ -408,7 +431,7 @@ function raporGoster(){
 }
 $('paylas').addEventListener('click',function(){
   var url=location.origin+location.pathname+'?kaynak=paylasim';
-  var metin='Gayrimenkul danışmanlığı testinde "'+SONUC.profil+'" çıktım. Sen hangisisin?';
+  var metin='Gayrimenkul danışmanlığı testinde "'+SONUC.unvan.ad+'" unvanını aldım '+SONUC.unvan.e+' Sen hangisisin: Aslan, Kartal, Yunus, Arı?';
   if(navigator.share){navigator.share({title:'Bu işe uygun musun?',text:metin,url:url}).catch(function(){});return}
   (navigator.clipboard?navigator.clipboard.writeText(metin+' '+url):Promise.reject()).then(function(){$('paylasNot').textContent='Link kopyalandı, istediğin yere yapıştırabilirsin.'}).catch(function(){$('paylasNot').textContent=url});
 });
