@@ -22,7 +22,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{min-height:100%}
-body{font-family:var(--body);color:var(--navy-ink);line-height:1.55;-webkit-font-smoothing:antialiased;
+body{font-family:var(--body);color:var(--navy-ink);line-height:1.55;-webkit-font-smoothing:antialiased;background-color:var(--navy-ink);
   background:radial-gradient(120% 70% at 85% 0%,rgba(220,28,46,.28),transparent 60%),linear-gradient(170deg,var(--navy-deep),var(--navy-ink));background-attachment:fixed;
   padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .shell{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 32px;display:flex;flex-direction:column;gap:16px;min-height:100vh;min-height:100dvh}
@@ -94,6 +94,25 @@ h1,h2,h3{font-family:var(--disp);line-height:1.12;text-wrap:balance;letter-spaci
 .cagri h3{font-size:19px;margin-bottom:4px}
 .cagri p{font-size:14px;color:#6A2A31}
 
+.isim{margin-bottom:14px}
+.guc{background:var(--cloud);border-radius:16px;padding:16px 18px;margin-bottom:12px}
+.guc h3{font-size:15px;margin-bottom:8px;color:var(--navy)}
+.guc ul{list-style:none;display:grid;gap:6px}
+.guc li{display:flex;gap:10px;font-weight:700;font-size:15px}
+.guc li::before{content:"★";color:var(--red)}
+.paylas{background:none;border:1.5px solid var(--line);border-radius:999px;padding:9px 18px;font:800 14px var(--body);color:var(--navy);cursor:pointer;margin-bottom:4px}
+.paylas-not{min-height:18px;font-size:12.5px;font-weight:700;color:var(--ok);margin-bottom:10px}
+.kilit{position:relative;border:1.5px dashed var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px}
+.kilit-ic{padding:16px 18px;filter:blur(5px);user-select:none;pointer-events:none}
+.kilit-ic p{font-size:14px;margin-top:10px}
+.kilit-ic .yetenek{margin:0}
+.kilit-ust{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;padding:16px;background:rgba(255,255,255,.55)}
+.kilit-ust b{font-family:var(--disp);font-size:19px}
+.kilit-ust span{font-size:13px;color:var(--steel);font-weight:600;max-width:34ch}
+.kilit-ikon{font-size:26px}
+.rapor{text-align:left;background:var(--cloud);border-radius:16px;padding:18px;margin:0 0 20px}
+.rapor .yetenek{margin-bottom:14px}
+.rapor p{font-size:14.5px;margin-top:8px;color:var(--navy-ink)}
 /* İletişim formu */
 form{display:grid;gap:14px}
 .f label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
@@ -137,6 +156,7 @@ form{display:grid;gap:14px}
         <div><b>2</b><span>dakika</span></div>
         <div><b>4</b><span>profil</span></div>
       </div>
+      <div class="f isim"><label for="isim">Sana nasıl hitap edelim?</label><input id="isim" autocomplete="given-name" maxlength="30" placeholder="Adın (isteğe bağlı)"></div>
       <button class="btn wide" id="basla">Teste başla →</button>
       <p class="fine">Sonucu görmek için iletişim bilgisi istemiyoruz.</p>
     </section>
@@ -158,10 +178,20 @@ form{display:grid;gap:14px}
       <span class="eyebrow">Sonucun</span>
       <div class="rozet">
         <div class="halka" id="halka"><span><b id="yuzde">0</b><small>uyum</small></span></div>
-        <div><p class="tip">Senin profilin</p><h2 id="profilAd"></h2></div>
+        <div><p class="tip" id="tipYazi">Senin profilin</p><h2 id="profilAd"></h2></div>
       </div>
       <p class="ac" id="profilMetin"></p>
-      <div class="yetenek" id="yetenek"></div>
+      <div class="guc"><h3>2 süper gücün</h3><ul id="gucler"></ul></div>
+      <button type="button" class="paylas" id="paylas">Sonucunu paylaş ↗</button>
+      <p class="paylas-not" id="paylasNot" role="status"></p>
+      <div class="kilit">
+        <div class="kilit-ic" aria-hidden="true">
+          <div class="yetenek"><div><span>İletişim</span><span class="t"><i style="width:72%"></i></span><b>%••</b></div><div><span>Disiplin</span><span class="t"><i style="width:48%"></i></span><b>%••</b></div><div><span>Dayanıklılık</span><span class="t"><i style="width:81%"></i></span><b>%••</b></div><div><span>Girişimcilik</span><span class="t"><i style="width:55%"></i></span><b>%••</b></div></div>
+          <p><b>Gelişim alanın:</b> sahada ilk aylarda en çok işine yarayacak alışkanlık</p>
+          <p><b>İlk 90 gün:</b> profiline özel başlangıç ipucu</p>
+        </div>
+        <div class="kilit-ust"><span class="kilit-ikon" aria-hidden="true">🔒</span><b>Kişisel raporun hazır</b><span>4 yetenek puanın, gelişim alanın ve profiline özel ilk 90 gün ipucun. Bilgilerini bırakınca açılır.</span></div>
+      </div>
       <div class="cagri">
         <h3 id="cagriBaslik">Bu sonuçla seni ofiste görmek isteriz.</h3>
         <p>Sonucunu gönder, seni ofisimize bir günlük <b>Gölge Gün</b>'e davet edelim: bir danışmanın yanında portföy gezer, müşteri görüşmesine katılır, işi içeriden görürsün. Broker'ımız 2 iş günü içinde seni arayıp günü birlikte belirler.</p>
@@ -171,10 +201,7 @@ form{display:grid;gap:14px}
           <div class="f"><label for="ad">Ad Soyad *</label><input id="ad" name="ad_soyad" autocomplete="name" required></div>
           <div class="f"><label for="tel">Telefon *</label><input id="tel" name="telefon" type="tel" inputmode="tel" autocomplete="tel" placeholder="05__ ___ __ __" required></div>
         </div>
-        <div class="ikili">
-          <div class="f"><label for="ilce">Yaşadığın ilçe *</label><input id="ilce" name="ilce" required placeholder="Örn. Kadıköy"></div>
-          <div class="f"><label for="mail">E-posta</label><input id="mail" name="eposta" type="email" autocomplete="email"></div>
-        </div>
+        <div class="f"><label for="ilce">Yaşadığın ilçe *</label><input id="ilce" name="ilce" required placeholder="Örn. Kadıköy"></div>
         <div class="hp" aria-hidden="true"><label for="ws">Web sitesi</label><input id="ws" name="web_sitesi" tabindex="-1" autocomplete="off"></div>
         <label class="kvkk"><input type="checkbox" id="kvkk" name="kvkk" value="1" required>
           <span><button type="button" class="link" id="kvkkAc" aria-controls="kvkkMetin" aria-expanded="false">Aydınlatma metnini</button> okudum; başvurumun değerlendirilmesi için kişisel verilerimin ve test cevaplarımın işlenmesini kabul ediyorum. *</span></label>
@@ -183,7 +210,7 @@ form{display:grid;gap:14px}
           <p>Verilerin üçüncü kişilerle paylaşılmaz; başvuru süreci tamamlandıktan sonra en fazla 1 yıl saklanır ve ardından silinir. KVKK'nın 11. maddesindeki hakların için dogusremax@gmail.com adresine yazabilir ya da Dumlupınar Mah. Özen Sk. Nuhoğlu Yenitepe Sitesi 2. Etap A Blok D:2, Kadıköy / İstanbul adresine başvurabilirsin.</p>
         </div>
         <p class="hata" id="hata" role="alert" hidden></p>
-        <button class="btn wide" id="gonder">Gölge Gün davetimi al →</button>
+        <button class="btn wide" id="gonder">Raporumu aç, Gölge Gün davetimi al →</button>
         <button type="button" class="ghost" id="tekrar">Testi baştan çöz</button>
       </form>
     </section>
@@ -191,8 +218,9 @@ form{display:grid;gap:14px}
     <!-- Teşekkür -->
     <section class="tamam" id="ekranTamam" hidden>
       <div class="tik">✓</div>
-      <h2>Davetin hazırlanıyor!</h2>
-      <p>Sonucun Broker'ımıza ulaştı. 2 iş günü içinde seni arayıp Gölge Gün'ünü birlikte planlayacağız. O zamana kadar ofisi ve eğitim programını tanıyabilirsin.</p>
+      <h2 id="tamamBaslik">Davetin hazırlanıyor!</h2>
+      <p>Sonucun Broker'ımıza ulaştı. Seni en kısa sürede arayıp Gölge Gün'ünü birlikte planlayacağız. İşte kişisel raporun:</p>
+      <div class="rapor" id="rapor"></div>
       <div class="sec2">
         <a class="btn" href="./#program">Eğitim programını gör</a>
         <a class="lnk" href="https://www.instagram.com/remaxdogus/" target="_blank" rel="noopener">Instagram'da @remaxdogus</a>
@@ -263,6 +291,9 @@ var PROFIL={
   y:{ad:'Sahanın Savaşçısı',m:'"Hayır" seni durdurmuyor, belirsizlikle başa çıkabiliyorsun. İlk ayların zorluğunu aşıp kalıcı olanlar en çok bu özelliğe sahip olanlar.'},
   g:{ad:'Girişimci Ruh',m:'Kendi işini kurmak, görünür olmak ve kazancını kendin belirlemek istiyorsun. RE/MAX modeli tam olarak bunun üzerine kurulu: markanın desteğiyle kendi işin.'}
 };
+var GUC={i:'İnsanlarla hızlı bağ kuruyorsun',d:'Planlı ve istikrarlı çalışıyorsun',y:'"Hayır" seni yıldırmıyor',g:'Kendi işini kurmak istiyorsun'};
+var GELISIM={i:'Çevreni büyütmek: her hafta 10 yeni kişiyle tanışmayı hedefle.',d:'Rutin kurmak: her sabah 1 saatlik sabit bir arama bloğu ayır.',y:'Reddedilmeye alışmak: ilk ay 50 "hayır" toplamayı bir oyuna çevir.',g:'Görünür olmak: haftada 2 kısa video ile bölgede tanınan yüz ol.'};
+var DOKSAN={i:'Tanıdık çevrenden ilk 3 portföyünü çıkarmayı hedefle; eğitimin "Ara" ve "Buluş" dersleri tam sana göre.',d:'Ofisin performans karnesiyle haftalık hedeflerini takip et; ilk 90 günde 2 yetkili portföy hedefle.',y:'Fikirtepe\'de sahibinden satılık ilanları her gün düzenli ara; istikrar ilk satışını getirir.',g:'Instagram hesabını danışman vitrinine çevir; ilk ay 8 kısa video hedefle.'};
 var MAX={i:0,d:0,y:0,g:0};
 SORULAR.forEach(function(q){var m={i:0,d:0,y:0,g:0};q.c.forEach(function(c){for(var k in c[1])m[k]=Math.max(m[k],c[1][k])});for(var k in m)MAX[k]+=m[k]});
 
@@ -294,7 +325,8 @@ $('soruAlan').addEventListener('click',function(e){
   setTimeout(function(){delete $('soruAlan').dataset.kilit;idx++;if(idx<SORULAR.length)soru();else sonuc()},t?750:250);
 });
 $('geri').addEventListener('click',function(){if(idx>0){idx--;soru()}});
-$('basla').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
+var ISIM='';
+$('basla').addEventListener('click',function(){ISIM=$('isim').value.trim().split(/\s+/)[0]||'';ISIM=ISIM.charAt(0).toLocaleUpperCase('tr-TR')+ISIM.slice(1);idx=0;cev=[];goster('ekranSoru');soru()});
 $('tekrar').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
 
 // Cevap verdikçe önde giden profil bulanıklıktan çıkar
@@ -316,16 +348,34 @@ function sonuc(){
   var yuzde=Math.round(top/mx*100);
   SONUC={puan:yuzde,profil:PROFIL[en].ad,detay:Object.keys(YETENEK).map(function(k){return YETENEK[k]+' '+oran[k]}).join(', '),
     cevap:cev.map(function(j){return 'ABCD'[j]}).join('')};
+  var sira=Object.keys(oran).sort(function(a,b){return oran[b]-oran[a]});
+  $('tipYazi').textContent=ISIM?ISIM+', senin profilin':'Senin profilin';
   $('profilAd').textContent=PROFIL[en].ad;
   $('profilMetin').textContent=PROFIL[en].m;
+  $('gucler').innerHTML='';sira.slice(0,2).forEach(function(k){var li=document.createElement('li');li.textContent=GUC[k];$('gucler').appendChild(li)});
   $('cagriBaslik').textContent=yuzde>=60?'Bu sonuçla seni ofiste görmek isteriz.':'Potansiyelin var; gerisini eğitimle birlikte tamamlayalım.';
-  $('yetenek').innerHTML=Object.keys(YETENEK).map(function(k){return '<div><span>'+YETENEK[k]+'</span><span class="t"><i data-w="'+oran[k]+'"></i></span><b>%'+oran[k]+'</b></div>'}).join('');
+  if(ISIM&&!$('ad').value)$('ad').value=ISIM+' ';
+  var zayif=sira[sira.length-1];
+  SONUC.rapor='<div class="yetenek">'+Object.keys(YETENEK).map(function(k){return '<div><span>'+YETENEK[k]+'</span><span class="t"><i data-w="'+oran[k]+'"></i></span><b>%'+oran[k]+'</b></div>'}).join('')+'</div>'+
+    '<p><b>Gelişim alanın:</b> '+GELISIM[zayif]+'</p><p><b>İlk 90 gün:</b> '+DOKSAN[en]+'</p>';
+  $('paylasNot').textContent='';
   goster('ekranSonuc');
   var h=$('halka'),n=0,hedef=yuzde,ad=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(ad){h.style.setProperty('--p',hedef);$('yuzde').textContent='%'+hedef}
   else{var iv=setInterval(function(){n=Math.min(hedef,n+2);h.style.setProperty('--p',n);$('yuzde').textContent='%'+n;if(n>=hedef)clearInterval(iv)},16)}
-  requestAnimationFrame(function(){requestAnimationFrame(function(){$('yetenek').querySelectorAll('i').forEach(function(i){i.style.width=i.dataset.w+'%'})})});
 }
+function raporGoster(){
+  $('rapor').innerHTML=SONUC.rapor;
+  if(ISIM)$('tamamBaslik').textContent=ISIM+', davetin hazırlanıyor!';
+  goster('ekranTamam');
+  requestAnimationFrame(function(){requestAnimationFrame(function(){$('rapor').querySelectorAll('i').forEach(function(i){i.style.width=i.dataset.w+'%'})})});
+}
+$('paylas').addEventListener('click',function(){
+  var url=location.origin+location.pathname+'?kaynak=paylasim';
+  var metin='Gayrimenkul danışmanlığı testinde "'+SONUC.profil+'" çıktım. Sen hangisisin?';
+  if(navigator.share){navigator.share({title:'Bu işe uygun musun?',text:metin,url:url}).catch(function(){});return}
+  (navigator.clipboard?navigator.clipboard.writeText(metin+' '+url):Promise.reject()).then(function(){$('paylasNot').textContent='Link kopyalandı, istediğin yere yapıştırabilirsin.'}).catch(function(){$('paylasNot').textContent=url});
+});
 
 $('kvkkAc').addEventListener('click',function(){var m=$('kvkkMetin');m.hidden=!m.hidden;this.setAttribute('aria-expanded',String(!m.hidden))});
 var qs=new URLSearchParams(location.search);
@@ -343,9 +393,9 @@ form.addEventListener('submit',function(ev){
   var b=$('gonder');b.disabled=true;b.textContent='Gönderiliyor…';
   fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(veri)})
   .then(function(r){return r.json()})
-  .then(function(j){if(!j.success)throw new Error(j.error||'');goster('ekranTamam')})
+  .then(function(j){if(!j.success)throw new Error(j.error||'');raporGoster()})
   .catch(function(e){
-    b.disabled=false;b.textContent='Gölge Gün davetimi al →';
+    b.disabled=false;b.textContent='Raporumu aç, Gölge Gün davetimi al →';
     $('hata').textContent=(e&&e.message&&e.message.indexOf('etch')<0&&e.message.indexOf('JSON')<0&&e.message)||'Gönderim sırasında bir sorun oluştu. Tekrar dene ya da WhatsApp\'tan 0532 472 41 48 numarasına yaz.';
     $('hata').hidden=false;
   });
