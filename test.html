@@ -358,7 +358,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
     <img class="logo logo-acik" src="img/logo-koyu.png" alt="Doğuş Doğuş">
     <img class="logo logo-gece" src="img/logo-beyaz.png" alt="Doğuş Doğuş">
     <div class="giris-bas">
-      <span class="etiket">KARİYER KEŞİF TESTİ</span>
+      <span class="etiket" id="etiket">KARİYER KEŞİF TESTİ</span>
       <h1 class="cap"><span class="k1">GAYRİMENKUL</span><span class="k2">DNA'nı Keşfet</span></h1>
       <p class="soru-yazi">Senin içinde hangi güç var?</p>
     </div>
@@ -367,7 +367,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
       <div class="paralar" id="paralar"></div>
     </div>
     <p class="kanca aday-yalniz"><b>Gayrimenkul kariyeri</b> sana uygun mu? Cevabı karakterinde.</p>
-    <p class="kanca ekip-yalniz"><b>RE/MAX Doğuş ekibi</b>, sen hangi karaktersin? Testi çöz, sonucunu story'de paylaş.</p>
+    <p class="kanca ekip-yalniz" id="ekipKanca"><b>Tecrüben konuşsun:</b> sahada hangi karakter öne çıkıyor? Testi çöz, sonucunu story'de paylaş.</p>
     <div class="bilgi"><span>11 soru</span><span>2 dakika</span><span>Sana özel sonuç</span></div>
     <div class="alan" id="isimAlan"><label for="isim">Sana nasıl hitap edelim?</label><input id="isim" autocomplete="given-name" maxlength="30" placeholder="Adın (isteğe bağlı)"></div>
     <button class="btn" id="basla">Teste başla →</button>
@@ -381,7 +381,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
     <div class="giris-bas" style="margin-top:6px"><h2 class="cap baslik2">Dört karakter<br>dört yetenek</h2><p class="soru-yazi">Senin hangisine daha yakın?</p></div>
     <div class="seritler" id="seritler" role="list"></div>
     <div class="secili" id="secili" aria-live="polite"></div>
-    <p class="alinti">“Kendini keşfet, yeni bir kariyere ilk adımı at.”</p>
+    <p class="alinti" id="karakterSoz">“Kendini keşfet, yeni bir kariyere ilk adımı at.”</p>
     <div class="bilgi"><span>11 soru</span><span>2 dakika</span><span>Sana özel sonuç</span></div>
     <button class="btn" id="basla2">Hadi başlayalım →</button>
   </section>
@@ -465,7 +465,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
       <p class="gelisim" id="gelisim"></p>
       <ol class="yol" id="yol"></ol></div>
     <div class="kutu tum"><h3 style="text-align:center">Tüm karakterler</h3><div class="seritler kucuk" id="seritler2"></div>
-      <p class="alinti">“Dört yetenek. Tek hedef.”<br><span>Sıradaki başarı hikâyesi senin olsun.</span></p></div>
+      <p class="alinti">“Dört yetenek. Tek hedef.”<br><span id="tumSoz">Sıradaki başarı hikâyesi senin olsun.</span></p></div>
     <div class="ekip-yalniz" style="margin-bottom:18px"><button type="button" class="story" id="story2">📸 Sonucunu hikâyende paylaş</button><p class="paylas-not" style="text-align:center">Paylaşınca adaylar da kendi karakterini merak etsin.</p></div>
     <div class="son">
       <a class="btn" href="./" style="text-decoration:none">RE/MAX Doğuş'ta kariyer fırsatlarını keşfet →</a>
@@ -570,6 +570,175 @@ var YOL={
   y:['Eğitimi tamamla, Fikirtepe\'de sahibinden ilanları her gün düzenli ara, ilk "hayır"larını topla.','Sahada tanınmaya başla; ilk yetkili portföyünü al ve ilk satış görüşmelerini yap.','Bölgende "o sokağı en iyi bilen" danışman ol; ilk zor ayları geride bırakmış kalıcı bir kariyer.'],
   g:['Eğitimi tamamla, Instagram hesabını danışman vitrinine çevir ve ilk 8 kısa videonu çek.','İçeriklerinden gelen ilk talepleri portföye çevir; bölgede tanınan bir yüz olmaya başla.','Kendi markanı kur: kişisel hesabın müşteri getiren bir kanal, sen de kendi ekibini düşünen bir girişimci.']
 };
+var YOL_BASLIK=['İLK 30 GÜN','İLK 90 GÜN','İLK YIL'];
+// ── Ekip sürümü (?ekip=1): tecrübeli danışmanlar; ad=Umut/Makbule ise ofis sahibi (broker) bakışı ──
+var EKIP_ROL=(function(){
+  var q=new URLSearchParams(location.search);if(q.get('ekip')!=='1')return '';
+  var ilk=(q.get('ad')||'').trim().split(/\s+/)[0].toLocaleLowerCase('tr-TR');
+  return ilk==='umut'||ilk==='makbule'?'broker':'danisman';
+})();
+if(EKIP_ROL==='danisman'){
+  SORULAR=[
+    {s:'Pazartesi sabahı ofise geldin. Haftayı nasıl başlatırsın?',f:'s01',c:[
+      ['Müşterilerimi ve çevremi arayıp gündem yakalarım',{i:2}],
+      ['Haftalık planımı ve takip listemi çıkarırım',{d:2}],
+      ['Bölgede yeni çıkan ilanları ve fırsatları tararım',{g:2}],
+      ['Geçen hafta kapanmayan zor dosyalara yüklenirim',{y:2}]],
+     t:'Haftayı nasıl açtığın, ayı nasıl kapattığını belirler.'},
+    {s:'Sahibinden ilan veren birini aradın, ilk cümlede telefonu kapatmak istiyor. Ne yaparsın?',f:'s02',c:[
+      ['Samimi bir soruyla konuşmayı açık tutarım',{i:2,y:1}],
+      ['Bölgedeki son satış rakamını paylaşıp ilgisini çekerim',{d:1,g:1}],
+      ['Kibarca kapatır, birkaç gün sonra yeniden ararım',{y:2}],
+      ['Listeden çıkarır, sıradakine geçerim',{}]],
+     t:'Sahibinden aramalarında farkı ilk 20 saniye yaratır.'},
+    {s:'Yetki aldığın bir portföyde mal sahibi fiyatı piyasanın çok üstünde tutuyor. Ne yaparsın?',f:'s03',c:[
+      ['Güveni koruyarak fiyatı zamanla konuşurum',{i:2}],
+      ['Emsal analizi hazırlayıp verilerle ikna ederim',{d:2}],
+      ['Farklı bir pazarlama kurgusuyla alıcı ilgisini test ederim',{g:2}],
+      ['Her hafta düzenli geri bildirimle ısrarla takip ederim',{y:2}]],
+     t:'Doğru fiyat, doğru portföyün yarısıdır.'},
+    {s:'Bu ay satışların beklediğinin altında kaldı. İlk hamlen ne olur?',f:'s04',c:[
+      ['Aktivite sayımı artırıp tempoyu yükseltirim',{y:2,d:1}],
+      ['Karneme bakıp hangi aşamada kaybettiğimi bulurum',{d:2}],
+      ['Eski müşterilerimi arayıp tavsiye isterim',{i:2}],
+      ['Yeni bir bölgeye ya da segmente açılırım',{g:2}]],
+     t:'İyi danışman kötü ayı, kötü bir yıla dönüşmeden yakalar.'},
+    {s:'Yıllık hedefini nasıl takip edersin?',f:'s05',c:[
+      ['Aylık ve haftalık rakamlara bölüp karnemden izlerim',{d:2}],
+      ['Ağımı büyüterek hedefe doğal olarak ulaşırım',{i:2}],
+      ['Büyük fırsatlara odaklanıp hedefi birkaç işle yakalarım',{g:2}],
+      ['Hedefi aklımda tutar, tempoma göre ilerlerim',{y:1}]],
+     t:'Yazılan ve takip edilen hedef, tecrübeyi rakama çevirir.'},
+    {s:'Zor bir pazarlıkta alıcı ile satıcı arasında gerginlik var. Ne yaparsın?',f:'s06',c:[
+      ['İki tarafla ayrı ayrı konuşup ortak noktayı bulurum',{i:2}],
+      ['Rakamları ve seçenekleri masaya net koyarım',{d:2}],
+      ['Takas, vade gibi yaratıcı bir çözüm öneririm',{g:2}],
+      ['Sabırla, gerekirse günlerce görüşmeyi sürdürürüm',{y:2}]],
+     t:'Kapanış en çok bu anlarda kazanılır. Yarısına geldin!'},
+    {s:'Bir müşterin seni arkadaşına tavsiye etti. Ne yaparsın?',f:'s07',c:[
+      ['Hemen arar, tanışmak için kahveye davet ederim',{i:2}],
+      ['Müşterime teşekkür eder, kişiyi takip sistemime eklerim',{d:2}],
+      ['Bunu düzenli bir tavsiye programına çeviririm',{g:2}],
+      ['Ulaşması zor olsa da bırakmadan peşine düşerim',{y:2}]],
+     t:'Tavsiye, tecrübeli danışmanın en değerli müşteri kaynağıdır.'},
+    {s:'Instagram ve video tarafında durumun hangisine daha yakın?',f:'s08',c:[
+      ['Düzenli paylaşıyorum, talep de geliyor',{g:2,i:1}],
+      ['Planlı ama seyrek paylaşıyorum',{d:1,g:1}],
+      ['Yeni formatlar deneyip öne çıkmak istiyorum',{g:2}],
+      ['Pek yok ama bu yıl açığı kapatmak istiyorum',{y:1}]],
+     t:'Bölgede tanınan yüz olmak, soğuk aramayı azaltır.'},
+    {s:'Uzun süredir satılmayan bir portföyün var. Ne yaparsın?',f:'s09',c:[
+      ['Mal sahibiyle oturup stratejiyi baştan konuşurum',{i:1,d:1}],
+      ['Gösterim ve geri dönüş verilerini analiz ederim',{d:2}],
+      ['Yeni çekim, yeni ilan metni, yeni kanal denerim',{g:2}],
+      ['Gösterim sayısını artırıp ısrarla devam ederim',{y:2}]],
+     t:'Bekleyen portföy, yenilenmeyi bekleyen bir hikâyedir.'},
+    {s:'Bu işte seni hâlâ en çok ne heyecanlandırıyor?',f:'s10',c:[
+      ['İşimi ve kazancımı bir üst seviyeye taşımak',{g:2}],
+      ['Koyduğum hedefleri tek tek gerçekleştirmek',{d:2}],
+      ['İnsanlara güvenle yuva bulmalarına yardım etmek',{i:2}],
+      ['Zor bir dosyayı kapatmanın verdiği his',{y:2}]],
+     t:'Seni neyin yakıp tuttuğunu bilmek, doğru hedefin ilk adımı. Son soru geliyor!'},
+    {s:'Önümüzdeki bir yılda kendini nerede görmek istersin?',f:'s11',c:[
+      ['İşinin çoğu tavsiyeyle gelen, güçlü bir ağ',{i:2}],
+      ['Öngörülebilir rakamlarla çalışan bir sistem',{d:2}],
+      ['Kendi ekibini kuran bir girişimci',{g:2}],
+      ['Bölgenin zor dosyaları kapatan ismi',{y:2}]],
+     t:'Tamamlandı! DNA\'n hazır.'}];
+  TANRI.i.m='İlişki senin en güçlü sermayen. Tecrübeni tavsiye zincirine çevirdiğinde portföy kendiliğinden gelir.';
+  TANRI.d.m='Sistemli çalışıyorsun. Rakamlarını izlediğin için iyi ayı tekrarlamayı, kötü ayı erken düzeltmeyi biliyorsun.';
+  TANRI.y.m='Zor dosyaların ismisin. Pes etmediğin için başkalarının bıraktığı işleri sen kapatıyorsun.';
+  TANRI.g.m='Fırsatı herkesten önce görüyorsun. Bir sonraki seviyen, bu enerjiyi kendi markana ve ekibine çevirmek.';
+  GUC={i:'Tavsiye ağın güçlü',d:'Rakamlarını takip ediyorsun',y:'Zor dosyaları kapatıyorsun',g:'Fırsatı ilk sen görüyorsun'};
+  GELISIM={i:'Geçmiş müşterilerini ayda bir arayıp tavsiye iste.',d:'Haftalık karnende aktivite ve dönüşüm oranını izle.',y:'Her ay bekleyen bir zor portföyü üstlen ve sonuna kadar götür.',g:'Bu çeyrekte bir yeni kanal ya da segment dene.'};
+  YOL={
+    i:['Son iki yılın müşteri listesini çıkar, her birini arayıp tavsiye iste.','Tavsiyeden gelen 3 yeni yetki al, memnun müşteri yorumlarını topla.','İşinin yarısından fazlası tavsiyeyle gelsin; kendi müşteri buluşmanı düzenle.'],
+    d:['Karnendeki aktivite, portföy ve satış dönüşümünü çıkar, en zayıf halkayı bul.','O halkayı güçlendiren haftalık bir rutin kur ve 12 hafta aksatma.','Öngörülebilir aylık ciro: hedefini aylara böl, her ayı kapattıkça yükselt.'],
+    y:['Uzun süredir bekleyen portföylerini tek tek ele al, fiyat ve stratejiyi yenile.','Bölgenin zor sokaklarına odaklan; sahibinden aramalarına haftalık hedef koy.','Bölgede "zor dosyaları kapatan" isim ol; bu ünü yeni yetkilere çevir.'],
+    g:['Haftada 2 video ile bölge uzmanı içerik serisini başlat.','İçeriklerden gelen talepleri portföye çevir; proje ya da ticari bir segment dene.','Kendi markanı ve ekibini kur: bir asistan ya da takım ortağıyla büyümeyi planla.']};
+  YOL_BASLIK=['ÖNÜMÜZDEKİ 30 GÜN','90 GÜN İÇİNDE','BU YIL'];
+}
+if(EKIP_ROL==='broker'){
+  SORULAR=[
+    {s:'Ofiste yeni bir hafta başlıyor. İlk işin ne olur?',f:'s01',c:[
+      ['Ekibi toplayıp moral ve enerji veririm',{i:2}],
+      ['Ofis rakamlarına ve karnelere bakarım',{d:2}],
+      ['Yeni proje ve iş birliği fırsatlarını konuşurum',{g:2}],
+      ['Takılan dosyaları tek tek çözmeye girişirim',{y:2}]],
+     t:'Ofisin haftası, liderin ilk saatiyle başlar.'},
+    {s:'Bir danışmanın üst üste iki aydır satış yapamadı. Ne yaparsın?',f:'s02',c:[
+      ['Birebir konuşup ne yaşadığını dinlerim',{i:2}],
+      ['Karnesini birlikte analiz edip plan çıkarırız',{d:2}],
+      ['Ona yeni bir bölge ya da müşteri kaynağı açarım',{g:2}],
+      ['Sahaya onunla çıkar, ilk dosyayı birlikte kapatırız',{y:2}]],
+     t:'Zor ayda yanında duran broker, danışmanı yıllarca tutar.'},
+    {s:'Ofise yeni danışman kazandırırken neyi öne çıkarırsın?',f:'s03',c:[
+      ['Sıcak ekip kültürümüzü ve ilişkilerimizi',{i:2}],
+      ['Eğitim ve takip sistemimizi',{d:2}],
+      ['Markanın ve kazancın açtığı fırsatları',{g:2}],
+      ['Zorlukları aşıp başaran danışmanlarımızın hikâyelerini',{y:2}]],
+     t:'Adaylar ofisi değil, insanları ve hikâyeleri seçer.'},
+    {s:'Bölgede büyük bir dönüşüm projesi başlıyor. İlk adımın ne olur?',f:'s04',c:[
+      ['Müteahhit ve hak sahipleriyle ilişki kurarım',{i:2}],
+      ['Plan yapıp ekipte görev dağılımı yaparım',{d:2}],
+      ['Projede ilk hareket eden ofis olurum',{g:2}],
+      ['Uzun soluklu bir süreç için sahada kalırım',{y:2}]],
+     t:'Fikirtepe gibi bir bölgede ilk adım, yılların portföyüdür.'},
+    {s:'Ofis hedeflerini nasıl takip edersin?',f:'s05',c:[
+      ['Toplantılarda ekiple konuşarak',{i:2}],
+      ['Panolar, karneler ve haftalık rakamlarla',{d:2}],
+      ['Büyük fırsatlara odaklanarak',{g:2}],
+      ['Zor dönemleri göğüsleyerek, vazgeçmeden',{y:2}]],
+     t:'Ölçülen hedef ekipçe sahiplenilir.'},
+    {s:'İki danışman arasında bir müşteri yüzünden anlaşmazlık çıktı. Ne yaparsın?',f:'s06',c:[
+      ['İkisini dinleyip uzlaştırırım',{i:2}],
+      ['Ofis kuralına göre net karar veririm',{d:2}],
+      ['Herkesin kazanacağı bir çözüm bulurum',{g:2}],
+      ['Zor konuşmayı ertelemeden hemen yaparım',{y:2}]],
+     t:'Adil karar, ekibin güvenidir. Yarısına geldin!'},
+    {s:'Rakip bir ofis en iyi danışmanlarından birine teklif verdi. Ne yaparsın?',f:'s07',c:[
+      ['Aramızdaki güvene dayanarak açık açık konuşurum',{i:2}],
+      ['Kariyer planını rakamlarla önüne koyarım',{d:2}],
+      ['Yeni bir rol ya da fırsat sunarım',{g:2}],
+      ['Kolay vazgeçmem, sonuna kadar uğraşırım',{y:2}]],
+     t:'İyi danışmanı tutan şey çoğu zaman paradan önce liderdir.'},
+    {s:'Ofisin dijital görünürlüğü için hangisi sana daha yakın?',f:'s08',c:[
+      ['Danışmanları kendi hesaplarında görünür kılarım',{i:1,g:1}],
+      ['İçerik takvimi ve düzen kurarım',{d:2}],
+      ['Yeni formatlar ve kampanyalar denerim',{g:2}],
+      ['Sonuç gelene kadar ısrarla sürdürürüm',{y:2}]],
+     t:'Görünür ofis, adayı da müşteriyi de kendine çeker.'},
+    {s:'Piyasa durgun ve ekipte motivasyon düşük. Ne yaparsın?',f:'s09',c:[
+      ['Ekiple bir araya gelip moral veririm',{i:2}],
+      ['Aktivite hedeflerini netleştirip takip ederim',{d:2}],
+      ['Yeni bir kampanya ya da fırsat başlatırım',{g:2}],
+      ['Önden gidip örnek olurum',{y:2}]],
+     t:'Durgun piyasa, güçlü ofisleri ayırır.'},
+    {s:'Ofis sahibi olarak seni en çok ne motive ediyor?',f:'s10',c:[
+      ['Ofisi ve markayı büyütmek',{g:2}],
+      ['Hedeflenen rakamları ekipçe tutturmak',{d:2}],
+      ['İnsanların gelişimine tanık olmak',{i:2}],
+      ['Zor dönemleri birlikte aşmak',{y:2}]],
+     t:'Liderin motivasyonu ekibe bulaşır. Son soru geliyor!'},
+    {s:'Bir yıl sonra ofisini nerede görmek istersin?',f:'s11',c:[
+      ['Danışmanların ofisi çevresine önerdiği güçlü bir aile',{i:2}],
+      ['Öngörülebilir rakamlarla işleyen bir sistem',{d:2}],
+      ['Yeni bölgelere ve projelere açılmış büyüyen bir marka',{g:2}],
+      ['Her koşulda ayakta kalan dayanıklı bir kadro',{y:2}]],
+     t:'Tamamlandı! Liderlik DNA\'n hazır.'}];
+  TANRI.i.m='Ofisini ilişkilerle büyütüyorsun. Ekip sana güvendiği için kalıyor, adaylar da bu sıcaklığa geliyor.';
+  TANRI.d.m='Ofisi sistemle yönetiyorsun. Rakamlar, karneler ve rutinler ekibin büyümesini öngörülebilir kılıyor.';
+  TANRI.y.m='Zor zamanların liderisin. Piyasa durgunken ekibi ayakta tutan senin kararlılığın.';
+  TANRI.g.m='Vizyonla yönetiyorsun. Yeni projeleri ve fırsatları ofise ilk sen getiriyorsun.';
+  GUC={i:'Ekibi bir arada tutuyorsun',d:'Ofisi sistemle yönetiyorsun',y:'Zor dönemde ekibi ayakta tutuyorsun',g:'Ofise yeni fırsatlar getiriyorsun'};
+  GELISIM={i:'Her danışmanla ayda bir birebir kariyer sohbeti yap.',d:'Ofis panosunu haftalık toplantının merkezine koy.',y:'Performans konularını ertelemeden ilk ay masaya getir.',g:'Bu yıl bir proje ortaklığı ya da yeni bölge aç.'};
+  YOL={
+    i:['Her danışmanla birebir kariyer sohbeti yap, ihtiyaçlarını not et.','Ofis içi tavsiye ve iş birliği düzeni kur; başarıları toplantıda kutla.','Danışmanların ofisi çevresine önerdiği bir kültür: yeni gelenlerin yarısı tavsiyeyle gelsin.'],
+    d:['Ofis panosunu güncelle: herkesin aktivite ve dönüşüm rakamları tek ekranda.','Haftalık toplantıyı rakamlar üzerine kur, düşük performansa erken müdahale et.','Öngörülebilir ofis cirosu ve hedeflediğin sayıda yeni danışmanla yılı kapat.'],
+    y:['Zorlanan danışmanlarla sahaya çık, ilk zor dosyayı birlikte kapatın.','Durgun dönem planı hazırla: kampanya, aktivite hedefi ve moral buluşması.','Zor dönemde kimseyi kaybetmeden yılı tamamla; dayanıklı bir kadro kur.'],
+    g:['Bölgedeki büyük projeleri listele, birinde ofis olarak ilk adımı at.','Yeni danışman kampanyasını (bu test dahil) aktif yürüt.','Ofisi yeni bir bölgeye ya da segmente taşı, büyümeyi markalaştır.']};
+  YOL_BASLIK=['OFİS İÇİN 30 GÜN','90 GÜN İÇİNDE','BU YIL'];
+}
 var MAX={i:0,d:0,y:0,g:0},TAVAN=0;
 SORULAR.forEach(function(q){TAVAN+=Math.max.apply(null,q.c.map(function(c){var t=0;for(var k in c[1])t+=c[1][k];return t}));var m={i:0,d:0,y:0,g:0};q.c.forEach(function(c){for(var k in c[1])m[k]=Math.max(m[k],c[1][k])});for(var k in m)MAX[k]+=m[k]});
 
@@ -661,6 +830,9 @@ function analiz(){
     paras.forEach(function(p,j){if(o>=(j+1)/4.4)p.classList.add('on')});
     if(o<1)requestAnimationFrame(adim);else setTimeout(sonuc,350)})(t0);
 }
+if(EKIP)$('etiket').textContent=EKIP_ROL==='broker'?'LİDERLİK DNA TESTİ':'EKİP DNA TESTİ';
+if(EKIP){$('karakterSoz').textContent='“Tecrüben hangi gücü büyüttü? Birlikte bakalım.”';$('tumSoz').textContent='Ofisimiz bu dört gücün toplamı.'}
+if(EKIP_ROL==='broker'){$('ekipKanca').innerHTML='<b>Ofisin lideri</b> olarak senin DNA\'n hangisi? Liderlik tarzını keşfet.';$('karakterSoz').textContent='“Ekibin sana bakıyor. Sen hangi güçle yönetiyorsun?”'}
 if(EKIP_AD){$('isim').value=EKIP_AD;$('isimAlan').querySelector('label').textContent='Hoş geldin '+EKIP_AD+'!'}
 $('basla').addEventListener('click',function(){ISIM=$('isim').value.trim().split(/\s+/)[0]||'';ISIM=ISIM.charAt(0).toLocaleUpperCase('tr-TR')+ISIM.slice(1);goster('ekranKarakter');seritSec(0);seritBaslat()});
 $('tekrar').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
@@ -710,7 +882,7 @@ function raporGoster(){
   var o=SONUC.oran,sira=SIRA.slice().sort(function(a,b){return o[b]-o[a]});
   $('harita').innerHTML=haritaHTML(o,false);
   $('gelisim').innerHTML='<b>Gelişim alanın:</b> '+GELISIM[sira[3]];
-  $('yol').innerHTML=['İLK 30 GÜN','İLK 90 GÜN','İLK YIL'].map(function(b,j){return '<li><b>'+b+'</b>'+YOL[SONUC.k][j]+'</li>'}).join('');
+  $('yol').innerHTML=YOL_BASLIK.map(function(b,j){return '<li><b>'+b+'</b>'+YOL[SONUC.k][j]+'</li>'}).join('');
   $('tamamBaslik').textContent=ISIM?'Teşekkürler '+ISIM+'!':'Teşekkürler!';
   if(EKIP){$('tamamBaslik').textContent=ISIM?'Tebrikler '+ISIM+'!':'Tebrikler!';$('tamamBaslik').nextElementSibling.textContent='İşte '+TANRI[SONUC.k].ad+' haritan. Güçlü yanların ve gelişim alanın aşağıda.'}
   else gunleriKur();
@@ -728,7 +900,7 @@ function storyCiz(){
   x.font='800 30px Manrope, sans-serif';x.fillStyle='#fff';x.fillText('R E / M A X   D O Ğ U Ş',540,110);
   x.font='700 20px Manrope, sans-serif';x.fillStyle='#A8B2C6';x.fillText('F İ K İ R T E P E  ·  K A D I K Ö Y',540,146);
   if(t.emRes){x.save();x.shadowColor='rgba(0,0,0,.6)';x.shadowBlur=40;x.drawImage(t.emRes,540-120,630,240,240);x.restore()}
-  x.font='800 30px Manrope, sans-serif';x.fillStyle='#A8B2C6';x.fillText(EKIP?'R E / M A X   D O Ğ U Ş   D A N I Ş M A N I Y I M':'G A Y R İ M E N K U L   D N A ’ M',540,1010);
+  x.font='800 30px Manrope, sans-serif';x.fillStyle='#A8B2C6';x.fillText(EKIP_ROL==='broker'?'R E / M A X   D O Ğ U Ş   B R O K E R':EKIP?'R E / M A X   D O Ğ U Ş   D A N I Ş M A N I Y I M':'G A Y R İ M E N K U L   D N A ’ M',540,1010);
   var gr=x.createLinearGradient(0,1030,0,1170);gr.addColorStop(0,'#F7E2A8');gr.addColorStop(.5,'#E8C77A');gr.addColorStop(1,'#B98A3C');
   x.fillStyle=gr;x.font='700 150px Cinzel, Georgia, serif';x.fillText(t.ad.toLocaleUpperCase('tr-TR'),540,1160);
   x.fillStyle='#F4EFE4';x.font='600 38px Cinzel, Georgia, serif';x.fillText(t.unvan.toLocaleUpperCase('tr-TR'),540,1230);
