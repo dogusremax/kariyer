@@ -83,6 +83,8 @@ h1,h2,h3{font-family:var(--disp);line-height:1.12;text-wrap:balance;letter-spaci
 .unvanlar div{display:flex;flex-wrap:wrap;gap:8px}
 .unvanlar span{background:var(--cloud);border-radius:999px;padding:7px 13px;font-weight:700;font-size:14px}
 .unvan{text-align:center;background:linear-gradient(160deg,var(--navy-deep),var(--navy));color:#fff;border-radius:20px;padding:22px 18px 20px;margin:4px 0 18px;animation:unvan .6s cubic-bezier(.2,1.4,.4,1)}
+.unvan .ui{width:190px;height:190px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 12px;box-shadow:0 0 0 4px rgba(255,255,255,.14),0 20px 40px -12px rgba(0,0,0,.65)}
+.unvanlar img{width:30px;height:30px;border-radius:50%;object-fit:cover;vertical-align:middle;margin:-4px 6px -4px -6px}
 .unvan .e{font-size:56px;line-height:1;display:block;margin-bottom:6px}
 .unvan small{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#C9D6EE}
 .unvan h2{font-size:clamp(26px,7vw,32px);color:#fff;margin:4px 0 6px}
@@ -186,7 +188,7 @@ form{display:grid;gap:14px}
       <h1>Fikirtepe'de <em>11.729 konut</em> yükseliyor. Peki onları kim satacak?</h1>
       <p class="lead">11 soruda gör: o kişi sen olabilir misin? İçinden geldiği gibi cevap ver, doğru ya da yanlış yok.</p>
       <div class="unvanlar"><p>Testi bitir, unvanını al. Sen hangisisin?</p>
-        <div><span>🦁 Aslan</span><span>🦅 Kartal</span><span>🐬 Yunus</span><span>🐝 Arı</span></div></div>
+        <div id="unvanCip"><span data-k="y">🦁 Aslan</span><span data-k="g">🦅 Kartal</span><span data-k="i">🐬 Yunus</span><span data-k="d">🐝 Arı</span></div></div>
       <div class="facts">
         <div><b>11</b><span>soru</span></div>
         <div><b>2</b><span>dakika</span></div>
@@ -211,7 +213,7 @@ form{display:grid;gap:14px}
 
     <!-- Sonuç -->
     <section class="sonuc" id="ekranSonuc" hidden>
-      <div class="unvan" id="unvan"><span class="e" id="unvanE"></span><small>Unvanın</small><h2 id="unvanAd"></h2><p id="unvanMetin"></p></div>
+      <div class="unvan" id="unvan"><img class="ui" id="unvanImg" alt="" hidden><span class="e" id="unvanE"></span><small>Unvanın</small><h2 id="unvanAd"></h2><p id="unvanMetin"></p></div>
       <div class="rozet">
         <div class="halka" id="halka"><span><b id="yuzde">0</b><small>uyum</small></span></div>
         <div><p class="tip" id="tipYazi">Senin profilin</p><h2 id="profilAd"></h2></div>
@@ -339,11 +341,14 @@ var PROFIL={
 };
 // Testi bitirene verilen unvan (en güçlü yetenek)
 var UNVAN={
-  y:{e:'🦁',ad:'Aslan',c:'Tam bir Aslansın!',b:'Ben tam bir Aslanım',m:'Cesur, dirençli, sahanın hakimi. "Hayır" seni durdurmaz, hedefini bırakmazsın.'},
-  g:{e:'🦅',ad:'Kartal',c:'Tam bir Kartalsın!',b:'Ben tam bir Kartalım',m:'Yükseklerden bakar, fırsatı herkesten önce görürsün. Kendi işini kuracak vizyon sende var.'},
-  i:{e:'🐬',ad:'Yunus',c:'Tam bir Yunussun!',b:'Ben tam bir Yunusum',m:'Sıcak, zeki, herkesle bağ kuran. İnsanlar sana kendiliğinden güvenir.'},
-  d:{e:'🐝',ad:'Arı',c:'Tam bir Arısın!',b:'Ben tam bir Arıyım',m:'Çalışkan, düzenli, sistemli. Her gün biraz daha bal yaparsın; istikrar senin süper gücün.'}
+  y:{img:'img/unvan-aslan.jpg',e:'🦁',ad:'Aslan',c:'Tam bir Aslansın!',b:'Ben tam bir Aslanım',m:'Cesur, dirençli, sahanın hakimi. "Hayır" seni durdurmaz, hedefini bırakmazsın.'},
+  g:{img:'img/unvan-kartal.jpg',e:'🦅',ad:'Kartal',c:'Tam bir Kartalsın!',b:'Ben tam bir Kartalım',m:'Yükseklerden bakar, fırsatı herkesten önce görürsün. Kendi işini kuracak vizyon sende var.'},
+  i:{img:'img/unvan-yunus.jpg',e:'🐬',ad:'Yunus',c:'Tam bir Yunussun!',b:'Ben tam bir Yunusum',m:'Sıcak, zeki, herkesle bağ kuran. İnsanlar sana kendiliğinden güvenir.'},
+  d:{img:'img/unvan-ari.jpg',e:'🐝',ad:'Arı',c:'Tam bir Arısın!',b:'Ben tam bir Arıyım',m:'Çalışkan, düzenli, sistemli. Her gün biraz daha bal yaparsın; istikrar senin süper gücün.'}
 };
+// 3D unvan görselleri: yüklenirse emojinin yerine geçer, yüklenemezse emoji kalır
+Object.keys(UNVAN).forEach(function(k){var u=UNVAN[k],im=new Image();im.onload=function(){u.res=im;
+  var c=document.querySelector('#unvanCip [data-k="'+k+'"]');if(c)c.innerHTML='<img src="'+u.img+'" alt="">'+u.ad};im.src=u.img});
 var GUC={i:'İnsanlarla hızlı bağ kuruyorsun',d:'Planlı ve istikrarlı çalışıyorsun',y:'"Hayır" seni yıldırmıyor',g:'Kendi işini kurmak istiyorsun'};
 var GELISIM={i:'Çevreni büyütmek: her hafta 10 yeni kişiyle tanışmayı hedefle.',d:'Rutin kurmak: her sabah 1 saatlik sabit bir arama bloğu ayır.',y:'Reddedilmeye alışmak: ilk ay 50 "hayır" toplamayı bir oyuna çevir.',g:'Görünür olmak: haftada 2 kısa video ile bölgede tanınan yüz ol.'};
 // Profile göre 30 gün / 90 gün / 1 yıl yol haritası
@@ -409,7 +414,7 @@ function sonuc(){
     cevap:cev.map(function(j){return 'ABCD'[j]}).join('')};
   var sira=Object.keys(oran).sort(function(a,b){return oran[b]-oran[a]});
   SONUC.guc=sira.slice(0,2).map(function(k){return GUC[k]});
-  $('unvanE').textContent=UNVAN[en].e;$('unvanAd').textContent=ISIM?ISIM+', t'+UNVAN[en].c.slice(1):UNVAN[en].c;$('unvanMetin').textContent=UNVAN[en].m;
+  var U=UNVAN[en];$('unvanImg').hidden=!U.res;if(U.res){$('unvanImg').src=U.img;$('unvanImg').alt=U.ad}$('unvanE').hidden=!!U.res;$('unvanE').textContent=U.e;$('unvanAd').textContent=ISIM?ISIM+', t'+UNVAN[en].c.slice(1):UNVAN[en].c;$('unvanMetin').textContent=UNVAN[en].m;
   $('tipYazi').textContent='Danışman profilin';
   $('profilAd').textContent=PROFIL[en].ad;
   $('profilMetin').textContent=PROFIL[en].m;
@@ -445,11 +450,12 @@ function storyCiz(){
   var c=document.createElement('canvas');c.width=1080;c.height=1920;var x=c.getContext('2d'),u=SONUC.unvan;
   var g=x.createLinearGradient(0,0,1080,1920);g.addColorStop(0,'#0C2B5E');g.addColorStop(.55,'#003DA5');g.addColorStop(1,'#081B38');
   x.fillStyle=g;x.fillRect(0,0,1080,1920);
-  x.fillStyle='rgba(255,255,255,.06)';x.beginPath();x.arc(540,720,420,0,7);x.fill();
   var logo=document.querySelector('.top img');if(logo&&logo.naturalWidth){var lw=300,lh=lw*logo.naturalHeight/logo.naturalWidth;x.drawImage(logo,540-lw/2,130,lw,lh)}
   x.textAlign='center';x.textBaseline='alphabetic';
-  x.font='800 34px Archivo, sans-serif';x.fillStyle='#C9D6EE';x.fillText('G A Y R İ M E N K U L   D A N I Ş M A N L I Ğ I   T E S T İ',540,420);
-  x.font='340px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';x.fillText(u.e,540,860);
+  x.font='800 34px Archivo, sans-serif';x.fillStyle='#C9D6EE';x.fillText('G A Y R İ M E N K U L   D A N I Ş M A N L I Ğ I   T E S T İ',540,340);
+  if(u.res){x.save();x.beginPath();x.arc(540,670,300,0,7);x.closePath();x.shadowColor='rgba(0,0,0,.5)';x.shadowBlur=60;x.fillStyle='#0C2B5E';x.fill();x.clip();x.shadowBlur=0;x.drawImage(u.res,240,370,600,600);x.restore();
+    x.strokeStyle='rgba(255,255,255,.18)';x.lineWidth=8;x.beginPath();x.arc(540,670,304,0,7);x.stroke()}
+  else{x.font='340px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';x.fillText(u.e,540,860)}
   x.fillStyle='#fff';x.font='900 104px Archivo, sans-serif';
   var bas=u.b+'!',fs=104;while(x.measureText(bas).width>900&&fs>60){fs-=4;x.font='900 '+fs+'px Archivo, sans-serif'}x.fillText(bas,540,1060);
   x.font='700 46px Manrope, sans-serif';x.fillStyle='#E3EAF7';x.fillText(SONUC.profil.replace(/ \(.*\)$/,'')+' · uyum %'+SONUC.puan,540,1150);
@@ -465,13 +471,14 @@ $('story').addEventListener('click',function(){
   var b=this;b.disabled=true;$('paylasNot').textContent='';
   (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){
     storyCiz().toBlob(function(blob){
+      if(!blob){b.disabled=false;$('paylasNot').textContent='Görsel oluşturulamadı, linki paylaşabilirsin.';return}
       b.disabled=false;
       var f=new File([blob],'unvanim-'+SONUC.unvan.ad.toLocaleLowerCase('tr-TR')+'.png',{type:'image/png'});
       if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f]}).catch(function(){});return}
       var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=f.name;document.body.appendChild(a);a.click();a.remove();
       $('paylasNot').textContent='Görsel indirildi. Instagram\'da hikâyene ekleyip testin linkini bağlantı çıkartmasıyla koyabilirsin.';
     },'image/png');
-  });
+  }).catch(function(){b.disabled=false;$('paylasNot').textContent='Görsel oluşturulamadı, linki paylaşabilirsin.'});
 });
 
 $('kvkkAc').addEventListener('click',function(){var m=$('kvkkMetin');m.hidden=!m.hidden;this.setAttribute('aria-expanded',String(!m.hidden))});
