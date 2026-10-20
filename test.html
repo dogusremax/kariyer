@@ -101,6 +101,9 @@ body:not(.acik) .sarmal{background:linear-gradient(160deg,rgba(255,255,255,.08),
 .para small{font-size:10.5px;color:var(--muted);font-weight:600}
 .kanca{text-align:center;font-size:13.5px;color:var(--muted);margin:2px 0 12px}
 .kanca b{color:var(--gold)}
+/* Ekip sürümü (?ekip=1): form ve Gölge Gün yok, harita doğrudan açılır */
+body.ekip .kilit,body.ekip #cagri,body.ekip #form,body.ekip #golge,body.ekip .son{display:none!important}
+.ekip-yalniz{display:none}body.ekip .ekip-yalniz{display:block}body.ekip .aday-yalniz{display:none}
 .baslik2{font-size:27px;font-weight:700;line-height:1.15}
 .seritler{display:flex;gap:6px;height:330px;margin:16px 0 10px}
 .serit{position:relative;flex:1;border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid var(--line);transition:flex .6s cubic-bezier(.2,.8,.2,1),box-shadow .6s;background:var(--panel)}
@@ -363,11 +366,12 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
       <canvas id="sarmalCiz" aria-hidden="true"></canvas>
       <div class="paralar" id="paralar"></div>
     </div>
-    <p class="kanca"><b>Gayrimenkul kariyeri</b> sana uygun mu? Cevabı karakterinde.</p>
+    <p class="kanca aday-yalniz"><b>Gayrimenkul kariyeri</b> sana uygun mu? Cevabı karakterinde.</p>
+    <p class="kanca ekip-yalniz"><b>RE/MAX Doğuş ekibi</b>, sen hangi karaktersin? Testi çöz, sonucunu story'de paylaş.</p>
     <div class="bilgi"><span>11 soru</span><span>2 dakika</span><span>Sana özel sonuç</span></div>
     <div class="alan" id="isimAlan"><label for="isim">Sana nasıl hitap edelim?</label><input id="isim" autocomplete="given-name" maxlength="30" placeholder="Adın (isteğe bağlı)"></div>
     <button class="btn" id="basla">Teste başla →</button>
-    <p class="not">Sonucu görmek için iletişim bilgisi istemiyoruz.</p>
+    <p class="not aday-yalniz">Sonucu görmek için iletişim bilgisi istemiyoruz.</p><p class="not ekip-yalniz">Ekip sürümü: form yok, yetenek haritan direkt açılır.</p>
   </section>
 
   <!-- Dört karakter -->
@@ -462,6 +466,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
       <ol class="yol" id="yol"></ol></div>
     <div class="kutu tum"><h3 style="text-align:center">Tüm karakterler</h3><div class="seritler kucuk" id="seritler2"></div>
       <p class="alinti">“Dört yetenek. Tek hedef.”<br><span>Sıradaki başarı hikâyesi senin olsun.</span></p></div>
+    <div class="ekip-yalniz" style="margin-bottom:18px"><button type="button" class="story" id="story2">📸 Sonucunu hikâyende paylaş</button><p class="paylas-not" style="text-align:center">Paylaşınca adaylar da kendi karakterini merak etsin.</p></div>
     <div class="son">
       <a class="btn" href="./" style="text-decoration:none">RE/MAX Doğuş'ta kariyer fırsatlarını keşfet →</a>
       <a class="lnk" href="./#program">Eğitim programını gör</a>
@@ -570,6 +575,7 @@ SORULAR.forEach(function(q){TAVAN+=Math.max.apply(null,q.c.map(function(c){var t
 
 var $=function(id){return document.getElementById(id)};
 var TEMA=(location.search.match(/[?&]tema=([a-z]+)/)||[])[1]||'mermer';
+var EKIP=/[?&]ekip=1\b/.test(location.search);if(EKIP)document.body.classList.add('ekip');
 if(TEMA&&TEMA!=='gece'){document.body.classList.add('acik');if(TEMA!=='acik')document.body.classList.add('t-'+TEMA)}
 var esc=function(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
 var ekranlar=['ekranGiris','ekranKarakter','ekranSoru','ekranAnaliz','ekranSonuc','ekranTamam'];
@@ -644,7 +650,8 @@ $('geri').addEventListener('click',function(){if(idx>0){idx--;soru()}else goster
 $('geri2').addEventListener('click',function(){if(idx>0){idx--;soru()}});
 $('karakterGeri').addEventListener('click',function(){goster('ekranGiris')});
 $('basla2').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
-$('raporaGit').addEventListener('click',function(){$('cagri').scrollIntoView({behavior:'smooth',block:'start'})});
+$('raporaGit').addEventListener('click',function(){if(EKIP){raporGoster();return}$('cagri').scrollIntoView({behavior:'smooth',block:'start'})});
+$('story2').addEventListener('click',function(){$('story').click()});
 // Cevaplar bitince kısa bir "analiz" anı: paralar sırayla yanar, çubuk dolar
 function analiz(){
   goster('ekranAnaliz');var paras=$('analizPara').querySelectorAll('.para'),n=0,sure=AZALT?300:3000,t0=performance.now();
@@ -687,6 +694,7 @@ function sonuc(){
   $('sahteHarita').innerHTML=haritaHTML({i:72,d:48,y:81,g:55},true);
   if(ISIM&&!$('ad').value)$('ad').value=ISIM+' ';
   $('paylasNot').textContent='';
+  if(EKIP)$('raporaGit').textContent='Yetenek haritamı gör →';
   goster('ekranSonuc');
   var h=$('halka'),n=0;
   var iv=setInterval(function(){n=Math.min(yuzde,n+2);h.style.setProperty('--p',n);$('yuzde').textContent='%'+n;if(n>=yuzde)clearInterval(iv)},18);
@@ -697,7 +705,8 @@ function raporGoster(){
   $('gelisim').innerHTML='<b>Gelişim alanın:</b> '+GELISIM[sira[3]];
   $('yol').innerHTML=['İLK 30 GÜN','İLK 90 GÜN','İLK YIL'].map(function(b,j){return '<li><b>'+b+'</b>'+YOL[SONUC.k][j]+'</li>'}).join('');
   $('tamamBaslik').textContent=ISIM?'Teşekkürler '+ISIM+'!':'Teşekkürler!';
-  gunleriKur();
+  if(EKIP){$('tamamBaslik').textContent=ISIM?'Tebrikler '+ISIM+'!':'Tebrikler!';$('tamamBaslik').nextElementSibling.textContent='İşte '+TANRI[SONUC.k].ad+' haritan. Güçlü yanların ve gelişim alanın aşağıda.'}
+  else gunleriKur();
   goster('ekranTamam');
   requestAnimationFrame(function(){requestAnimationFrame(function(){$('harita').querySelectorAll('i').forEach(function(i){i.style.width=i.dataset.w+'%'})})});
 }
@@ -712,7 +721,7 @@ function storyCiz(){
   x.font='800 30px Manrope, sans-serif';x.fillStyle='#fff';x.fillText('R E / M A X   D O Ğ U Ş',540,110);
   x.font='700 20px Manrope, sans-serif';x.fillStyle='#A8B2C6';x.fillText('F İ K İ R T E P E  ·  K A D I K Ö Y',540,146);
   if(t.emRes){x.save();x.shadowColor='rgba(0,0,0,.6)';x.shadowBlur=40;x.drawImage(t.emRes,540-120,630,240,240);x.restore()}
-  x.font='800 30px Manrope, sans-serif';x.fillStyle='#A8B2C6';x.fillText('G A Y R İ M E N K U L   D N A ’ M',540,1010);
+  x.font='800 30px Manrope, sans-serif';x.fillStyle='#A8B2C6';x.fillText(EKIP?'R E / M A X   D O Ğ U Ş   D A N I Ş M A N I Y I M':'G A Y R İ M E N K U L   D N A ’ M',540,1010);
   var gr=x.createLinearGradient(0,1030,0,1170);gr.addColorStop(0,'#F7E2A8');gr.addColorStop(.5,'#E8C77A');gr.addColorStop(1,'#B98A3C');
   x.fillStyle=gr;x.font='700 150px Cinzel, Georgia, serif';x.fillText(t.ad.toLocaleUpperCase('tr-TR'),540,1160);
   x.fillStyle='#F4EFE4';x.font='600 38px Cinzel, Georgia, serif';x.fillText(t.unvan.toLocaleUpperCase('tr-TR'),540,1230);
@@ -733,7 +742,7 @@ $('story').addEventListener('click',function(){
       b.disabled=false;
       if(!blob){$('paylasNot').textContent='Görsel oluşturulamadı, linki paylaşabilirsin.';return}
       var f=new File([blob],'gayrimenkul-dna-'+TANRI[SONUC.k].ad.toLowerCase()+'.png',{type:'image/png'});
-      var url=location.origin+location.pathname+'?kaynak=paylasim';
+      var url=location.origin+location.pathname+'?kaynak='+(EKIP?'ekip':'paylasim');
       if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f]}).catch(function(){});return}
       if(navigator.share&&!navigator.canShare){navigator.share({title:'Gayrimenkul DNA testi',text:'Gayrimenkul DNA testinde '+TANRI[SONUC.k].ad+' çıktım. Sen hangisisin?',url:url}).catch(function(){});return}
       var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=f.name;document.body.appendChild(a);a.click();a.remove();
