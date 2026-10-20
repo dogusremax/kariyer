@@ -576,6 +576,7 @@ SORULAR.forEach(function(q){TAVAN+=Math.max.apply(null,q.c.map(function(c){var t
 var $=function(id){return document.getElementById(id)};
 var TEMA=(location.search.match(/[?&]tema=([a-z]+)/)||[])[1]||'mermer';
 var EKIP=/[?&]ekip=1\b/.test(location.search);if(EKIP)document.body.classList.add('ekip');
+var EKIP_AD=EKIP?(new URLSearchParams(location.search).get('ad')||'').trim().slice(0,30):'';
 if(TEMA&&TEMA!=='gece'){document.body.classList.add('acik');if(TEMA!=='acik')document.body.classList.add('t-'+TEMA)}
 var esc=function(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
 var ekranlar=['ekranGiris','ekranKarakter','ekranSoru','ekranAnaliz','ekranSonuc','ekranTamam'];
@@ -660,6 +661,7 @@ function analiz(){
     paras.forEach(function(p,j){if(o>=(j+1)/4.4)p.classList.add('on')});
     if(o<1)requestAnimationFrame(adim);else setTimeout(sonuc,350)})(t0);
 }
+if(EKIP_AD){$('isim').value=EKIP_AD;$('isimAlan').querySelector('label').textContent='Hoş geldin '+EKIP_AD+'!'}
 $('basla').addEventListener('click',function(){ISIM=$('isim').value.trim().split(/\s+/)[0]||'';ISIM=ISIM.charAt(0).toLocaleUpperCase('tr-TR')+ISIM.slice(1);goster('ekranKarakter');seritSec(0);seritBaslat()});
 $('tekrar').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
 
@@ -694,10 +696,15 @@ function sonuc(){
   $('sahteHarita').innerHTML=haritaHTML({i:72,d:48,y:81,g:55},true);
   if(ISIM&&!$('ad').value)$('ad').value=ISIM+' ';
   $('paylasNot').textContent='';
-  if(EKIP)$('raporaGit').textContent='Yetenek haritamı gör →';
+  if(EKIP){$('raporaGit').textContent='Yetenek haritamı gör →';ekipGonder()}
   goster('ekranSonuc');
   var h=$('halka'),n=0;
   var iv=setInterval(function(){n=Math.min(yuzde,n+2);h.style.setProperty('--p',n);$('yuzde').textContent='%'+n;if(n>=yuzde)clearInterval(iv)},18);
+}
+// Ekip sürümü: sonuç Broker'a gider (Ekip DNA sekmesi + mail); hata olsa da danışman sonucunu görür
+function ekipGonder(){
+  try{fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify({action:'ekipDna',ad:EKIP_AD||ISIM,test_puan:SONUC.puan,test_profil:SONUC.profil,test_detay:SONUC.detay,test_cevap:SONUC.cevap})}).catch(function(){})}catch(e){}
 }
 function raporGoster(){
   var o=SONUC.oran,sira=SIRA.slice().sort(function(a,b){return o[b]-o[a]});
