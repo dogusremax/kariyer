@@ -113,6 +113,24 @@ h1,h2,h3{font-family:var(--disp);line-height:1.12;text-wrap:balance;letter-spaci
 .rapor{text-align:left;background:var(--cloud);border-radius:16px;padding:18px;margin:0 0 20px}
 .rapor .yetenek{margin-bottom:14px}
 .rapor p{font-size:14.5px;margin-top:8px;color:var(--navy-ink)}
+.yol{list-style:none;margin-top:12px;display:grid;gap:10px;border-left:2px solid var(--line);padding-left:14px}
+.yol li{position:relative;font-size:14px;color:var(--navy-ink)}
+.yol li::before{content:"";position:absolute;left:-20px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--red)}
+.yol b{display:block;font-family:var(--disp);color:var(--navy);font-size:13px;letter-spacing:.02em}
+.golge{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px;margin:0 0 18px;text-align:left}
+.golge h3{font-size:18px;margin-bottom:4px}
+.golge>p{font-size:13.5px;color:var(--steel);margin-bottom:12px}
+.gunler{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.gunler button,.saatler button{flex:0 0 auto;border:1.5px solid var(--line);background:#fff;border-radius:12px;font:700 14px var(--body);color:var(--navy-ink);cursor:pointer}
+.gunler button{padding:8px 12px;text-align:center;line-height:1.25}
+.gunler button small{display:block;font-size:11.5px;font-weight:600;color:var(--steel)}
+.saatler{display:flex;gap:8px;margin-top:10px}
+.saatler button{padding:10px 18px}
+.gunler button.sec,.saatler button.sec{border-color:var(--navy);background:var(--navy);color:#fff}
+.gunler button.sec small{color:#C9D6EE}
+.golge .btn{margin-top:14px}
+.golge .lnk{display:block;margin:10px auto 0;background:none;border:0;font:700 13px var(--body);color:var(--navy);text-decoration:underline;cursor:pointer}
+.golge-ok{text-align:center;font-weight:700;color:var(--ok);font-size:15px}
 /* İletişim formu */
 form{display:grid;gap:14px}
 .f label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
@@ -132,6 +150,7 @@ form{display:grid;gap:14px}
 .tamam .tik{width:68px;height:68px;border-radius:50%;background:#E9F7EE;color:var(--ok);font-size:32px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
 .tamam h2{font-size:28px;margin-bottom:8px}
 .tamam p{color:var(--steel);margin-bottom:20px}
+.rapor-bas{font-size:18px;margin:4px 0 10px}
 .tamam .sec2{display:flex;flex-direction:column;gap:10px;align-items:center}
 .tamam a.lnk{font-weight:800;color:var(--navy)}
 .foot{color:rgba(255,255,255,.55);font-size:12px;text-align:center}
@@ -187,14 +206,13 @@ form{display:grid;gap:14px}
       <div class="kilit">
         <div class="kilit-ic" aria-hidden="true">
           <div class="yetenek"><div><span>İletişim</span><span class="t"><i style="width:72%"></i></span><b>%••</b></div><div><span>Disiplin</span><span class="t"><i style="width:48%"></i></span><b>%••</b></div><div><span>Dayanıklılık</span><span class="t"><i style="width:81%"></i></span><b>%••</b></div><div><span>Girişimcilik</span><span class="t"><i style="width:55%"></i></span><b>%••</b></div></div>
-          <p><b>Gelişim alanın:</b> sahada ilk aylarda en çok işine yarayacak alışkanlık</p>
-          <p><b>İlk 90 gün:</b> profiline özel başlangıç ipucu</p>
+          <ol class="yol"><li><b>İLK 30 GÜN</b>eğitim ve ilk adımların, profiline göre</li><li><b>İLK 90 GÜN</b>ilk portföy hedefin ve nasıl alacağın</li><li><b>İLK YIL</b>kariyerinin bir yıl sonra nerede olacağı</li></ol>
         </div>
-        <div class="kilit-ust"><span class="kilit-ikon" aria-hidden="true">🔒</span><b>Kişisel raporun hazır</b><span>4 yetenek puanın, gelişim alanın ve profiline özel ilk 90 gün ipucun. Bilgilerini bırakınca açılır.</span></div>
+        <div class="kilit-ust"><span class="kilit-ikon" aria-hidden="true">🔒</span><b>Kariyer yol haritan hazır</b><span>4 yetenek puanın ve profiline özel 30 gün, 90 gün, 1 yıl planın. Bilgilerini bırakınca açılır, ardından Gölge Gün tarihini kendin seçersin.</span></div>
       </div>
       <div class="cagri">
         <h3 id="cagriBaslik">Bu sonuçla seni ofiste görmek isteriz.</h3>
-        <p>Sonucunu gönder, seni ofisimize bir günlük <b>Gölge Gün</b>'e davet edelim: bir danışmanın yanında portföy gezer, müşteri görüşmesine katılır, işi içeriden görürsün. Broker'ımız 2 iş günü içinde seni arayıp günü birlikte belirler.</p>
+        <p>Sonucunu gönder, seni ofisimize bir günlük <b>Gölge Gün</b>'e davet edelim: bir danışmanın yanında portföy gezer, müşteri görüşmesine katılır, işi içeriden görürsün. Formdan sonra tarihi kendin seçersin, Broker'ımız arayıp onaylar.</p>
       </div>
       <form id="form" novalidate>
         <div class="ikili">
@@ -210,7 +228,7 @@ form{display:grid;gap:14px}
           <p>Verilerin üçüncü kişilerle paylaşılmaz; başvuru süreci tamamlandıktan sonra en fazla 1 yıl saklanır ve ardından silinir. KVKK'nın 11. maddesindeki hakların için dogusremax@gmail.com adresine yazabilir ya da Dumlupınar Mah. Özen Sk. Nuhoğlu Yenitepe Sitesi 2. Etap A Blok D:2, Kadıköy / İstanbul adresine başvurabilirsin.</p>
         </div>
         <p class="hata" id="hata" role="alert" hidden></p>
-        <button class="btn wide" id="gonder">Raporumu aç, Gölge Gün davetimi al →</button>
+        <button class="btn wide" id="gonder">Yol haritamı aç, Gölge Gün tarihimi seç →</button>
         <button type="button" class="ghost" id="tekrar">Testi baştan çöz</button>
       </form>
     </section>
@@ -219,7 +237,17 @@ form{display:grid;gap:14px}
     <section class="tamam" id="ekranTamam" hidden>
       <div class="tik">✓</div>
       <h2 id="tamamBaslik">Davetin hazırlanıyor!</h2>
-      <p>Sonucun Broker'ımıza ulaştı. Seni en kısa sürede arayıp Gölge Gün'ünü birlikte planlayacağız. İşte kişisel raporun:</p>
+      <p>Sonucun Broker'ımıza ulaştı. Şimdi Gölge Gün'ün için sana uyan zamanı seç.</p>
+      <div class="golge" id="golge">
+        <h3>Gölge Gün'ünü seç</h3>
+        <p>Bir gün boyunca bir danışmanımızın yanındasın. Seçtiğin zamanı Broker'ımız arayıp onaylar.</p>
+        <div class="gunler" id="gunler" role="group" aria-label="Gün"></div>
+        <div class="saatler" id="saatler" role="group" aria-label="Saat"><button type="button" data-s="10:00">10:00</button><button type="button" data-s="14:00">14:00</button></div>
+        <p class="hata" id="golgeHata" role="alert" hidden></p>
+        <button type="button" class="btn wide" id="golgeGonder" disabled>Bu zamanı ayır</button>
+        <button type="button" class="lnk" id="golgeAra">Bu günler uymuyor, beni arayın</button>
+      </div>
+      <h3 class="rapor-bas">Kariyer yol haritan</h3>
       <div class="rapor" id="rapor"></div>
       <div class="sec2">
         <a class="btn" href="./#program">Eğitim programını gör</a>
@@ -293,7 +321,13 @@ var PROFIL={
 };
 var GUC={i:'İnsanlarla hızlı bağ kuruyorsun',d:'Planlı ve istikrarlı çalışıyorsun',y:'"Hayır" seni yıldırmıyor',g:'Kendi işini kurmak istiyorsun'};
 var GELISIM={i:'Çevreni büyütmek: her hafta 10 yeni kişiyle tanışmayı hedefle.',d:'Rutin kurmak: her sabah 1 saatlik sabit bir arama bloğu ayır.',y:'Reddedilmeye alışmak: ilk ay 50 "hayır" toplamayı bir oyuna çevir.',g:'Görünür olmak: haftada 2 kısa video ile bölgede tanınan yüz ol.'};
-var DOKSAN={i:'Tanıdık çevrenden ilk 3 portföyünü çıkarmayı hedefle; eğitimin "Ara" ve "Buluş" dersleri tam sana göre.',d:'Ofisin performans karnesiyle haftalık hedeflerini takip et; ilk 90 günde 2 yetkili portföy hedefle.',y:'Fikirtepe\'de sahibinden satılık ilanları her gün düzenli ara; istikrar ilk satışını getirir.',g:'Instagram hesabını danışman vitrinine çevir; ilk ay 8 kısa video hedefle.'};
+// Profile göre 30 gün / 90 gün / 1 yıl yol haritası
+var YOL={
+  i:['Eğitimi tamamla, çevrendeki 100 kişilik listeni çıkar ve herkese yeni işini duyur.','Tanıdık ve tavsiyelerden ilk 3 yetkili portföyünü al, ilk gösterimlerini yap.','Memnun müşterilerinin tavsiyeleriyle düzenli bir müşteri akışı kur; işinin çoğu tavsiyeyle gelsin.'],
+  d:['Eğitimi tamamla, günlük arama ve takip rutinini kur, bölgendeki siteleri tek tek listele.','Haftalık hedeflerini performans karnesiyle takip et ve ilk 2 yetkili portföyünü al.','Sistemin seni taşısın: her ay öngörülebilir sayıda portföy ve satış, bölgende uzmanlık.'],
+  y:['Eğitimi tamamla, Fikirtepe\'de sahibinden ilanları her gün düzenli ara, ilk "hayır"larını topla.','Sahada tanınmaya başla; ilk yetkili portföyünü al ve ilk satış görüşmelerini yap.','Bölgende "o sokağı en iyi bilen" danışman ol; ilk zor ayları geride bırakmış kalıcı bir kariyer.'],
+  g:['Eğitimi tamamla, Instagram hesabını danışman vitrinine çevir ve ilk 8 kısa videonu çek.','İçeriklerinden gelen ilk talepleri portföye çevir; bölgede tanınan bir yüz olmaya başla.','Kendi markanı kur: kişisel hesabın müşteri getiren bir kanal, sen de kendi ekibini düşünen bir girişimci.']
+};
 var MAX={i:0,d:0,y:0,g:0};
 SORULAR.forEach(function(q){var m={i:0,d:0,y:0,g:0};q.c.forEach(function(c){for(var k in c[1])m[k]=Math.max(m[k],c[1][k])});for(var k in m)MAX[k]+=m[k]});
 
@@ -357,7 +391,8 @@ function sonuc(){
   if(ISIM&&!$('ad').value)$('ad').value=ISIM+' ';
   var zayif=sira[sira.length-1];
   SONUC.rapor='<div class="yetenek">'+Object.keys(YETENEK).map(function(k){return '<div><span>'+YETENEK[k]+'</span><span class="t"><i data-w="'+oran[k]+'"></i></span><b>%'+oran[k]+'</b></div>'}).join('')+'</div>'+
-    '<p><b>Gelişim alanın:</b> '+GELISIM[zayif]+'</p><p><b>İlk 90 gün:</b> '+DOKSAN[en]+'</p>';
+    '<p><b>Gelişim alanın:</b> '+GELISIM[zayif]+'</p>'+
+    '<ol class="yol">'+['İLK 30 GÜN','İLK 90 GÜN','İLK YIL'].map(function(b,j){return '<li><b>'+b+'</b>'+YOL[en][j]+'</li>'}).join('')+'</ol>';
   $('paylasNot').textContent='';
   goster('ekranSonuc');
   var h=$('halka'),n=0,hedef=yuzde,ad=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -366,6 +401,7 @@ function sonuc(){
 }
 function raporGoster(){
   $('rapor').innerHTML=SONUC.rapor;
+  gunleriKur();
   if(ISIM)$('tamamBaslik').textContent=ISIM+', davetin hazırlanıyor!';
   goster('ekranTamam');
   requestAnimationFrame(function(){requestAnimationFrame(function(){$('rapor').querySelectorAll('i').forEach(function(i){i.style.width=i.dataset.w+'%'})})});
@@ -393,13 +429,38 @@ form.addEventListener('submit',function(ev){
   var b=$('gonder');b.disabled=true;b.textContent='Gönderiliyor…';
   fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(veri)})
   .then(function(r){return r.json()})
-  .then(function(j){if(!j.success)throw new Error(j.error||'');raporGoster()})
+  .then(function(j){if(!j.success)throw new Error(j.error||'');ANAHTAR=j.anahtar||'';TEL=veri.telefon;raporGoster()})
   .catch(function(e){
-    b.disabled=false;b.textContent='Raporumu aç, Gölge Gün davetimi al →';
+    b.disabled=false;b.textContent='Yol haritamı aç, Gölge Gün tarihimi seç →';
     $('hata').textContent=(e&&e.message&&e.message.indexOf('etch')<0&&e.message.indexOf('JSON')<0&&e.message)||'Gönderim sırasında bir sorun oluştu. Tekrar dene ya da WhatsApp\'tan 0532 472 41 48 numarasına yaz.';
     $('hata').hidden=false;
   });
 });
+
+// Gölge Gün: önümüzdeki 10 iş günü × 10:00 / 14:00
+var ANAHTAR='',TEL='',SECGUN='',SECSAAT='';
+function gunleriKur(){
+  var h='',d=new Date(),n=0;
+  while(n<10){d.setDate(d.getDate()+1);var g=d.getDay();if(g===0||g===6)continue;n++;
+    var etiket=d.toLocaleDateString('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric'})+' '+d.toLocaleDateString('tr-TR',{weekday:'long'});
+    h+='<button type="button" data-g="'+etiket+'">'+d.toLocaleDateString('tr-TR',{weekday:'short'})+'<small>'+d.toLocaleDateString('tr-TR',{day:'numeric',month:'short'})+'</small></button>'}
+  $('gunler').innerHTML=h;
+}
+function golgeHazir(){$('golgeGonder').disabled=!(SECGUN&&SECSAAT)}
+$('gunler').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;SECGUN=b.dataset.g;
+  this.querySelectorAll('button').forEach(function(x){x.classList.toggle('sec',x===b)});golgeHazir()});
+$('saatler').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;SECSAAT=b.dataset.s;
+  this.querySelectorAll('button').forEach(function(x){x.classList.toggle('sec',x===b)});golgeHazir()});
+function golgeGonder(tercih){
+  var b=$('golgeGonder');b.disabled=true;$('golgeHata').hidden=true;
+  fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'adayGolgeGun',anahtar:ANAHTAR,telefon:TEL,golge_gun:tercih})})
+  .then(function(r){return r.json()})
+  .then(function(j){if(!j.success)throw new Error(j.error||'');
+    $('golge').innerHTML='<p class="golge-ok">'+(tercih==='Beni arayın'?'Tamam, Broker\'ımız seni arayıp birlikte gün belirleyecek.':'✓ '+tercih+' için yerin ayrıldı. Broker\'ımız arayıp onaylayacak.')+'</p>'})
+  .catch(function(){b.disabled=false;$('golgeHata').textContent='Tercihin kaydedilemedi. Tekrar dene ya da WhatsApp\'tan 0532 472 41 48 numarasına yaz.';$('golgeHata').hidden=false});
+}
+$('golgeGonder').addEventListener('click',function(){golgeGonder(SECGUN+' '+SECSAAT)});
+$('golgeAra').addEventListener('click',function(){golgeGonder('Beni arayın')});
 </script>
 </body>
 </html>
