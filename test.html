@@ -114,6 +114,8 @@ h1,h2,h3{font-family:var(--disp);line-height:1.12;text-wrap:balance;letter-spaci
 .guc li{display:flex;gap:10px;font-weight:700;font-size:15px}
 .guc li::before{content:"★";color:var(--red)}
 .paylas{background:none;border:1.5px solid var(--line);border-radius:999px;padding:9px 18px;font:800 14px var(--body);color:var(--navy);cursor:pointer;margin-bottom:4px}
+.story{display:block;width:100%;border:0;border-radius:999px;padding:14px 18px;margin-bottom:10px;font:800 15.5px var(--body);color:#fff;cursor:pointer;background:linear-gradient(45deg,#F58529,#DD2A7B 55%,#8134AF);box-shadow:0 8px 20px -8px rgba(221,42,123,.6)}
+.story:disabled{opacity:.7}
 .paylas-not{min-height:18px;font-size:12.5px;font-weight:700;color:var(--ok);margin-bottom:10px}
 .kilit{position:relative;border:1.5px dashed var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px}
 .kilit-ic{padding:16px 18px;filter:blur(5px);user-select:none;pointer-events:none}
@@ -216,7 +218,8 @@ form{display:grid;gap:14px}
       </div>
       <p class="ac" id="profilMetin"></p>
       <div class="guc"><h3>2 süper gücün</h3><ul id="gucler"></ul></div>
-      <button type="button" class="paylas" id="paylas">Sonucunu paylaş ↗</button>
+      <button type="button" class="story" id="story">📸 Unvanını hikâyende paylaş</button>
+      <button type="button" class="paylas" id="paylas">Linki paylaş ↗</button>
       <p class="paylas-not" id="paylasNot" role="status"></p>
       <div class="kilit">
         <div class="kilit-ic" aria-hidden="true">
@@ -336,10 +339,10 @@ var PROFIL={
 };
 // Testi bitirene verilen unvan (en güçlü yetenek)
 var UNVAN={
-  y:{e:'🦁',ad:'Aslan',c:'Tam bir Aslansın!',m:'Cesur, dirençli, sahanın hakimi. "Hayır" seni durdurmaz, hedefini bırakmazsın.'},
-  g:{e:'🦅',ad:'Kartal',c:'Tam bir Kartalsın!',m:'Yükseklerden bakar, fırsatı herkesten önce görürsün. Kendi işini kuracak vizyon sende var.'},
-  i:{e:'🐬',ad:'Yunus',c:'Tam bir Yunussun!',m:'Sıcak, zeki, herkesle bağ kuran. İnsanlar sana kendiliğinden güvenir.'},
-  d:{e:'🐝',ad:'Arı',c:'Tam bir Arısın!',m:'Çalışkan, düzenli, sistemli. Her gün biraz daha bal yaparsın; istikrar senin süper gücün.'}
+  y:{e:'🦁',ad:'Aslan',c:'Tam bir Aslansın!',b:'Ben tam bir Aslanım',m:'Cesur, dirençli, sahanın hakimi. "Hayır" seni durdurmaz, hedefini bırakmazsın.'},
+  g:{e:'🦅',ad:'Kartal',c:'Tam bir Kartalsın!',b:'Ben tam bir Kartalım',m:'Yükseklerden bakar, fırsatı herkesten önce görürsün. Kendi işini kuracak vizyon sende var.'},
+  i:{e:'🐬',ad:'Yunus',c:'Tam bir Yunussun!',b:'Ben tam bir Yunusum',m:'Sıcak, zeki, herkesle bağ kuran. İnsanlar sana kendiliğinden güvenir.'},
+  d:{e:'🐝',ad:'Arı',c:'Tam bir Arısın!',b:'Ben tam bir Arıyım',m:'Çalışkan, düzenli, sistemli. Her gün biraz daha bal yaparsın; istikrar senin süper gücün.'}
 };
 var GUC={i:'İnsanlarla hızlı bağ kuruyorsun',d:'Planlı ve istikrarlı çalışıyorsun',y:'"Hayır" seni yıldırmıyor',g:'Kendi işini kurmak istiyorsun'};
 var GELISIM={i:'Çevreni büyütmek: her hafta 10 yeni kişiyle tanışmayı hedefle.',d:'Rutin kurmak: her sabah 1 saatlik sabit bir arama bloğu ayır.',y:'Reddedilmeye alışmak: ilk ay 50 "hayır" toplamayı bir oyuna çevir.',g:'Görünür olmak: haftada 2 kısa video ile bölgede tanınan yüz ol.'};
@@ -405,6 +408,7 @@ function sonuc(){
   SONUC={puan:yuzde,unvan:UNVAN[en],profil:PROFIL[en].ad+' ('+UNVAN[en].ad+')',detay:Object.keys(YETENEK).map(function(k){return YETENEK[k]+' '+oran[k]}).join(', '),
     cevap:cev.map(function(j){return 'ABCD'[j]}).join('')};
   var sira=Object.keys(oran).sort(function(a,b){return oran[b]-oran[a]});
+  SONUC.guc=sira.slice(0,2).map(function(k){return GUC[k]});
   $('unvanE').textContent=UNVAN[en].e;$('unvanAd').textContent=ISIM?ISIM+', t'+UNVAN[en].c.slice(1):UNVAN[en].c;$('unvanMetin').textContent=UNVAN[en].m;
   $('tipYazi').textContent='Danışman profilin';
   $('profilAd').textContent=PROFIL[en].ad;
@@ -434,6 +438,40 @@ $('paylas').addEventListener('click',function(){
   var metin='Gayrimenkul danışmanlığı testinde "'+SONUC.unvan.ad+'" unvanını aldım '+SONUC.unvan.e+' Sen hangisisin: Aslan, Kartal, Yunus, Arı?';
   if(navigator.share){navigator.share({title:'Bu işe uygun musun?',text:metin,url:url}).catch(function(){});return}
   (navigator.clipboard?navigator.clipboard.writeText(metin+' '+url):Promise.reject()).then(function(){$('paylasNot').textContent='Link kopyalandı, istediğin yere yapıştırabilirsin.'}).catch(function(){$('paylasNot').textContent=url});
+});
+
+// Instagram hikâyesi için 1080×1920 unvan kartı
+function storyCiz(){
+  var c=document.createElement('canvas');c.width=1080;c.height=1920;var x=c.getContext('2d'),u=SONUC.unvan;
+  var g=x.createLinearGradient(0,0,1080,1920);g.addColorStop(0,'#0C2B5E');g.addColorStop(.55,'#003DA5');g.addColorStop(1,'#081B38');
+  x.fillStyle=g;x.fillRect(0,0,1080,1920);
+  x.fillStyle='rgba(255,255,255,.06)';x.beginPath();x.arc(540,720,420,0,7);x.fill();
+  var logo=document.querySelector('.top img');if(logo&&logo.naturalWidth){var lw=300,lh=lw*logo.naturalHeight/logo.naturalWidth;x.drawImage(logo,540-lw/2,130,lw,lh)}
+  x.textAlign='center';x.textBaseline='alphabetic';
+  x.font='800 34px Archivo, sans-serif';x.fillStyle='#C9D6EE';x.fillText('G A Y R İ M E N K U L   D A N I Ş M A N L I Ğ I   T E S T İ',540,420);
+  x.font='340px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';x.fillText(u.e,540,860);
+  x.fillStyle='#fff';x.font='900 104px Archivo, sans-serif';
+  var bas=u.b+'!',fs=104;while(x.measureText(bas).width>900&&fs>60){fs-=4;x.font='900 '+fs+'px Archivo, sans-serif'}x.fillText(bas,540,1060);
+  x.font='700 46px Manrope, sans-serif';x.fillStyle='#E3EAF7';x.fillText(SONUC.profil.replace(/ \(.*\)$/,'')+' · uyum %'+SONUC.puan,540,1150);
+  x.font='700 42px Manrope, sans-serif';x.fillStyle='#fff';
+  SONUC.guc.forEach(function(t,j){x.fillStyle='#DC1C2E';x.fillText('★',540-x.measureText(t).width/2-34,1260+j*70);x.fillStyle='#fff';x.fillText(t,540+10,1260+j*70)});
+  x.fillStyle='#DC1C2E';x.beginPath();x.roundRect?x.roundRect(140,1530,800,150,75):x.rect(140,1530,800,150);x.fill();
+  x.fillStyle='#fff';x.font='900 56px Archivo, sans-serif';x.fillText('Sen hangisisin?',540,1595);
+  x.font='700 34px Manrope, sans-serif';x.fillText('Aslan · Kartal · Yunus · Arı  |  2 dk test',540,1645);
+  x.font='700 36px Manrope, sans-serif';x.fillStyle='#C9D6EE';if(/^https?:$/.test(location.protocol)&&!/claude/.test(location.host))x.fillText((location.host+location.pathname).replace(/\/$/,''),540,1760);
+  return c;
+}
+$('story').addEventListener('click',function(){
+  var b=this;b.disabled=true;$('paylasNot').textContent='';
+  (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){
+    storyCiz().toBlob(function(blob){
+      b.disabled=false;
+      var f=new File([blob],'unvanim-'+SONUC.unvan.ad.toLocaleLowerCase('tr-TR')+'.png',{type:'image/png'});
+      if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f]}).catch(function(){});return}
+      var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=f.name;document.body.appendChild(a);a.click();a.remove();
+      $('paylasNot').textContent='Görsel indirildi. Instagram\'da hikâyene ekleyip testin linkini bağlantı çıkartmasıyla koyabilirsin.';
+    },'image/png');
+  });
 });
 
 $('kvkkAc').addEventListener('click',function(){var m=$('kvkkMetin');m.hidden=!m.hidden;this.setAttribute('aria-expanded',String(!m.hidden))});
