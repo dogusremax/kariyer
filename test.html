@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gayrimenkul DNA'nı Keşfet | RE/MAX Doğuş Kariyer</title>
+<meta name="description" content="11 soru, 2 dakika. Hermes mi, Athena mı, Herakles mi, Artemis mi? Gayrimenkul DNA'nı keşfet. RE/MAX Doğuş, Fikirtepe.">
+<meta property="og:title" content="Gayrimenkul DNA'nı keşfet: içindeki güç hangisi?">
+<meta property="og:description" content="11 soru, 2 dakika, sana özel sonuç. Hermes, Athena, Herakles, Artemis: sen hangisisin?">
+<meta property="og:image" content="img/dna/hermes.jpg">
+<meta name="theme-color" content="#070F22">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Sinematik lacivert + altın tema (Gayrimenkul DNA testi) */
+:root{
+  --bg:#070F22; --bg2:#0B1730; --panel:#0F1D3B; --panel2:#152750; --line:rgba(232,199,122,.22); --line2:rgba(255,255,255,.1);
+  --gold:#E8C77A; --gold2:#C99B4A; --gold-ink:#2A1C05; --text:#F4EFE4; --muted:#A8B2C6; --ok:#7FD39B; --err:#FF8A8A;
+  --i:#4F8DF7; --d:#3DBE8B; --y:#E2574C; --g:#E8B04A;
+  --cap:'Cinzel',Georgia,serif; --serif:'Cormorant Garamond',Georgia,serif; --body:'Manrope',system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{font-family:var(--body);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;background:var(--bg);
+  padding-bottom:env(safe-area-inset-bottom,0px)}
+img{display:block;max-width:100%}
+.app{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;position:relative;overflow:hidden;background:var(--bg)}
+.ekran{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;padding:0 20px 24px;position:relative}
+.cap{font-family:var(--cap);letter-spacing:.06em;line-height:1.1}
+.gold{background:linear-gradient(180deg,#F7E2A8 0%,#E8C77A 45%,#B98A3C 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ust{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:max(14px,env(safe-area-inset-top,0px)) 0 10px;position:relative;z-index:2}
+.ust .marka{display:flex;flex-direction:column;align-items:center;flex:1}
+.ust .marka b{font:800 12.5px var(--body);letter-spacing:.14em}
+.ust .marka small{font-size:9px;letter-spacing:.24em;color:var(--muted);font-weight:700}
+.ikon-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 36px}
+.ikon-btn:disabled{visibility:hidden}
+.sayac{min-width:36px;text-align:right;font:700 12px var(--body);color:var(--muted);font-variant-numeric:tabular-nums}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:999px;padding:17px 22px;cursor:pointer;
+  font:800 14.5px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink);
+  background:linear-gradient(180deg,#F6DE9E,#E2B964 55%,#C99B4A);box-shadow:0 10px 30px -10px rgba(232,199,122,.55),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .12s,opacity .2s}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.45;cursor:default}
+.lnk{background:none;border:0;color:var(--gold);font:700 13.5px var(--body);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* Giriş */
+#ekranGiris{background:linear-gradient(180deg,rgba(7,15,34,.35) 0%,rgba(7,15,34,.55) 30%,var(--bg) 62%),url(img/dna/sehir.jpg) center top/cover no-repeat}
+.logo{height:40px;width:auto;margin:18px auto 0;filter:drop-shadow(0 4px 8px rgba(40,30,10,.18))}
+.giris-bas{text-align:center;margin-top:20px;position:relative;z-index:1}
+.etiket{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:5px 14px;font:800 10.5px var(--body);letter-spacing:.2em;color:var(--gold);background:rgba(7,15,34,.5)}
+.etiket::before,.etiket::after{content:"◆";font-size:7px;color:var(--gold2)}
+.giris-bas h1{margin:16px 0 0;font-weight:700}
+.giris-bas h1 .k1{display:block;font:600 15px var(--cap);letter-spacing:.42em;margin-right:-.42em;color:#E9D7A8}
+.giris-bas h1 .k2{display:block;font-size:clamp(40px,12vw,50px);line-height:1.05;margin-top:6px;letter-spacing:.02em;
+  background:linear-gradient(100deg,#B98A3C 0%,#F7E2A8 22%,#E8C77A 40%,#FFF4D0 50%,#E8C77A 60%,#B98A3C 100%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:parilti 5s ease-in-out infinite;filter:drop-shadow(0 4px 18px rgba(232,199,122,.25))}
+@keyframes parilti{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+.susleme{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px auto 12px;color:var(--gold2);font-size:9px}
+.susleme::before,.susleme::after{content:"";width:64px;height:1px;background:linear-gradient(90deg,transparent,var(--gold2))}
+.susleme::after{transform:scaleX(-1)}
+.giris-bas p{color:#D9DEE8;font-size:14px;max-width:32ch;margin:0 auto}
+.giris-bas p b{color:var(--gold)}
+.giris-bas .soru-yazi{font:italic 600 22px var(--serif);color:#F2E6C9;margin-top:10px}
+.parla{position:absolute;inset:0;z-index:4;background:linear-gradient(115deg,transparent 30%,rgba(255,244,208,.35) 48%,transparent 62%);transform:translateX(-120%);pointer-events:none}
+@keyframes sweep{to{transform:translateX(120%)}}
+.secili{text-align:center;min-height:62px;margin:2px 0 14px;transition:opacity .3s}
+.secili b{display:block;font:700 17px var(--cap);letter-spacing:.1em;color:var(--gold)}
+.secili span{display:block;font:italic 600 17px var(--serif);color:#E9E1CE}
+.toz{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.toz i{position:absolute;bottom:-10px;width:3px;height:3px;border-radius:50%;background:#F6DE9E;box-shadow:0 0 8px #E8C77A;opacity:0;animation:toz linear infinite}
+@keyframes toz{0%{transform:translateY(0);opacity:0}15%{opacity:.9}100%{transform:translateY(-560px);opacity:0}}
+#ekranGiris>*:not(.toz){position:relative;z-index:1}
+.bilgi{display:flex;justify-content:center;gap:14px;font-size:12.5px;color:var(--muted);font-weight:700;margin-bottom:16px}
+.bilgi span::before{content:"◆ ";color:var(--gold2);font-size:9px}
+.alan label{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.alan input{width:100%;padding:14px 15px;border-radius:12px;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:var(--text);font:16px var(--body)}
+.alan input::placeholder{color:#6F7B93}
+.alan input:focus{outline:none;border-color:var(--gold)}
+#isimAlan{margin-bottom:14px}
+.not{font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px}
+
+/* Mermer tasarım parçaları */
+.giris-bas .soru-yazi{margin-top:12px}
+.sarmal{position:relative;margin:14px -4px 8px;padding:104px 4px 14px;border-radius:22px;overflow:hidden;border:1px solid var(--line);
+  background:radial-gradient(120% 90% at 50% 0%,rgba(255,255,255,.9),transparent 60%),linear-gradient(135deg,rgba(255,255,255,.55),rgba(232,214,180,.25) 40%,rgba(255,255,255,.6) 60%,rgba(220,200,165,.22));box-shadow:0 14px 30px -18px rgba(60,40,10,.45),inset 0 1px 0 #fff}
+.sarmal canvas{position:absolute;left:0;right:0;top:6px;width:100%;height:100px;pointer-events:none}
+.sarmal::after{content:"";position:absolute;left:18px;right:18px;top:104px;height:1px;background:linear-gradient(90deg,transparent,var(--a3),transparent)}
+.sarmal .paralar{padding-top:12px}
+body:not(.acik) .sarmal{background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(232,199,122,.06));border-color:rgba(232,199,122,.3);box-shadow:0 14px 30px -18px rgba(0,0,0,.8)}
+.paralar{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 4px 10px;position:relative;z-index:2}
+.sarmal .paralar{margin:0}
+.sarmal .para img{animation:nefes 3.2s ease-in-out infinite}
+.sarmal .para:nth-child(2) img{animation-delay:.8s}.sarmal .para:nth-child(3) img{animation-delay:1.6s}.sarmal .para:nth-child(4) img{animation-delay:2.4s}
+@keyframes nefes{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px);box-shadow:0 12px 22px -8px rgba(60,40,10,.55),0 0 0 2px #fff,0 0 22px rgba(232,182,90,.55)}}
+.para{text-align:center}
+.para img{width:60px;height:60px;margin:0 auto 4px;border-radius:50%;box-shadow:0 8px 18px -8px rgba(60,40,10,.6),0 0 0 2px rgba(255,255,255,.8)}
+.para b{display:block;font:700 11px var(--cap);letter-spacing:.06em;color:var(--gold)}
+.para small{font-size:10.5px;color:var(--muted);font-weight:600}
+.kanca{text-align:center;font-size:13.5px;color:var(--muted);margin:2px 0 12px}
+.kanca b{color:var(--gold)}
+.baslik2{font-size:27px;font-weight:700;line-height:1.15}
+.seritler{display:flex;gap:6px;height:330px;margin:16px 0 10px}
+.serit{position:relative;flex:1;border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid var(--line);transition:flex .6s cubic-bezier(.2,.8,.2,1),box-shadow .6s;background:var(--panel)}
+.serit>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.serit::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(255,250,240,.92) 80%)}
+.serit .yazi{position:absolute;left:0;right:0;bottom:10px;text-align:center;z-index:2;padding:0 4px}
+.serit .c{width:40px;height:40px;margin:0 auto 4px;border-radius:50%}
+.serit b{display:block;font:700 10px var(--cap);letter-spacing:.02em;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:clip}
+.serit.on b{font-size:11px;letter-spacing:.05em}
+.serit small{display:block;font-size:10px;line-height:1.2;color:var(--muted);font-weight:600}
+.serit.on{flex:1.9;box-shadow:0 0 0 1.5px var(--gold2),0 14px 30px -12px rgba(60,40,10,.55)}
+.serit.on .parla{animation:sweep 1.4s ease .2s}
+.seritler.kucuk{height:250px;margin:6px 0 10px}
+.alinti{text-align:center;font:italic 600 18px/1.35 var(--serif);color:var(--text);margin:4px 0 12px}
+.alinti span{font:500 13.5px var(--body);color:var(--muted);font-style:normal}
+.geri-yazi{background:none;border:0;color:var(--muted);font:700 14px var(--body);cursor:pointer;padding:12px 8px;flex:0 0 auto}
+.kum{margin:6px -20px 0;height:260px;overflow:hidden;position:relative}
+.kum img{width:100%;height:100%;object-fit:cover}
+.kum::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,var(--bg))}
+.paralar.analiz{margin:14px 6px 18px}
+.paralar.analiz .para{opacity:.35;filter:grayscale(.7);transform:scale(.92);transition:all .5s cubic-bezier(.2,1.4,.4,1)}
+.paralar.analiz .para.on{opacity:1;filter:none;transform:none}
+.paralar.analiz .para.on img{box-shadow:0 0 0 2px var(--gold2),0 0 24px var(--gold2)}
+.yukle{display:flex;align-items:center;gap:10px}
+.yukle .ilerleme{flex:1;margin:0;height:8px}
+.yukle span{font:700 13px var(--body);color:var(--gold);min-width:40px;text-align:right}
+.zarf{margin:0 auto 10px;width:220px;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px -16px rgba(60,40,10,.6)}
+.zarf img{width:100%}
+.tum h3{margin-bottom:6px}
+
+/* Soru */
+.ilerleme{height:5px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden;margin:2px 0 14px}
+.ilerleme i{display:block;height:100%;width:0;background:linear-gradient(90deg,#C99B4A,#F6DE9E);border-radius:9px;transition:width .4s ease}
+.foto{margin:0 -20px;height:200px;position:relative;overflow:hidden}
+.foto img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:opacity .35s}
+.foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,15,34,.1) 40%,var(--bg) 100%)}
+.gizli{position:absolute;right:12px;top:12px;z-index:2;display:flex;align-items:center;gap:8px;background:rgba(7,15,34,.72);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 5px}
+.gizli img{width:26px;height:26px;filter:blur(var(--b,6px));transition:filter .4s}
+.gizli span{display:flex;flex-direction:column;line-height:1.15}
+.gizli small{font-size:9.5px;color:var(--muted);font-weight:700;letter-spacing:.04em}
+.gizli b{font:700 12px var(--cap);color:var(--gold);filter:blur(var(--b,6px));transition:filter .4s}
+.soru-kart{position:relative;margin-top:-34px;z-index:1}
+.soru-no{font:800 10.5px var(--body);letter-spacing:.22em;color:var(--gold)}
+.soru-kart h2{font:600 clamp(23px,6.4vw,27px)/1.22 var(--serif);margin:6px 0 16px;color:#FBF7EE}
+.opts{display:grid;gap:9px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid var(--line2);border-radius:14px;padding:12px 13px;font:600 14.5px/1.38 var(--body);color:var(--text);cursor:pointer;transition:border-color .15s,background .15s,transform .1s}
+.opt:active{transform:scale(.99)}
+.opt .l{flex:0 0 30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 13px var(--body);color:var(--gold-ink);background:linear-gradient(180deg,#F2D791,#C99B4A)}
+.opt .tik{margin-left:auto;flex:0 0 22px;height:22px;border-radius:50%;background:var(--gold);color:var(--gold-ink);font-size:12px;font-weight:900;display:none;align-items:center;justify-content:center}
+.opt.sec{border-color:var(--gold);background:linear-gradient(180deg,rgba(232,199,122,.16),rgba(232,199,122,.06))}
+.opt.sec .tik{display:flex}
+.opts.secildi .opt:not(.sec){opacity:.5}
+.icgoru{display:flex;gap:12px;align-items:flex-start;margin-top:14px;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(232,199,122,.06);animation:yuksel .35s ease}
+.icgoru img{width:38px;height:38px;flex:0 0 38px}
+.icgoru small{display:block;font:800 10px var(--body);letter-spacing:.2em;color:var(--gold);margin-bottom:3px}
+.icgoru p{font-size:13.5px;color:#DCE1EA}
+.alt{margin-top:auto;padding-top:16px;display:flex;gap:10px;align-items:center}
+.alt .btn{flex:1}
+.anim{animation:gir .35s ease}
+@keyframes gir{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@keyframes yuksel{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Sonuç */
+.kahraman{margin:0 -20px;position:relative;height:340px;overflow:hidden}
+.kahraman>img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;animation:zoom 6s ease-out both}
+@keyframes zoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+.kahraman::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,15,34,.25) 0%,transparent 30%,rgba(7,15,34,.6) 70%,var(--bg) 100%)}
+.kahraman .ust{position:absolute;left:20px;right:20px;top:0}
+.sonuc-bas{text-align:center;margin-top:-96px;position:relative;z-index:2}
+.sonuc-bas .em{width:76px;height:76px;margin:0 auto 6px;filter:drop-shadow(0 8px 20px rgba(0,0,0,.6));animation:parla .9s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes parla{from{opacity:0;transform:scale(.6) rotate(-12deg)}to{opacity:1;transform:none}}
+.sonuc-bas small{font:800 10.5px var(--body);letter-spacing:.24em;color:var(--muted)}
+.sonuc-bas h1{font-size:clamp(44px,13vw,56px);font-weight:700;margin:4px 0 2px}
+.sonuc-bas .alt-bas{font:600 13px var(--cap);letter-spacing:.2em;color:var(--text)}
+.cizgi{width:56px;height:1px;background:var(--gold2);margin:12px auto}
+.sonuc-bas q{display:block;font:italic 600 20px/1.3 var(--serif);color:#F2E6C9;quotes:"“" "”"}
+.kisisel{margin:16px 0 14px;text-align:center;font-size:14.5px;color:#D7DCE6}
+.kutu{border:1px solid var(--line2);background:rgba(255,255,255,.035);border-radius:16px;padding:15px 16px;margin-bottom:12px}
+.kutu h3{font:700 12px var(--cap);letter-spacing:.14em;color:var(--gold);margin-bottom:10px}
+.ozet{display:flex;align-items:center;gap:14px}
+.halka{--p:0;width:78px;height:78px;flex:0 0 78px;border-radius:50%;background:conic-gradient(var(--gold) calc(var(--p)*1%),rgba(255,255,255,.08) 0);display:flex;align-items:center;justify-content:center}
+.halka span{width:64px;height:64px;border-radius:50%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 19px var(--cap);color:var(--gold)}
+.halka small{font:800 8.5px var(--body);letter-spacing:.14em;color:var(--muted)}
+.guc{list-style:none;display:grid;gap:6px}
+.guc li{display:flex;gap:8px;font-weight:700;font-size:14px}
+.guc li::before{content:"✦";color:var(--gold)}
+.story{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:999px;padding:14px;margin:4px 0 8px;font:800 14px var(--body);color:#fff;cursor:pointer;background:linear-gradient(45deg,#F58529,#DD2A7B 55%,#8134AF)}
+.story:disabled{opacity:.7}
+.paylas-not{min-height:18px;font-size:12px;font-weight:700;color:var(--ok);text-align:center;margin-bottom:6px}
+.kilit{position:relative;border-radius:16px;overflow:hidden;border:1px dashed var(--line);margin:6px 0 14px}
+.kilit-ic{padding:16px;filter:blur(6px);pointer-events:none;user-select:none}
+.kilit-ust{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;padding:16px;background:rgba(7,15,34,.55)}
+.kilit-ust .muhur{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;background:radial-gradient(circle at 35% 30%,#F6DE9E,#B98A3C);box-shadow:0 0 30px rgba(232,199,122,.45)}
+.kilit-ust b{font:700 18px var(--cap);letter-spacing:.04em}
+.kilit-ust span{font-size:12.5px;color:#C9D0DD;max-width:32ch}
+.harita{display:grid;gap:12px}
+.harita .s{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center}
+.harita .s img{width:34px;height:34px}
+.harita .s .ad{font-size:12.5px;font-weight:700;margin-bottom:5px}
+.harita .s .ad b{font-family:var(--cap);letter-spacing:.04em}
+.harita .t{height:6px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden}
+.harita .t i{display:block;height:100%;width:0;border-radius:9px;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.harita .s em{font-style:normal;font:700 14px var(--cap);color:var(--gold)}
+.cagri{text-align:center;margin:4px 0 14px}
+.cagri h2{font:700 21px var(--cap);letter-spacing:.03em}
+.cagri p{font-size:13.5px;color:#C9D0DD;margin-top:6px}
+form{display:grid;gap:11px}
+.ikili{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kvkk{display:flex;gap:10px;align-items:flex-start;font-size:11.5px;color:var(--muted);line-height:1.5}
+.kvkk input{width:18px;height:18px;flex:0 0 auto;margin-top:1px;accent-color:var(--gold)}
+.kvkk .lnk{padding:0;font-size:11.5px}
+.kvkk-metin{font-size:11.5px;line-height:1.55;color:var(--muted);background:rgba(255,255,255,.04);border-radius:10px;padding:11px 13px}
+.kvkk-metin p+p{margin-top:6px}
+.hata{color:var(--err);font-size:13px;font-weight:700}
+.tried input:invalid{border-color:var(--err)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.guven{display:flex;justify-content:space-around;font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-top:4px}
+.ghost{background:none;border:0;color:var(--muted);font:700 13px var(--body);cursor:pointer;padding:8px;text-align:center}
+
+/* Teşekkür */
+#ekranTamam{background:linear-gradient(180deg,rgba(7,15,34,.5),var(--bg) 300px),url(img/dna/sehir.jpg) center top/100% auto no-repeat}
+.tamam-bas{text-align:center;margin:18px 0 18px}
+.tamam-bas .muhur{width:66px;height:66px;margin:0 auto 12px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--gold-ink);background:radial-gradient(circle at 35% 30%,#F6DE9E,#B98A3C);box-shadow:0 0 40px rgba(232,199,122,.5)}
+.tamam-bas h1{font-size:30px;font-weight:700}
+.tamam-bas p{font-size:14px;color:#C9D0DD;margin-top:6px}
+.gunler{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.gunler::-webkit-scrollbar{display:none}
+.gunler button,.saatler button{flex:0 0 auto;border:1px solid var(--line2);background:rgba(255,255,255,.04);border-radius:12px;font:700 13.5px var(--body);color:var(--text);cursor:pointer}
+.gunler button{padding:8px 12px;text-align:center;line-height:1.25}
+.gunler button small{display:block;font-size:11px;font-weight:600;color:var(--muted)}
+.saatler{display:flex;gap:8px;margin:10px 0 12px}
+.saatler button{padding:10px 18px}
+.gunler button.sec,.saatler button.sec{border-color:var(--gold);background:rgba(232,199,122,.16);color:var(--gold)}
+.golge-p{font-size:13px;color:#C9D0DD;margin-bottom:12px}
+.golge-ok{text-align:center;font-weight:700;color:var(--ok);font-size:14.5px}
+.yol{list-style:none;margin-top:14px;display:grid;gap:12px;border-left:1px solid var(--gold2);padding-left:16px}
+.yol li{position:relative;font-size:13.5px;color:#DCE1EA}
+.yol li::before{content:"";position:absolute;left:-21px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.yol b{display:block;font:700 11px var(--cap);letter-spacing:.14em;color:var(--gold)}
+.gelisim{font-size:13.5px;color:#DCE1EA;margin-top:12px}
+.gelisim b{color:var(--gold)}
+.son{display:grid;gap:8px;margin-top:6px;text-align:center}
+.alt-yazi{text-align:center;font:600 10px var(--body);letter-spacing:.2em;color:#6F7B93;margin-top:22px}
+/* Gündüz teması (?tema=acik): sıcak krem zemin, lacivert yazı, altın vurgu */
+.logo-acik{display:none}
+body.acik{--bg:#FFF6E8;--panel:#fff;--line:rgba(176,124,40,.35);--line2:rgba(12,30,63,.12);--text:#0C1E3F;--muted:#5B6880;--gold:#A3701D;--gold2:#D3A24E;--err:#C62828;--ok:#1C8A45;color-scheme:light}
+body.acik .logo-acik{display:block}
+body.acik .logo-gece{display:none}
+body.acik .gold,body.acik .giris-bas h1 .k2{background:linear-gradient(100deg,#8A5A12 0%,#C8902F 25%,#E7B866 45%,#FFE3A6 50%,#E7B866 55%,#B07A22 75%,#8A5A12 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+body.acik .giris-bas h1 .k2{filter:drop-shadow(0 6px 16px rgba(214,150,50,.28))}
+body.acik #ekranGiris{background:radial-gradient(120% 55% at 50% -8%,#FFD596 0%,rgba(255,213,150,.55) 35%,rgba(255,213,150,0) 70%),radial-gradient(80% 40% at 100% 40%,rgba(255,170,120,.22),transparent 70%),linear-gradient(180deg,#FFEFD6,#FFF6E8 60%)}
+body.acik .etiket{background:rgba(255,255,255,.75);color:#8A5A12}
+body.acik .giris-bas h1 .k1{color:#8A6A35}
+body.acik .giris-bas p{color:#34445E}
+body.acik .giris-bas p b{color:#B5651D}
+body.acik .giris-bas .soru-yazi{color:#7A4E12}
+body.acik .secili b{color:#9A6418}
+body.acik .secili span{color:#3A4760}
+body.acik .toz i{background:#FFB547;box-shadow:0 0 8px #FFC46B}
+body.acik .alan input{background:#fff;border-color:rgba(12,30,63,.14);color:var(--text)}
+body.acik .alan input::placeholder{color:#97A1B3}
+body.acik .ikon-btn{background:#fff;border-color:var(--line2)}
+body.acik .ilerleme{background:rgba(12,30,63,.08)}
+body.acik .foto::after{background:linear-gradient(180deg,rgba(255,246,232,0) 45%,var(--bg) 100%)}
+body.acik .gizli{background:rgba(255,255,255,.88)}
+body.acik .soru-kart h2{color:#0C1E3F}
+body.acik .opt{background:#fff;border-color:rgba(12,30,63,.1);box-shadow:0 4px 14px -8px rgba(12,30,63,.25);color:var(--text)}
+body.acik .opt.sec{background:#FFF1D4;border-color:var(--gold2)}
+body.acik .icgoru{background:#FFF3DC;border-color:rgba(211,162,78,.45)}
+body.acik .icgoru p{color:#34445E}
+body.acik .kahraman::after{background:linear-gradient(180deg,rgba(255,246,232,.1) 0%,transparent 30%,rgba(255,246,232,.55) 72%,var(--bg) 100%)}
+body.acik .kahraman .marka b{color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+body.acik .kahraman .marka small{color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+body.acik .alt-bas{color:#0C1E3F}
+body.acik .sonuc-bas q{color:#7A4E12}
+body.acik .kisisel{color:#34445E}
+body.acik .kutu{background:#fff;border-color:rgba(12,30,63,.08);box-shadow:0 10px 30px -18px rgba(12,30,63,.35)}
+body.acik .halka{background:conic-gradient(var(--gold2) calc(var(--p)*1%),rgba(12,30,63,.08) 0)}
+body.acik .halka span{background:#fff}
+body.acik .kilit{background:#fff}
+body.acik .kilit-ust{background:rgba(255,246,232,.6)}
+body.acik .kilit-ust span,body.acik .cagri p,body.acik .tamam-bas p,body.acik .golge-p{color:#4A5870}
+body.acik .harita .t{background:rgba(12,30,63,.08)}
+body.acik .kvkk-metin{background:rgba(12,30,63,.04)}
+body.acik #ekranTamam{background:radial-gradient(120% 45% at 50% -5%,#FFD596 0%,rgba(255,213,150,0) 70%),var(--bg)}
+body.acik .gunler button,body.acik .saatler button{background:#fff;border-color:rgba(12,30,63,.12)}
+body.acik .gunler button.sec,body.acik .saatler button.sec{background:#FFF1D4;border-color:var(--gold2);color:#8A5A12}
+body.acik .yol li,body.acik .gelisim{color:#34445E}
+body.acik .yol li::before{box-shadow:0 0 8px rgba(211,162,78,.7)}
+body.acik .alt-yazi{color:#8A94A6}
+/* Aydınlık tema renk paletleri: altın (varsayılan), RE/MAX, gökyüzü, gün batımı */
+body.acik{--a1:#8A5A12;--a2:#C8902F;--a3:#FFE3A6;--tint:#FFF1D4;--tint2:#FFF3DC;--btnink:#2A1C05;--btnsh:rgba(214,150,50,.45);--toz:#FFB547;--glow:rgba(255,190,100,.45);
+  --btn:linear-gradient(180deg,#F6DE9E,#E2B964 55%,#C99B4A);
+  --hero:radial-gradient(120% 55% at 50% -8%,#FFD596 0%,rgba(255,213,150,.55) 35%,rgba(255,213,150,0) 70%),radial-gradient(80% 40% at 100% 40%,rgba(255,170,120,.22),transparent 70%),linear-gradient(180deg,#FFEFD6,#FFF6E8 60%);
+  --hero2:radial-gradient(120% 45% at 50% -5%,#FFD596 0%,rgba(255,213,150,0) 70%),var(--bg);--gold:var(--a1);--gold2:var(--a2)}
+body.t-remax{--bg:#F7F9FD;--a1:#003DA5;--a2:#DC1C2E;--a3:#FF8A95;--tint:#EEF3FC;--tint2:#FDEEF0;--btnink:#fff;--btnsh:rgba(220,28,46,.45);--toz:#4F8DF7;--glow:rgba(0,61,165,.2);
+  --btn:linear-gradient(180deg,#F0384A,#DC1C2E 60%,#B5121F);
+  --hero:radial-gradient(80% 42% at 0% 0%,rgba(0,61,165,.2),transparent 70%),radial-gradient(80% 42% at 100% 8%,rgba(220,28,46,.18),transparent 70%),linear-gradient(180deg,#FFFFFF,#F7F9FD);
+  --hero2:radial-gradient(80% 35% at 0% 0%,rgba(0,61,165,.16),transparent 70%),radial-gradient(80% 35% at 100% 0%,rgba(220,28,46,.14),transparent 70%),var(--bg)}
+body.t-gok{--bg:#F1F8FF;--a1:#0B4F8A;--a2:#1E9BD7;--a3:#9FDDFF;--tint:#E3F3FD;--tint2:#E8F6FF;--btnink:#fff;--btnsh:rgba(30,155,215,.45);--toz:#6EC6FF;--glow:rgba(30,155,215,.3);
+  --btn:linear-gradient(180deg,#46B9EE,#1E9BD7 60%,#137DB5);
+  --hero:radial-gradient(120% 55% at 50% -8%,#A9DBFF 0%,rgba(169,219,255,.5) 35%,rgba(169,219,255,0) 70%),radial-gradient(70% 35% at 100% 35%,rgba(120,220,200,.22),transparent 70%),linear-gradient(180deg,#E3F2FF,#F1F8FF 60%);
+  --hero2:radial-gradient(120% 45% at 50% -5%,#A9DBFF 0%,rgba(169,219,255,0) 70%),var(--bg)}
+body.t-gunbatimi{--bg:#FFF4EF;--a1:#B8325F;--a2:#FF6A4D;--a3:#FFC0A8;--tint:#FFEDE6;--tint2:#FFF0EA;--btnink:#fff;--btnsh:rgba(255,94,77,.45);--toz:#FF8A5B;--glow:rgba(255,120,90,.35);
+  --btn:linear-gradient(180deg,#FF9160,#FF5E4D 55%,#E0457B);
+  --hero:radial-gradient(120% 55% at 50% -8%,#FFB38A 0%,rgba(255,140,120,.45) 35%,rgba(255,140,120,0) 70%),radial-gradient(80% 40% at 100% 30%,rgba(224,69,123,.22),transparent 70%),linear-gradient(180deg,#FFE6DA,#FFF4EF 60%);
+  --hero2:radial-gradient(120% 45% at 50% -5%,#FFB38A 0%,rgba(255,140,120,0) 70%),var(--bg)}
+body.acik .btn{background:var(--btn);color:var(--btnink);box-shadow:0 10px 30px -10px var(--btnsh),inset 0 1px 0 rgba(255,255,255,.4)}
+body.acik .gold,body.acik .giris-bas h1 .k2{background:linear-gradient(100deg,var(--a1) 0%,var(--a2) 30%,var(--a3) 50%,var(--a2) 70%,var(--a1) 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+body.acik #ekranGiris{background:var(--hero)}
+body.acik #ekranTamam{background:var(--hero2)}
+body.acik .etiket,body.acik .giris-bas p b,body.acik .giris-bas .soru-yazi,body.acik .secili b{color:var(--a1)}
+body.acik .giris-bas h1 .k1{color:var(--a1);opacity:.8}
+body.acik .toz i{background:var(--toz);box-shadow:0 0 8px var(--toz)}
+body.acik .ilerleme i{background:linear-gradient(90deg,var(--a1),var(--a2))}
+body.acik .opt .l{background:var(--tint);color:var(--a1);border:1px solid var(--a3)}
+body.acik .opt.sec{background:var(--tint);border-color:var(--a2)}
+body.acik .opt.sec .l,body.acik .opt .tik{background:var(--a2);color:#fff;border-color:var(--a2)}
+body.acik .icgoru{background:var(--tint2);border-color:var(--a3)}
+body.acik .halka{background:conic-gradient(var(--a2) calc(var(--p)*1%),rgba(12,30,63,.08) 0)}
+body.acik .halka span{color:var(--a1)}
+body.acik .kilit-ust .muhur,body.acik .tamam-bas .muhur{background:radial-gradient(circle at 35% 30%,var(--a3),var(--a2));color:#fff;box-shadow:0 0 30px var(--glow)}
+body.acik .gunler button.sec,body.acik .saatler button.sec{background:var(--tint);border-color:var(--a2);color:var(--a1)}
+body.acik .yol{border-left-color:var(--a3)}
+body.acik .yol li::before{background:var(--a2);box-shadow:0 0 8px var(--glow)}
+body.acik .guc li::before{color:var(--a2)}
+body.acik .cizgi{background:var(--a2)}
+body.acik .lnk{color:var(--a1)}
+body.acik .alan input:focus{border-color:var(--a2)}
+/* Mermer tema (varsayılan): beyaz mermer, sabah ışığı, koyu başlık, altın vurgu */
+body.t-mermer{--bg:#FBF8F2;--a1:#8A5A12;--a2:#C8902F;--a3:#F3D9A0;--tint:#FBF1DD;--tint2:#FCF4E4;--btnink:#2A1C05;--btnsh:rgba(200,144,47,.45);--toz:#E8B65A;--glow:rgba(232,182,90,.35);
+  --btn:linear-gradient(180deg,#F6DE9E,#E2B964 55%,#C99B4A);
+  --hero:radial-gradient(120% 45% at 50% -6%,#FFFFFF 0%,rgba(255,255,255,0) 60%),radial-gradient(90% 40% at 100% 35%,rgba(243,217,160,.35),transparent 70%),radial-gradient(90% 40% at 0% 60%,rgba(220,214,204,.45),transparent 70%),linear-gradient(180deg,#F6F1E8,#FBF8F2 50%);
+  --hero2:var(--hero)}
+body.t-mermer .app{background:var(--hero)}
+body.t-mermer .ekran{background:transparent!important}
+body.t-mermer .giris-bas h1 .k1{color:#1F2433;opacity:.9}
+body.t-mermer .giris-bas h1 .k2{background:none;-webkit-text-fill-color:#1F2433;color:#1F2433;filter:none;animation:none}
+body.t-mermer .baslik2{color:#1F2433}
+body.t-mermer .tamam-bas h1{-webkit-text-fill-color:#1F2433;background:none;color:#1F2433}
+body.t-mermer .foto::after{background:linear-gradient(180deg,rgba(251,248,242,0) 45%,var(--bg) 100%)}
+body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,242,.1) 0%,transparent 30%,rgba(251,248,242,.6) 72%,var(--bg) 100%)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Giriş -->
+  <section class="ekran" id="ekranGiris">
+    <div class="toz" id="toz" aria-hidden="true"></div>
+    <img class="logo logo-acik" src="img/logo-koyu.png" alt="Doğuş Doğuş">
+    <img class="logo logo-gece" src="img/logo-beyaz.png" alt="Doğuş Doğuş">
+    <div class="giris-bas">
+      <span class="etiket">KARİYER KEŞİF TESTİ</span>
+      <h1 class="cap"><span class="k1">GAYRİMENKUL</span><span class="k2">DNA'nı Keşfet</span></h1>
+      <p class="soru-yazi">Senin içinde hangi güç var?</p>
+    </div>
+    <div class="sarmal" aria-label="Dört gücün altın DNA sarmalı">
+      <canvas id="sarmalCiz" aria-hidden="true"></canvas>
+      <div class="paralar" id="paralar"></div>
+    </div>
+    <p class="kanca"><b>Gayrimenkul kariyeri</b> sana uygun mu? Cevabı karakterinde.</p>
+    <div class="bilgi"><span>11 soru</span><span>2 dakika</span><span>Sana özel sonuç</span></div>
+    <div class="alan" id="isimAlan"><label for="isim">Sana nasıl hitap edelim?</label><input id="isim" autocomplete="given-name" maxlength="30" placeholder="Adın (isteğe bağlı)"></div>
+    <button class="btn" id="basla">Teste başla →</button>
+    <p class="not">Sonucu görmek için iletişim bilgisi istemiyoruz.</p>
+  </section>
+
+  <!-- Dört karakter -->
+  <section class="ekran" id="ekranKarakter" hidden>
+    <div class="ust"><button class="ikon-btn" id="karakterGeri" aria-label="Geri">‹</button>
+      <div class="marka"><b>RE/MAX DOĞUŞ</b><small>FİKİRTEPE · KADIKÖY</small></div><span class="sayac"></span></div>
+    <div class="giris-bas" style="margin-top:6px"><h2 class="cap baslik2">Dört karakter<br>dört yetenek</h2><p class="soru-yazi">Senin hangisine daha yakın?</p></div>
+    <div class="seritler" id="seritler" role="list"></div>
+    <div class="secili" id="secili" aria-live="polite"></div>
+    <p class="alinti">“Kendini keşfet, yeni bir kariyere ilk adımı at.”</p>
+    <div class="bilgi"><span>11 soru</span><span>2 dakika</span><span>Sana özel sonuç</span></div>
+    <button class="btn" id="basla2">Hadi başlayalım →</button>
+  </section>
+
+  <!-- Soru -->
+  <section class="ekran" id="ekranSoru" hidden>
+    <div class="ust"><button class="ikon-btn" id="geri" aria-label="Önceki soru">‹</button>
+      <div class="marka"><b>RE/MAX DOĞUŞ</b><small>FİKİRTEPE · KADIKÖY</small></div><span class="sayac" id="sayac">1 / 11</span></div>
+    <div class="ilerleme"><i id="bar"></i></div>
+    <div class="foto"><img id="foto" alt=""><div class="gizli" id="gizli" aria-hidden="true"><img id="gpEm" alt=""><span><small id="gpDurum">DNA'n şekilleniyor</small><b id="gpAd">Hermes</b></span></div></div>
+    <div class="soru-kart" id="soruAlan"></div>
+    <div class="alt"><button class="geri-yazi" id="geri2" hidden>‹ Geri</button><button class="btn" id="ileri" hidden>Sonraki soru →</button></div>
+  </section>
+
+  <!-- Analiz -->
+  <section class="ekran" id="ekranAnaliz" hidden>
+    <div class="ust"><span></span><div class="marka"><b>RE/MAX DOĞUŞ</b><small>FİKİRTEPE · KADIKÖY</small></div><span></span></div>
+    <div class="kum"><img src="img/dna/kumsaati.jpg" alt=""></div>
+    <div class="giris-bas" style="margin-top:4px"><h2 class="cap baslik2">Cevapların<br>analiz ediliyor…</h2><p class="kanca" style="margin-top:8px">Dört yeteneğini değerlendiriyoruz. Sonucunu hazırlıyoruz.</p></div>
+    <div class="paralar analiz" id="analizPara"></div>
+    <div class="yukle"><div class="ilerleme"><i id="analizBar"></i></div><span id="analizYuzde">%0</span></div>
+  </section>
+
+  <!-- Sonuç -->
+  <section class="ekran" id="ekranSonuc" hidden>
+    <div class="kahraman"><img id="kahramanImg" alt=""><div class="ust"><span></span><div class="marka"><b>RE/MAX DOĞUŞ</b><small>FİKİRTEPE · KADIKÖY</small></div><span></span></div></div>
+    <div class="sonuc-bas">
+      <img class="em" id="sonucEm" alt="">
+      <small>GAYRİMENKUL DNA'N</small>
+      <h1 class="cap gold" id="tanriAd"></h1>
+      <div class="alt-bas" id="tanriUnvan"></div>
+      <div class="cizgi"></div>
+      <q id="tanriSoz"></q>
+    </div>
+    <p class="kisisel" id="kisisel"></p>
+    <button class="btn" id="raporaGit" style="margin-bottom:16px">Kişisel raporumu gör →</button>
+    <div class="kutu"><div class="ozet"><div class="halka" id="halka"><span><b id="yuzde">%0</b><small>UYUM</small></span></div>
+      <div><h3>2 süper gücün</h3><ul class="guc" id="gucler"></ul></div></div></div>
+    <button type="button" class="story" id="story">📸 Sonucunu hikâyende paylaş</button>
+    <p class="paylas-not" id="paylasNot" role="status"></p>
+    <div class="kilit">
+      <div class="kilit-ic" aria-hidden="true"><div class="harita" id="sahteHarita"></div></div>
+      <div class="kilit-ust"><div class="muhur">🔒</div><b>Yetenek haritan hazır</b><span>4 gücündeki puanların ve sana özel 30 gün, 90 gün, 1 yıl kariyer yol haritan. Bilgilerini bırakınca açılır.</span></div>
+    </div>
+    <div class="cagri" id="cagri"><div class="zarf"><img src="img/dna/zarf.jpg" alt=""></div><h2>Detaylı kariyer<br>raporun hazır!</h2><p>Ardından ofisimizde bir günlük <b>Gölge Gün</b> için tarihini kendin seç: bir danışmanımızın yanında işi içeriden gör.</p></div>
+    <form id="form" novalidate>
+      <div class="alan"><label for="ad">Ad Soyad *</label><input id="ad" name="ad_soyad" autocomplete="name" required placeholder="Adın ve soyadın"></div>
+      <div class="ikili">
+        <div class="alan"><label for="tel">Telefon *</label><input id="tel" name="telefon" type="tel" inputmode="tel" autocomplete="tel" placeholder="05__ ___ __ __" required></div>
+        <div class="alan"><label for="ilce">İlçe *</label><input id="ilce" name="ilce" required placeholder="Örn. Kadıköy"></div>
+      </div>
+      <div class="alan"><label for="eposta">E-posta (isteğe bağlı)</label><input id="eposta" name="eposta" type="email" autocomplete="email" placeholder="ornek@eposta.com"></div>
+      <div class="hp" aria-hidden="true"><label for="ws">Web sitesi</label><input id="ws" name="web_sitesi" tabindex="-1" autocomplete="off"></div>
+      <label class="kvkk"><input type="checkbox" id="kvkk" name="kvkk" value="1" required>
+        <span><button type="button" class="lnk" id="kvkkAc" aria-controls="kvkkMetin" aria-expanded="false">Aydınlatma metnini</button> okudum; başvurumun değerlendirilmesi için kişisel verilerimin ve test cevaplarımın işlenmesini kabul ediyorum. *</span></label>
+      <div class="kvkk-metin" id="kvkkMetin" hidden>
+        <p><b>Kişisel Verilerin Korunması Aydınlatma Metni.</b> RE/MAX Doğuş (UMT GROUP Gayrimenkul Yatırım Danışmanlık İnş. San. Tic. Ltd. Şti., veri sorumlusu) olarak bu formda paylaştığın kimlik ve iletişim bilgilerini ve test cevaplarını yalnızca danışmanlık başvurunu değerlendirmek ve seninle iletişime geçmek amacıyla, 6698 sayılı KVKK'nın 5/2-c ve 5/2-f maddelerine dayanarak işleriz.</p>
+        <p>Verilerin üçüncü kişilerle paylaşılmaz; başvuru süreci tamamlandıktan sonra en fazla 1 yıl saklanır ve ardından silinir. KVKK'nın 11. maddesindeki hakların için dogusremax@gmail.com adresine yazabilir ya da Dumlupınar Mah. Özen Sk. Nuhoğlu Yenitepe Sitesi 2. Etap A Blok D:2, Kadıköy / İstanbul adresine başvurabilirsin.</p>
+      </div>
+      <p class="hata" id="hata" role="alert" hidden></p>
+      <button class="btn" id="gonder">Raporumu aç →</button>
+      <div class="guven"><span>🔒 GÜVENLİ FORM</span><span>✓ KVKK UYUMLU</span><span>✦ GÖLGE GÜN DAVETİ</span></div>
+      <button type="button" class="ghost" id="tekrar">Testi baştan çöz</button>
+    </form>
+  </section>
+
+  <!-- Teşekkür -->
+  <section class="ekran" id="ekranTamam" hidden>
+    <div class="ust"><span></span><div class="marka"><b>RE/MAX DOĞUŞ</b><small>FİKİRTEPE · KADIKÖY</small></div><span></span></div>
+    <div class="tamam-bas"><div class="muhur">✓</div><h1 class="cap gold" id="tamamBaslik">Teşekkürler!</h1><p>Sonucun Broker'ımıza ulaştı. Şimdi Gölge Gün'ün için sana uyan zamanı seç.</p></div>
+    <div class="kutu" id="golge">
+      <h3>Gölge Gün'ünü seç</h3>
+      <p class="golge-p">Bir gün boyunca bir danışmanımızın yanındasın. Seçtiğin zamanı Broker'ımız arayıp onaylar.</p>
+      <div class="gunler" id="gunler" role="group" aria-label="Gün"></div>
+      <div class="saatler" id="saatler" role="group" aria-label="Saat"><button type="button" data-s="10:00">10:00</button><button type="button" data-s="14:00">14:00</button></div>
+      <p class="hata" id="golgeHata" role="alert" hidden></p>
+      <button type="button" class="btn" id="golgeGonder" disabled>Bu zamanı ayır →</button>
+      <div style="text-align:center;margin-top:6px"><button type="button" class="lnk" id="golgeAra">Bu günler uymuyor, beni arayın</button></div>
+    </div>
+    <div class="kutu"><h3>Senin yetenek haritan</h3><div class="harita" id="harita"></div>
+      <p class="gelisim" id="gelisim"></p>
+      <ol class="yol" id="yol"></ol></div>
+    <div class="kutu tum"><h3 style="text-align:center">Tüm karakterler</h3><div class="seritler kucuk" id="seritler2"></div>
+      <p class="alinti">“Dört yetenek. Tek hedef.”<br><span>Sıradaki başarı hikâyesi senin olsun.</span></p></div>
+    <div class="son">
+      <a class="btn" href="./" style="text-decoration:none">RE/MAX Doğuş'ta kariyer fırsatlarını keşfet →</a>
+      <a class="lnk" href="./#program">Eğitim programını gör</a>
+      <a class="lnk" href="https://www.instagram.com/remaxdogus/" target="_blank" rel="noopener">Instagram'da @remaxdogus</a>
+    </div>
+    <p class="alt-yazi">"DAHA FAZLASI SENİNLE MÜMKÜN" · FİKİRTEPE · KADIKÖY</p>
+  </section>
+  <p class="alt-yazi" style="padding:0 20px 18px;letter-spacing:.04em">RE/MAX Doğuş · Her RE/MAX ofisi bağımsız olarak sahip olunur ve işletilir.</p>
+</div>
+
+<script>
+// Başvuru danisman-takip Apps Script'ine gider (action=adayBasvuru), kariyer formu ile aynı uç.
+var BASVURU_URL='https://script.google.com/macros/s/AKfycbylNnt48KJxD-HBqoopEfYZjv4A06hKo3RjUclILLh9g8bDIno73dDti_PUFECC4F0utg/exec';
+
+// Dört güç: i iletişim (Hermes), d disiplin (Athena), y dayanıklılık (Herakles), g girişimcilik (Artemis)
+var SIRA=['i','g','d','y'];
+var TANRI={
+  i:{ad:'Hermes',unvan:'İletişimin Ustası',guc:'İletişim',kisa:'İletişimin Ustası',soz:'İnsanları bir araya getiren güç sende.',img:'img/dna/hermes.jpg',em:'img/dna/em-hermes.png',coin:'img/dna/c-hermes.png',serit:'img/dna/k-hermes.jpg',renk:'#4F8DF7',
+     m:'İnsanlarla bağ kurmak senin doğal gücün. Gayrimenkulde müşterilerin çoğu tanıdıktan ve tavsiyeden gelir; bu senin en büyük sermayen.'},
+  d:{ad:'Athena',unvan:'Stratejinin Mimarı',guc:'Disiplin',kisa:'Stratejinin Mimarı',soz:'Planlar, yönetir, sonuca götürürsün.',img:'img/dna/athena.jpg',em:'img/dna/em-athena.png',coin:'img/dna/c-athena.png',serit:'img/dna/k-athena.jpg',renk:'#3DBE8B',
+     m:'Planlı ve istikrarlısın. Bu meslekte kazananlar her gün aynı işleri aksatmadan yapanlardır; ofisimizin takip ve performans araçları tam senin tarzın.'},
+  y:{ad:'Herakles',unvan:'Mücadelenin Gücü',guc:'Dayanıklılık',kisa:'Mücadelenin Gücü',soz:'Zorluklar seni daha da güçlendirir.',img:'img/dna/herakles.jpg',em:'img/dna/em-herakles.png',coin:'img/dna/c-herakles.png',serit:'img/dna/k-herakles.jpg',renk:'#E2574C',
+     m:'"Hayır" seni durdurmuyor, belirsizlikle başa çıkabiliyorsun. İlk ayların zorluğunu aşıp kalıcı olanlar en çok bu özelliğe sahip olanlar.'},
+  g:{ad:'Artemis',unvan:'Fırsat Avcısı',guc:'Girişimcilik',kisa:'Fırsat Avcısı',soz:'Yeni fırsatları görür, harekete geçersin.',img:'img/dna/artemis.jpg',em:'img/dna/em-artemis.png',coin:'img/dna/c-artemis.png',serit:'img/dna/k-artemis.jpg',renk:'#E8B04A',
+     m:'Fırsatı herkesten önce görüp harekete geçiyorsun. RE/MAX modeli tam bunun üzerine kurulu: markanın desteğiyle kendi işin.'}
+};
+var SORULAR=[
+  {s:'Cumartesi sabahı tamamen sana ait. Hangisini yapmak sana daha cazip gelir?',f:'s01',c:[
+    ['Arkadaşlarımla buluşmak, yeni insanlarla tanışmak',{i:2}],
+    ['Önümüzdeki haftayı planlayıp yarım kalan işlerimi bitirmek',{d:2}],
+    ['Aklımdaki yeni bir fikri araştırmak',{g:2}],
+    ['Uzun zamandır ertelediğim zor bir işi tamamlamak',{y:2}]],
+   t:'Her seçim bir ipucu. DNA\'n şekilleniyor.'},
+  {s:'Hiç tanımadığın birini telefonla araman gerekiyor. Ne yaparsın?',f:'s02',c:[
+    ['Kısa bir hazırlık yapar, doğrudan ararım',{i:2,y:1}],
+    ['Önce konuşmamı planlar, sonra ararım',{d:2,i:1}],
+    ['İlk önce mesajla iletişim kurmayı denerim',{i:1}],
+    ['Aramayı mümkün olduğunca ertelerim',{}]],
+   t:'İlk arama zor gelir; ikincisi, üçüncüsü kolaylaşır. Bu iş bir telefonla başlar.'},
+  {s:'Bir teklif sundun ve karşındaki kişi net bir "hayır" dedi. Tepkin ne olur?',f:'s03',c:[
+    ['Nedenini öğrenir, uygun bir zamanda yeniden görüşmeyi denerim',{y:2,i:1}],
+    ['Neden işe yaramadığını değerlendirip yeni bir yöntem denerim',{g:1,d:1,y:1}],
+    ['Moralim bozulur ama başka fırsatlara yönelirim',{y:1}],
+    ['Bir süre yeni teklif vermekten kaçınırım',{}]],
+   t:'"Hayır"lar bu meslekte yolun bir parçası. Asıl fark, sonrasında ne yaptığında.'},
+  {s:'Yeni başladığın bir işte ilk 30 gün beklediğin sonucu alamadın. Ne yaparsın?',f:'s04',c:[
+    ['Günlük faaliyetlerimi artırıp devam ederim',{y:2,d:1}],
+    ['Deneyimli birinden destek alıp çalışma planımı yenilerim',{d:1,i:1}],
+    ['Farklı müşteri ve fırsat kaynakları araştırırım',{g:2}],
+    ['Biraz bekleyip şartların değişmesini umarım',{}]],
+   t:'İlk aylar temel atma dönemi. Sabır ve düzen burada fark yaratır.'},
+  {s:'Bir hedef belirlediğinde genellikle nasıl ilerlersin?',f:'s05',c:[
+    ['Hedefimi küçük adımlara böler, düzenli takip ederim',{d:2}],
+    ['Çevremdeki insanlardan destek ve bağlantı oluştururum',{i:2}],
+    ['Farklı yöntemler deneyerek ilerlerim',{g:2}],
+    ['Başlangıçta hızlı ilerlerim ama bazen düzenimi kaybederim',{g:1}]],
+   t:'Yazılan ve takip edilen hedefler, kafada tutulanlardan çok daha kolay gerçekleşir.'},
+  {s:'Çalışma saatlerini tamamen kendin belirliyorsun. Günün nasıl geçer?',f:'s06',c:[
+    ['Kendi çalışma saatlerimi belirler ve büyük ölçüde uyarım',{d:2}],
+    ['Görüşmelerime göre esnek ama düzenli çalışırım',{d:1,i:1}],
+    ['Fırsat gördüğüm işlere ağırlık veririm',{g:2}],
+    ['Dışarıdan yönlendirme olmayınca başlamakta zorlanırım',{}]],
+   t:'Kendi işinin patronu olmak, kendi disiplinini kurmak demek. Yarısına geldin!'},
+  {s:'Çevrende birinin evini satmayı düşündüğünü öğrendin. İlk adımın ne olur?',f:'s07',c:[
+    ['Kendisiyle konuşup ihtiyacını öğrenirim',{i:2,g:1}],
+    ['Bölgedeki fiyatları araştırıp hazırlık yaparım',{d:2}],
+    ['Ortak tanıdığımızdan bizi tanıştırmasını isterim',{i:1}],
+    ['O bana ulaşırsa yardımcı olurum',{}]],
+   t:'Portföy çoğu zaman çevrendeki bir sohbetle başlar.'},
+  {s:'Kamera karşısında bir ev tanıtımı yapman gerekiyor. Hangisi sana daha yakın?',f:'s08',c:[
+    ['Doğrudan kamerayı açıp anlatmaya başlarım',{g:2,i:1}],
+    ['Önce kısa bir metin hazırlar, birkaç deneme yaparım',{d:1,g:1}],
+    ['Farklı ve dikkat çekici bir video fikri geliştiririm',{g:2}],
+    ['Kamera karşısında olmak istemem ama öğrenmeyi deneyebilirim',{y:1}]],
+   t:'Instagram bugün bir danışmanın vitrini. Kamera karşısında rahatlamayı eğitimde birlikte çalışıyoruz.'},
+  {s:'Bir ay boyunca düzenli çalıştın ama henüz satış yapamadın. Ne düşünürsün?',f:'s09',c:[
+    ['Görüşme sayılarımı ve takip sistemimi gözden geçiririm',{d:2,y:1}],
+    ['Daha fazla yeni insanla iletişime geçerim',{i:1,y:2}],
+    ['Yeni müşteri kazanma yöntemleri denerim',{g:2,y:1}],
+    ['Motivasyonum düşer, tempomu azaltırım',{}]],
+   t:'Takip ve istikrar, ilk satışı getiren ikili.'},
+  {s:'Gelirinin performansına bağlı olduğu bir işte seni en çok ne motive eder?',f:'s10',c:[
+    ['Kazancımı ve işimi büyütme fırsatı',{g:2}],
+    ['Kendi hedeflerimi belirleyip onlara ulaşmak',{d:2}],
+    ['İnsanlarla tanışmak, güven kazanmak ve çevremi büyütmek',{i:2}],
+    ['Zorlukları aşıp kendi başarımı oluşturmak',{y:2}]],
+   t:'Seni neyin motive ettiğini bilmek, doğru hedef koymanın ilk adımı. Son soru geliyor!'},
+  {s:'Bir yıl sonra gayrimenkul sektöründe kendini nerede görmek istersin?',f:'s11',c:[
+    ['Güçlü müşteri ilişkileri ve geniş bir referans ağı kurmuş',{i:2}],
+    ['Düzenli çalışan, hedeflerini takip eden profesyonel biri olmuş',{d:2}],
+    ['Kendi müşteri portföyünü büyüten girişimci biri olmuş',{g:2}],
+    ['Zorlukları aşmış, tecrübe kazanmış ve kendini geliştirmiş',{y:2}]],
+   t:'Tamamlandı! Gayrimenkul DNA\'n hazır.'}
+];
+var GUC={i:'İnsanlarla hızlı bağ kuruyorsun',d:'Planlı ve istikrarlı çalışıyorsun',y:'"Hayır" seni yıldırmıyor',g:'Fırsatı görüp harekete geçiyorsun'};
+var GELISIM={i:'Çevreni büyütmek: her hafta 10 yeni kişiyle tanışmayı hedefle.',d:'Rutin kurmak: her sabah 1 saatlik sabit bir arama bloğu ayır.',y:'Reddedilmeye alışmak: ilk ay 50 "hayır" toplamayı bir oyuna çevir.',g:'Görünür olmak: haftada 2 kısa video ile bölgede tanınan yüz ol.'};
+// 30 gün / 90 gün / 1 yıl yol haritası
+var YOL={
+  i:['Eğitimi tamamla, çevrendeki 100 kişilik listeni çıkar ve herkese yeni işini duyur.','Tanıdık ve tavsiyelerden ilk 3 yetkili portföyünü al, ilk gösterimlerini yap.','Memnun müşterilerinin tavsiyeleriyle düzenli bir müşteri akışı kur; işinin çoğu tavsiyeyle gelsin.'],
+  d:['Eğitimi tamamla, günlük arama ve takip rutinini kur, bölgendeki siteleri tek tek listele.','Haftalık hedeflerini performans karnesiyle takip et ve ilk 2 yetkili portföyünü al.','Sistemin seni taşısın: her ay öngörülebilir sayıda portföy ve satış, bölgende uzmanlık.'],
+  y:['Eğitimi tamamla, Fikirtepe\'de sahibinden ilanları her gün düzenli ara, ilk "hayır"larını topla.','Sahada tanınmaya başla; ilk yetkili portföyünü al ve ilk satış görüşmelerini yap.','Bölgende "o sokağı en iyi bilen" danışman ol; ilk zor ayları geride bırakmış kalıcı bir kariyer.'],
+  g:['Eğitimi tamamla, Instagram hesabını danışman vitrinine çevir ve ilk 8 kısa videonu çek.','İçeriklerinden gelen ilk talepleri portföye çevir; bölgede tanınan bir yüz olmaya başla.','Kendi markanı kur: kişisel hesabın müşteri getiren bir kanal, sen de kendi ekibini düşünen bir girişimci.']
+};
+var MAX={i:0,d:0,y:0,g:0},TAVAN=0;
+SORULAR.forEach(function(q){TAVAN+=Math.max.apply(null,q.c.map(function(c){var t=0;for(var k in c[1])t+=c[1][k];return t}));var m={i:0,d:0,y:0,g:0};q.c.forEach(function(c){for(var k in c[1])m[k]=Math.max(m[k],c[1][k])});for(var k in m)MAX[k]+=m[k]});
+
+var $=function(id){return document.getElementById(id)};
+var TEMA=(location.search.match(/[?&]tema=([a-z]+)/)||[])[1]||'mermer';
+if(TEMA&&TEMA!=='gece'){document.body.classList.add('acik');if(TEMA!=='acik')document.body.classList.add('t-'+TEMA)}
+var esc=function(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var ekranlar=['ekranGiris','ekranKarakter','ekranSoru','ekranAnaliz','ekranSonuc','ekranTamam'];
+function goster(id){ekranlar.forEach(function(e){$(e).hidden=e!==id});window.scrollTo(0,0)}
+
+// Giriş: dört güç kartı; görselleri önceden yükle
+// Giriş: dört güç parası; karakter ekranı: dört şerit, sırayla öne çıkar
+var KS=['i','d','y','g'],aktif=0,seritZ=null,AZALT=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var PARA=function(k){var t=TANRI[k];return '<div class="para" data-k="'+k+'"><img src="'+t.coin+'" alt=""><b>'+t.ad.toLocaleUpperCase('tr-TR')+'</b><small>'+t.guc+'</small></div>'};
+$('paralar').innerHTML=KS.map(PARA).join('');
+
+// Giriş: dört paranın arkasında dönen altın DNA sarmalı
+(function(){var c=$('sarmalCiz');if(!c)return;var x=c.getContext('2d'),W=0,H=100,r=window.devicePixelRatio||1;
+  function boy(){W=c.clientWidth;c.width=W*r;c.height=H*r;x.setTransform(r,0,0,r,0,0)}
+  function ciz(t){if(!W)boy();x.clearRect(0,0,W,H);var orta=50,A=32,adim=6,faz=t/1400,on=[],arka=[];
+    for(var px=-10;px<=W+10;px+=adim){var a=px/W*Math.PI*4+faz,s=Math.sin(a),z=Math.cos(a);
+      var p={x:px,y1:orta+A*s,y2:orta-A*s,z:z};(Math.round(px/adim)%2?arka:on).push(p);
+      if(Math.round(px/adim)%3===0){var g=x.createLinearGradient(0,p.y1,0,p.y2);g.addColorStop(0,'rgba(176,120,30,.7)');g.addColorStop(.5,'rgba(243,217,160,.5)');g.addColorStop(1,'rgba(200,144,47,.6)');
+        x.strokeStyle=g;x.lineWidth=2;x.lineCap='round';x.beginPath();x.moveTo(px,p.y1);x.lineTo(px,p.y2);x.stroke()}}
+    [1,-1].forEach(function(k){for(var px=-10;px<=W+10;px+=adim){var a=px/W*Math.PI*4+faz,z=Math.cos(a)*k,y=orta+A*Math.sin(a)*k;
+      var rr=1.8+2.4*(z+1)/2,al=.4+.6*(z+1)/2;x.fillStyle='rgba('+(z>0?'176,120,30,':'214,170,90,')+al+')';x.beginPath();x.arc(px,y,rr,0,7);x.fill();
+      if(z>.85){x.fillStyle='rgba(255,246,220,'+(z-.85)*4+')';x.beginPath();x.arc(px-.6,y-.6,rr*.45,0,7);x.fill()}}});
+  }
+  window.addEventListener('resize',function(){W=0});
+  if(AZALT){ciz(0);return}
+  (function dongu(t){if(!$('ekranGiris').hidden)ciz(t);requestAnimationFrame(dongu)})(0);
+})();
+$('analizPara').innerHTML=KS.map(PARA).join('');
+var SERIT=function(k,j){var t=TANRI[k];return '<div class="serit" role="listitem" data-j="'+j+'"><img src="'+t.serit+'" alt="'+t.ad+'"><span class="parla"></span><div class="yazi"><img class="c" src="'+t.coin+'" alt=""><b>'+t.ad.toLocaleUpperCase('tr-TR')+'</b><small>'+t.unvan+'</small></div></div>'};
+$('seritler').innerHTML=KS.map(SERIT).join('');
+$('seritler2').innerHTML=KS.map(SERIT).join('');
+function seritSec(j){aktif=j;$('seritler').querySelectorAll('.serit').forEach(function(k,n){k.classList.toggle('on',n===j)});
+  var t=TANRI[KS[j]];$('secili').innerHTML='<b>'+t.ad.toLocaleUpperCase('tr-TR')+' · '+t.unvan+'</b><span>“'+t.soz+'”</span>'}
+function seritBaslat(){clearInterval(seritZ);if(!AZALT)seritZ=setInterval(function(){if(!$('ekranKarakter').hidden)seritSec((aktif+1)%4)},2400)}
+$('seritler').addEventListener('click',function(e){var k=e.target.closest('.serit');if(!k)return;seritSec(+k.dataset.j);seritBaslat()});
+seritSec(0);
+if(!AZALT)$('toz').innerHTML=Array.from({length:16},function(_,n){return '<i style="left:'+(4+n*6+Math.random()*4).toFixed(1)+'%;animation-duration:'+(7+Math.random()*7).toFixed(1)+'s;animation-delay:'+(-Math.random()*12).toFixed(1)+'s;width:'+(2+Math.random()*2.5).toFixed(1)+'px;height:'+(2+Math.random()*2.5).toFixed(1)+'px"></i>'}).join('');
+SORULAR.forEach(function(q){new Image().src='img/dna/'+q.f+'.jpg'});
+Object.keys(TANRI).forEach(function(k){var im=new Image();im.onload=function(){TANRI[k].res=im};im.src=TANRI[k].img;
+  var em=new Image();em.onload=function(){TANRI[k].emRes=em};em.src=TANRI[k].em});
+
+var cev=[],idx=0,ISIM='';
+function soru(){
+  var q=SORULAR[idx],sec=cev[idx];
+  $('sayac').textContent=(idx+1)+' / '+SORULAR.length;
+  $('bar').style.width=(idx/SORULAR.length*100)+'%';
+  $('geri2').hidden=idx===0;
+  $('foto').src='img/dna/'+q.f+'.jpg';
+  gizliGuncelle();
+  var h='<div class="anim"><div class="soru-no">'+(idx+1)+'. SORU</div><h2>'+q.s+'</h2><div class="opts'+(sec!=null?' secildi':'')+'">';
+  q.c.forEach(function(c,j){h+='<button class="opt'+(sec===j?' sec':'')+'" data-j="'+j+'"><span class="l">'+'ABCD'[j]+'</span><span>'+c[0]+'</span><span class="tik">✓</span></button>'});
+  h+='</div><div id="icgoru"></div></div>';
+  $('soruAlan').innerHTML=h;
+  if(sec!=null)icgoruGoster();else $('ileri').hidden=true;
+}
+function icgoruGoster(){
+  var q=SORULAR[idx],w=q.c[cev[idx]][1],k=Object.keys(w).sort(function(a,b){return w[b]-w[a]})[0]||onde();
+  $('icgoru').innerHTML='<div class="icgoru"><img src="'+TANRI[k].em+'" alt=""><div><small>KÜÇÜK BİR İÇGÖRÜ</small><p>'+q.t+'</p></div></div>';
+  $('ileri').hidden=false;$('ileri').textContent=idx===SORULAR.length-1?'Sonucu gör →':'Sonraki soru →';
+}
+$('soruAlan').addEventListener('click',function(e){
+  var b=e.target.closest('.opt');if(!b)return;
+  cev[idx]=+b.dataset.j;
+  b.parentNode.classList.add('secildi');
+  b.parentNode.querySelectorAll('.opt').forEach(function(o){o.classList.toggle('sec',o===b)});
+  $('bar').style.width=((idx+1)/SORULAR.length*100)+'%';
+  gizliGuncelle();icgoruGoster();
+  $('ileri').scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+$('ileri').addEventListener('click',function(){if(cev[idx]==null)return;idx++;if(idx<SORULAR.length)soru();else analiz()});
+$('geri').addEventListener('click',function(){if(idx>0){idx--;soru()}else goster('ekranKarakter')});
+$('geri2').addEventListener('click',function(){if(idx>0){idx--;soru()}});
+$('karakterGeri').addEventListener('click',function(){goster('ekranGiris')});
+$('basla2').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
+$('raporaGit').addEventListener('click',function(){$('cagri').scrollIntoView({behavior:'smooth',block:'start'})});
+// Cevaplar bitince kısa bir "analiz" anı: paralar sırayla yanar, çubuk dolar
+function analiz(){
+  goster('ekranAnaliz');var paras=$('analizPara').querySelectorAll('.para'),n=0,sure=AZALT?300:3000,t0=performance.now();
+  paras.forEach(function(p){p.classList.remove('on')});
+  (function adim(t){var o=Math.min(1,(t-t0)/sure);$('analizBar').style.width=(o*100)+'%';$('analizYuzde').textContent='%'+Math.round(o*100);
+    paras.forEach(function(p,j){if(o>=(j+1)/4.4)p.classList.add('on')});
+    if(o<1)requestAnimationFrame(adim);else setTimeout(sonuc,350)})(t0);
+}
+$('basla').addEventListener('click',function(){ISIM=$('isim').value.trim().split(/\s+/)[0]||'';ISIM=ISIM.charAt(0).toLocaleUpperCase('tr-TR')+ISIM.slice(1);goster('ekranKarakter');seritSec(0);seritBaslat()});
+$('tekrar').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
+
+// Cevap verdikçe önde giden güç bulanıklıktan çıkar
+function puanlar(){var p={i:0,d:0,y:0,g:0};for(var k=0;k<cev.length;k++){if(cev[k]==null)continue;var s=SORULAR[k].c[cev[k]][1];for(var x in s)p[x]+=s[x]}return p}
+function onde(){var p=puanlar();return Object.keys(p).sort(function(a,b){return p[b]/MAX[b]-p[a]/MAX[a]})[0]}
+function gizliGuncelle(){
+  var n=cev.filter(function(c){return c!=null}).length,oran=n/SORULAR.length,t=TANRI[onde()];
+  $('gpAd').textContent=t.ad;$('gpEm').src=t.em;
+  $('gizli').style.setProperty('--b',Math.max(0,6-oran*8).toFixed(1)+'px');
+  $('gpDurum').textContent=n===0?'DNA\'n şekilleniyor':oran<.45?'İpuçları birikiyor':oran<.75?'Gücün belirginleşiyor':'Neredeyse belli oldu!';
+}
+
+var SONUC={};
+function haritaHTML(oran,sahte){
+  return SIRA.slice().sort(function(a,b){return oran[b]-oran[a]}).map(function(k){var t=TANRI[k];
+    return '<div class="s"><img src="'+t.em+'" alt=""><div><div class="ad"><b>'+t.ad.toLocaleUpperCase('tr-TR')+'</b> · '+t.guc+'</div><div class="t"><i style="background:'+t.renk+(sahte?';width:'+oran[k]+'%':'')+'" data-w="'+oran[k]+'"></i></div></div><em>'+(sahte?'%••':'%'+oran[k])+'</em></div>'}).join('');
+}
+function sonuc(){
+  // Uyum: toplam puan / tek cevap yolunda alınabilecek en yüksek puan
+  var p=puanlar(),top=0,oran={};
+  for(var k in p){top+=p[k];oran[k]=Math.round(p[k]/MAX[k]*100)}
+  var sira=Object.keys(oran).sort(function(a,b){return oran[b]-oran[a]}),en=sira[0],t=TANRI[en];
+  var yuzde=Math.min(100,Math.round(top/TAVAN*100));
+  SONUC={puan:yuzde,k:en,profil:t.ad+' · '+t.unvan,detay:SIRA.map(function(k){return TANRI[k].guc+' '+oran[k]}).join(', '),
+    cevap:cev.map(function(j){return 'ABCD'[j]}).join(''),oran:oran,guc:sira.slice(0,2).map(function(k){return GUC[k]})};
+  $('kahramanImg').src=t.img;$('kahramanImg').alt=t.ad;$('sonucEm').src=document.body.classList.contains('t-mermer')?t.coin:t.em;
+  $('tanriAd').textContent=t.ad.toLocaleUpperCase('tr-TR');$('tanriUnvan').textContent=t.unvan.toLocaleUpperCase('tr-TR');$('tanriSoz').textContent=t.soz;
+  $('kisisel').textContent=(ISIM?ISIM+', ':'')+t.m.charAt(0).toLocaleLowerCase('tr-TR')+t.m.slice(1);
+  if(!ISIM)$('kisisel').textContent=t.m;
+  $('gucler').innerHTML=SONUC.guc.map(function(g){return '<li>'+g+'</li>'}).join('');
+  $('sahteHarita').innerHTML=haritaHTML({i:72,d:48,y:81,g:55},true);
+  if(ISIM&&!$('ad').value)$('ad').value=ISIM+' ';
+  $('paylasNot').textContent='';
+  goster('ekranSonuc');
+  var h=$('halka'),n=0;
+  var iv=setInterval(function(){n=Math.min(yuzde,n+2);h.style.setProperty('--p',n);$('yuzde').textContent='%'+n;if(n>=yuzde)clearInterval(iv)},18);
+}
+function raporGoster(){
+  var o=SONUC.oran,sira=SIRA.slice().sort(function(a,b){return o[b]-o[a]});
+  $('harita').innerHTML=haritaHTML(o,false);
+  $('gelisim').innerHTML='<b>Gelişim alanın:</b> '+GELISIM[sira[3]];
+  $('yol').innerHTML=['İLK 30 GÜN','İLK 90 GÜN','İLK YIL'].map(function(b,j){return '<li><b>'+b+'</b>'+YOL[SONUC.k][j]+'</li>'}).join('');
+  $('tamamBaslik').textContent=ISIM?'Teşekkürler '+ISIM+'!':'Teşekkürler!';
+  gunleriKur();
+  goster('ekranTamam');
+  requestAnimationFrame(function(){requestAnimationFrame(function(){$('harita').querySelectorAll('i').forEach(function(i){i.style.width=i.dataset.w+'%'})})});
+}
+
+// Instagram hikâyesi için 1080×1920 sonuç kartı
+function storyCiz(){
+  var c=document.createElement('canvas');c.width=1080;c.height=1920;var x=c.getContext('2d'),t=TANRI[SONUC.k];
+  x.fillStyle='#070F22';x.fillRect(0,0,1080,1920);
+  if(t.res){x.save();x.globalAlpha=.95;var w=1080,h=w*t.res.height/t.res.width;x.filter='blur(2px)';x.drawImage(t.res,0,0,w,h);x.restore();
+    var g=x.createLinearGradient(0,0,0,h+2);g.addColorStop(0,'rgba(7,15,34,.3)');g.addColorStop(.35,'rgba(7,15,34,0)');g.addColorStop(.7,'rgba(7,15,34,.45)');g.addColorStop(1,'#070F22');x.fillStyle=g;x.fillRect(0,0,1080,h+2)}
+  x.textAlign='center';
+  x.font='800 30px Manrope, sans-serif';x.fillStyle='#fff';x.fillText('R E / M A X   D O Ğ U Ş',540,110);
+  x.font='700 20px Manrope, sans-serif';x.fillStyle='#A8B2C6';x.fillText('F İ K İ R T E P E  ·  K A D I K Ö Y',540,146);
+  if(t.emRes){x.save();x.shadowColor='rgba(0,0,0,.6)';x.shadowBlur=40;x.drawImage(t.emRes,540-120,630,240,240);x.restore()}
+  x.font='800 30px Manrope, sans-serif';x.fillStyle='#A8B2C6';x.fillText('G A Y R İ M E N K U L   D N A ’ M',540,1010);
+  var gr=x.createLinearGradient(0,1030,0,1170);gr.addColorStop(0,'#F7E2A8');gr.addColorStop(.5,'#E8C77A');gr.addColorStop(1,'#B98A3C');
+  x.fillStyle=gr;x.font='700 150px Cinzel, Georgia, serif';x.fillText(t.ad.toLocaleUpperCase('tr-TR'),540,1160);
+  x.fillStyle='#F4EFE4';x.font='600 38px Cinzel, Georgia, serif';x.fillText(t.unvan.toLocaleUpperCase('tr-TR'),540,1230);
+  x.fillStyle='#C99B4A';x.fillRect(490,1268,100,2);
+  x.fillStyle='#F2E6C9';x.font='italic 600 54px "Cormorant Garamond", Georgia, serif';x.fillText('“'+t.soz+'”',540,1350,960);
+  x.fillStyle='#E8C77A';x.font='700 40px Cinzel, Georgia, serif';x.fillText('UYUM %'+SONUC.puan,540,1440);
+  var bx=170,by=1560,bw=740,bh=150;var bg=x.createLinearGradient(0,by,0,by+bh);bg.addColorStop(0,'#F6DE9E');bg.addColorStop(1,'#C99B4A');
+  x.fillStyle=bg;x.beginPath();x.roundRect?x.roundRect(bx,by,bw,bh,75):x.rect(bx,by,bw,bh);x.fill();
+  x.fillStyle='#2A1C05';x.font='700 54px Cinzel, Georgia, serif';x.fillText('SEN HANGİSİSİN?',540,1630);
+  x.font='700 30px Manrope, sans-serif';x.fillText('Hermes · Athena · Herakles · Artemis  |  2 dk test',540,1678);
+  if(/^https?:$/.test(location.protocol)&&!/claude/.test(location.host)){x.font='700 32px Manrope, sans-serif';x.fillStyle='#A8B2C6';x.fillText((location.host+location.pathname).replace(/\/$/,''),540,1790)}
+  return c;
+}
+$('story').addEventListener('click',function(){
+  var b=this;b.disabled=true;$('paylasNot').textContent='';
+  (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){
+    storyCiz().toBlob(function(blob){
+      b.disabled=false;
+      if(!blob){$('paylasNot').textContent='Görsel oluşturulamadı, linki paylaşabilirsin.';return}
+      var f=new File([blob],'gayrimenkul-dna-'+TANRI[SONUC.k].ad.toLowerCase()+'.png',{type:'image/png'});
+      var url=location.origin+location.pathname+'?kaynak=paylasim';
+      if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f]}).catch(function(){});return}
+      if(navigator.share&&!navigator.canShare){navigator.share({title:'Gayrimenkul DNA testi',text:'Gayrimenkul DNA testinde '+TANRI[SONUC.k].ad+' çıktım. Sen hangisisin?',url:url}).catch(function(){});return}
+      var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=f.name;document.body.appendChild(a);a.click();a.remove();
+      $('paylasNot').textContent='Görsel indirildi. Instagram\'da hikâyene ekleyip testin linkini bağlantı çıkartmasıyla koyabilirsin.';
+    },'image/png');
+  }).catch(function(){b.disabled=false;$('paylasNot').textContent='Görsel oluşturulamadı.'});
+});
+
+$('kvkkAc').addEventListener('click',function(){var m=$('kvkkMetin');m.hidden=!m.hidden;this.setAttribute('aria-expanded',String(!m.hidden))});
+var qs=new URLSearchParams(location.search);
+var form=$('form');
+form.addEventListener('submit',function(ev){
+  ev.preventDefault();$('hata').hidden=true;
+  if(!form.checkValidity()){
+    form.classList.add('tried');var ilk=form.querySelector(':invalid');
+    $('hata').textContent=ilk&&ilk.id==='kvkk'?'Devam etmek için aydınlatma metnini onayla.':ilk&&ilk.id==='eposta'?'E-posta adresini kontrol et.':'Lütfen * ile işaretli alanları doldur.';
+    $('hata').hidden=false;if(ilk)ilk.focus();return;
+  }
+  var veri={action:'adayBasvuru',utm:(qs.get('kaynak')||qs.get('utm_source')||'').slice(0,60),
+    test_puan:SONUC.puan,test_profil:SONUC.profil,test_detay:SONUC.detay,test_cevap:SONUC.cevap};
+  new FormData(form).forEach(function(v,k){veri[k]=v});
+  var b=$('gonder');b.disabled=true;b.textContent='Gönderiliyor…';
+  fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(veri)})
+  .then(function(r){return r.json()})
+  .then(function(j){if(!j.success)throw new Error(j.error||'');ANAHTAR=j.anahtar||'';TEL=veri.telefon;raporGoster()})
+  .catch(function(e){
+    b.disabled=false;b.textContent='Raporumu aç →';
+    $('hata').textContent=(e&&e.message&&e.message.indexOf('etch')<0&&e.message.indexOf('JSON')<0&&e.message)||'Gönderim sırasında bir sorun oluştu. Tekrar dene ya da WhatsApp\'tan 0532 472 41 48 numarasına yaz.';
+    $('hata').hidden=false;
+  });
+});
+
+// Gölge Gün: önümüzdeki 10 iş günü × 10:00 / 14:00
+var ANAHTAR='',TEL='',SECGUN='',SECSAAT='';
+function gunleriKur(){
+  var h='',d=new Date(),n=0;
+  while(n<10){d.setDate(d.getDate()+1);var g=d.getDay();if(g===0||g===6)continue;n++;
+    var etiket=d.toLocaleDateString('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric'})+' '+d.toLocaleDateString('tr-TR',{weekday:'long'});
+    h+='<button type="button" data-g="'+etiket+'">'+d.toLocaleDateString('tr-TR',{weekday:'short'})+'<small>'+d.toLocaleDateString('tr-TR',{day:'numeric',month:'short'})+'</small></button>'}
+  $('gunler').innerHTML=h;
+}
+function golgeHazir(){$('golgeGonder').disabled=!(SECGUN&&SECSAAT)}
+$('gunler').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;SECGUN=b.dataset.g;
+  this.querySelectorAll('button').forEach(function(x){x.classList.toggle('sec',x===b)});golgeHazir()});
+$('saatler').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;SECSAAT=b.dataset.s;
+  this.querySelectorAll('button').forEach(function(x){x.classList.toggle('sec',x===b)});golgeHazir()});
+function golgeGonder(tercih){
+  var b=$('golgeGonder');b.disabled=true;$('golgeHata').hidden=true;
+  fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'adayGolgeGun',anahtar:ANAHTAR,telefon:TEL,golge_gun:tercih})})
+  .then(function(r){return r.json()})
+  .then(function(j){if(!j.success)throw new Error(j.error||'');
+    $('golge').innerHTML='<p class="golge-ok">'+(tercih==='Beni arayın'?'Tamam, Broker\'ımız seni arayıp birlikte gün belirleyecek.':'✓ '+esc(tercih)+' için yerin ayrıldı. Broker\'ımız arayıp onaylayacak.')+'</p>'})
+  .catch(function(){b.disabled=false;$('golgeHata').textContent='Tercihin kaydedilemedi. Tekrar dene ya da WhatsApp\'tan 0532 472 41 48 numarasına yaz.';$('golgeHata').hidden=false});
+}
+$('golgeGonder').addEventListener('click',function(){golgeGonder(SECGUN+' '+SECSAAT)});
+$('golgeAra').addEventListener('click',function(){golgeGonder('Beni arayın')});
+</script>
+</body>
+</html>
