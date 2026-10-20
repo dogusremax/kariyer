@@ -188,7 +188,7 @@ form{display:grid;gap:14px}
       <h1>Fikirtepe'de <em>11.729 konut</em> yükseliyor. Peki onları kim satacak?</h1>
       <p class="lead">11 soruda gör: o kişi sen olabilir misin? İçinden geldiği gibi cevap ver, doğru ya da yanlış yok.</p>
       <div class="unvanlar"><p>Testi bitir, unvanını al. Sen hangisisin?</p>
-        <div id="unvanCip"><span data-k="y">🦁 Aslan</span><span data-k="g">🦅 Kartal</span><span data-k="i">🐬 Yunus</span><span data-k="d">🐝 Arı</span></div></div>
+        <div id="unvanCip"><span data-k="i">🪽 Hermes</span><span data-k="d">🦉 Athena</span><span data-k="y">🦁 Herakles</span><span data-k="g">🏹 Artemis</span></div></div>
       <div class="facts">
         <div><b>11</b><span>soru</span></div>
         <div><b>2</b><span>dakika</span></div>
@@ -204,7 +204,7 @@ form{display:grid;gap:14px}
       <div class="prog"><div class="bar"><i id="bar"></i></div><span class="n" id="sayac">1 / 11</span></div>
       <div class="gizli-profil" id="gizli" aria-hidden="true">
         <div class="gp-ikon">?</div>
-        <div class="gp-yazi"><small id="gpDurum">Unvanın şekilleniyor…</small><b id="gpAd">🦁 Aslan</b></div>
+        <div class="gp-yazi"><small id="gpDurum">Unvanın şekilleniyor…</small><b id="gpAd">🦁 Herakles</b></div>
       </div>
       <div id="soruAlan"></div>
       <p class="tepki" id="tepki"></p>
@@ -341,10 +341,10 @@ var PROFIL={
 };
 // Testi bitirene verilen unvan (en güçlü yetenek)
 var UNVAN={
-  y:{img:'img/unvan-aslan.jpg',e:'🦁',ad:'Aslan',c:'Tam bir Aslansın!',b:'Ben tam bir Aslanım',m:'Cesur, dirençli, sahanın hakimi. "Hayır" seni durdurmaz, hedefini bırakmazsın.'},
-  g:{img:'img/unvan-kartal.jpg',e:'🦅',ad:'Kartal',c:'Tam bir Kartalsın!',b:'Ben tam bir Kartalım',m:'Yükseklerden bakar, fırsatı herkesten önce görürsün. Kendi işini kuracak vizyon sende var.'},
-  i:{img:'img/unvan-yunus.jpg',e:'🐬',ad:'Yunus',c:'Tam bir Yunussun!',b:'Ben tam bir Yunusum',m:'Sıcak, zeki, herkesle bağ kuran. İnsanlar sana kendiliğinden güvenir.'},
-  d:{img:'img/unvan-ari.jpg',e:'🐝',ad:'Arı',c:'Tam bir Arısın!',b:'Ben tam bir Arıyım',m:'Çalışkan, düzenli, sistemli. Her gün biraz daha bal yaparsın; istikrar senin süper gücün.'}
+  i:{img:'img/unvan-hermes.jpg',e:'🪽',ad:'Hermes',c:'Tam bir Hermes\'sin!',b:'Ben tam bir Hermes\'im',m:'Ticaretin ve iletişimin tanrısı. Sözün yol bulur, insanlarla anında bağ kurarsın; satış senin doğal dilin.'},
+  d:{img:'img/unvan-athena.jpg',e:'🦉',ad:'Athena',c:'Tam bir Athena\'sın!',b:'Ben tam bir Athena\'yım',m:'Strateji ve akıl tanrıçası. Planlı, düzenli, sistemli çalışırsın; istikrar senin süper gücün.'},
+  y:{img:'img/unvan-herakles.jpg',e:'🦁',ad:'Herakles',c:'Tam bir Herakles\'sin!',b:'Ben tam bir Herakles\'im',m:'12 zor görevi bitiren kahraman. Cesur ve dirençlisin; "hayır" seni durdurmaz, hedefini bırakmazsın.'},
+  g:{img:'img/unvan-artemis.jpg',e:'🏹',ad:'Artemis',c:'Tam bir Artemis\'sin!',b:'Ben tam bir Artemis\'im',m:'Hedefini seçip vuran avcı tanrıça. Fırsatı herkesten önce görür, kendi yolunu çizersin; kendi işini kuracak cesaret sende var.'}
 };
 // 3D unvan görselleri: yüklenirse emojinin yerine geçer, yüklenemezse emoji kalır
 Object.keys(UNVAN).forEach(function(k){var u=UNVAN[k],im=new Image();im.onload=function(){u.res=im;
@@ -440,7 +440,7 @@ function raporGoster(){
 }
 $('paylas').addEventListener('click',function(){
   var url=location.origin+location.pathname+'?kaynak=paylasim';
-  var metin='Gayrimenkul danışmanlığı testinde "'+SONUC.unvan.ad+'" unvanını aldım '+SONUC.unvan.e+' Sen hangisisin: Aslan, Kartal, Yunus, Arı?';
+  var metin='Gayrimenkul danışmanlığı testinde "'+SONUC.unvan.ad+'" unvanını aldım '+SONUC.unvan.e+' Sen hangisisin: Hermes, Athena, Herakles, Artemis?';
   if(navigator.share){navigator.share({title:'Bu işe uygun musun?',text:metin,url:url}).catch(function(){});return}
   (navigator.clipboard?navigator.clipboard.writeText(metin+' '+url):Promise.reject()).then(function(){$('paylasNot').textContent='Link kopyalandı, istediğin yere yapıştırabilirsin.'}).catch(function(){$('paylasNot').textContent=url});
 });
@@ -463,7 +463,7 @@ function storyCiz(){
   SONUC.guc.forEach(function(t,j){x.fillStyle='#DC1C2E';x.fillText('★',540-x.measureText(t).width/2-34,1260+j*70);x.fillStyle='#fff';x.fillText(t,540+10,1260+j*70)});
   x.fillStyle='#DC1C2E';x.beginPath();x.roundRect?x.roundRect(140,1530,800,150,75):x.rect(140,1530,800,150);x.fill();
   x.fillStyle='#fff';x.font='900 56px Archivo, sans-serif';x.fillText('Sen hangisisin?',540,1595);
-  x.font='700 34px Manrope, sans-serif';x.fillText('Aslan · Kartal · Yunus · Arı  |  2 dk test',540,1645);
+  x.font='700 34px Manrope, sans-serif';x.fillText('Hermes · Athena · Herakles · Artemis  |  2 dk test',540,1645);
   x.font='700 36px Manrope, sans-serif';x.fillStyle='#C9D6EE';if(/^https?:$/.test(location.protocol)&&!/claude/.test(location.host))x.fillText((location.host+location.pathname).replace(/\/$/,''),540,1760);
   return c;
 }
