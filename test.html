@@ -726,7 +726,7 @@ var MAX={i:0,d:0,y:0,g:0},TAVAN=0;
 SORULAR.forEach(function(q){TAVAN+=Math.max.apply(null,q.c.map(function(c){var t=0;for(var k in c[1])t+=c[1][k];return t}));var m={i:0,d:0,y:0,g:0};q.c.forEach(function(c){for(var k in c[1])m[k]=Math.max(m[k],c[1][k])});for(var k in m)MAX[k]+=m[k]});
 
 var $=function(id){return document.getElementById(id)};
-var TEMA=(location.search.match(/[?&]tema=([a-z]+)/)||[])[1]||'mermer';
+var TEMA=(location.search.match(/[?&]tema=([a-z]+)/)||[])[1]||'remax';
 var EKIP=/[?&]ekip=1\b/.test(location.search);if(EKIP)document.body.classList.add('ekip');
 var EKIP_AD=EKIP?(new URLSearchParams(location.search).get('ad')||'').trim().slice(0,30):'';
 if(TEMA&&TEMA!=='gece'){document.body.classList.add('acik');if(TEMA!=='acik')document.body.classList.add('t-'+TEMA)}
