@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Gayrimenkul DNA'nı Keşfet | RE/MAX Doğuş Kariyer</title>
-<meta name="description" content="11 soru, 2 dakika. Hermes mi, Athena mı, Herakles mi, Artemis mi? Gayrimenkul DNA'nı keşfet. RE/MAX Doğuş, Fikirtepe.">
+<meta name="description" content="7 soru, 2 dakika. Hermes mi, Athena mı, Herakles mi, Artemis mi? Gayrimenkul DNA'nı keşfet. RE/MAX Doğuş, Fikirtepe.">
 <meta property="og:title" content="Gayrimenkul DNA'nı keşfet: içindeki güç hangisi?">
-<meta property="og:description" content="11 soru, 2 dakika, sana özel sonuç. Hermes, Athena, Herakles, Artemis: sen hangisisin?">
+<meta property="og:description" content="7 soru, 2 dakika, sana özel sonuç. Hermes, Athena, Herakles, Artemis: sen hangisisin?">
 <meta property="og:image" content="img/dna/hermes.jpg">
 <meta name="theme-color" content="#070F22">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,6 +103,8 @@ body:not(.acik) .sarmal{background:linear-gradient(160deg,rgba(255,255,255,.08),
 .kanca b{color:var(--gold)}
 /* Ekip sürümü (?ekip=1): form ve Gölge Gün yok, harita doğrudan açılır */
 body.ekip .kilit,body.ekip #cagri,body.ekip #form,body.ekip #golge,body.ekip .son{display:none!important}
+/* Aday sürümü: form yok; rapor direkt açılır, Gölge Gün WhatsApp mesajıyla ayrılır */
+.kilit,#cagri,#form{display:none!important}
 .ekip-yalniz{display:none}body.ekip .ekip-yalniz{display:block}body.ekip .aday-yalniz{display:none}
 .baslik2{font-size:27px;font-weight:700;line-height:1.15}
 .seritler{display:flex;gap:6px;height:330px;margin:16px 0 10px}
@@ -183,6 +185,9 @@ body.ekip .kilit,body.ekip #cagri,body.ekip #form,body.ekip #golge,body.ekip .so
 .kisisel{margin:16px 0 14px;text-align:center;font-size:14.5px;color:#D7DCE6}
 .kutu{border:1px solid var(--line2);background:rgba(255,255,255,.035);border-radius:16px;padding:15px 16px;margin-bottom:12px}
 .kutu h3{font:700 12px var(--cap);letter-spacing:.14em;color:var(--gold);margin-bottom:10px}
+.kazanc p{font-size:14px;line-height:1.55;color:#D7DCE6}.kazanc p b{color:#fff}
+.kazanc a{display:inline-block;margin-top:10px;font:800 14px var(--body);color:var(--gold);text-decoration:none}
+body.acik .kazanc p{color:#34445E}body.acik .kazanc p b{color:#0C1E3F}
 .ozet{display:flex;align-items:center;gap:14px}
 .halka{--p:0;width:78px;height:78px;flex:0 0 78px;border-radius:50%;background:conic-gradient(var(--gold) calc(var(--p)*1%),rgba(255,255,255,.08) 0);display:flex;align-items:center;justify-content:center}
 .halka span{width:64px;height:64px;border-radius:50%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 19px var(--cap);color:var(--gold)}
@@ -368,7 +373,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
     </div>
     <p class="kanca aday-yalniz"><b>Gayrimenkul kariyeri</b> sana uygun mu? Cevabı karakterinde.</p>
     <p class="kanca ekip-yalniz" id="ekipKanca"><b>Tecrüben konuşsun:</b> sahada hangi karakter öne çıkıyor? Testi çöz, sonucunu story'de paylaş.</p>
-    <div class="bilgi"><span>11 soru</span><span>2 dakika</span><span>Sana özel sonuç</span></div>
+    <div class="bilgi"><span>7 soru</span><span>2 dakika</span><span>Sana özel sonuç</span></div>
     <div class="alan" id="isimAlan"><label for="isim">Sana nasıl hitap edelim?</label><input id="isim" autocomplete="given-name" maxlength="30" placeholder="Adın (isteğe bağlı)"></div>
     <button class="btn" id="basla">Teste başla →</button>
     <p class="not aday-yalniz">Sonucu görmek için iletişim bilgisi istemiyoruz.</p><p class="not ekip-yalniz">Ekip sürümü: form yok, yetenek haritan direkt açılır.</p>
@@ -382,14 +387,14 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
     <div class="seritler" id="seritler" role="list"></div>
     <div class="secili" id="secili" aria-live="polite"></div>
     <p class="alinti" id="karakterSoz">“Kendini keşfet, yeni bir kariyere ilk adımı at.”</p>
-    <div class="bilgi"><span>11 soru</span><span>2 dakika</span><span>Sana özel sonuç</span></div>
+    <div class="bilgi"><span>7 soru</span><span>2 dakika</span><span>Sana özel sonuç</span></div>
     <button class="btn" id="basla2">Hadi başlayalım →</button>
   </section>
 
   <!-- Soru -->
   <section class="ekran" id="ekranSoru" hidden>
     <div class="ust"><button class="ikon-btn" id="geri" aria-label="Önceki soru">‹</button>
-      <div class="marka"><b>RE/MAX DOĞUŞ</b><small>FİKİRTEPE · KADIKÖY</small></div><span class="sayac" id="sayac">1 / 11</span></div>
+      <div class="marka"><b>RE/MAX DOĞUŞ</b><small>FİKİRTEPE · KADIKÖY</small></div><span class="sayac" id="sayac">1 / 7</span></div>
     <div class="ilerleme"><i id="bar"></i></div>
     <div class="foto"><img id="foto" alt=""><div class="gizli" id="gizli" aria-hidden="true"><img id="gpEm" alt=""><span><small id="gpDurum">DNA'n şekilleniyor</small><b id="gpAd">Hermes</b></span></div></div>
     <div class="soru-kart" id="soruAlan"></div>
@@ -420,6 +425,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
     <button class="btn" id="raporaGit" style="margin-bottom:16px">Kişisel raporumu gör →</button>
     <div class="kutu"><div class="ozet"><div class="halka" id="halka"><span><b id="yuzde">%0</b><small>UYUM</small></span></div>
       <div><h3>2 süper gücün</h3><ul class="guc" id="gucler"></ul></div></div></div>
+    <div class="kutu kazanc aday-yalniz"><h3>BU İŞTE KAZANÇ</h3><p><b>Kendi saatlerin, kendi kazancın.</b> Maaş tavanı yok: kazancın, sattığın ve kiraladığın kadar büyür. Deneyim şartı yok, eğitimi ofisimiz veriyor.</p><a id="kazancLink" href="https://yenifikirtepeburada.com/kariyer.html#kazanc" target="_blank" rel="noopener">Ne kadar kazanabilirsin? Hesapla →</a></div>
     <button type="button" class="story" id="story">📸 Sonucunu hikâyende paylaş</button>
     <p class="paylas-not" id="paylasNot" role="status"></p>
     <div class="kilit">
@@ -431,9 +437,9 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
       <div class="alan"><label for="ad">Ad Soyad *</label><input id="ad" name="ad_soyad" autocomplete="name" required placeholder="Adın ve soyadın"></div>
       <div class="ikili">
         <div class="alan"><label for="tel">Telefon *</label><input id="tel" name="telefon" type="tel" inputmode="tel" autocomplete="tel" placeholder="05__ ___ __ __" required></div>
-        <div class="alan"><label for="ilce">İlçe *</label><input id="ilce" name="ilce" required placeholder="Örn. Kadıköy"></div>
+        <div class="alan alan-ek"><label for="ilce">İlçe (isteğe bağlı)</label><input id="ilce" name="ilce" placeholder="Örn. Kadıköy"></div>
       </div>
-      <div class="alan"><label for="eposta">E-posta (isteğe bağlı)</label><input id="eposta" name="eposta" type="email" autocomplete="email" placeholder="ornek@eposta.com"></div>
+      <div class="alan alan-ek"><label for="eposta">E-posta (isteğe bağlı)</label><input id="eposta" name="eposta" type="email" autocomplete="email" placeholder="ornek@eposta.com"></div>
       <div class="hp" aria-hidden="true"><label for="ws">Web sitesi</label><input id="ws" name="web_sitesi" tabindex="-1" autocomplete="off"></div>
       <label class="kvkk"><input type="checkbox" id="kvkk" name="kvkk" value="1" required>
         <span><button type="button" class="lnk" id="kvkkAc" aria-controls="kvkkMetin" aria-expanded="false">Aydınlatma metnini</button> okudum; başvurumun değerlendirilmesi için kişisel verilerimin ve test cevaplarımın işlenmesini kabul ediyorum. *</span></label>
@@ -451,15 +457,15 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
   <!-- Teşekkür -->
   <section class="ekran" id="ekranTamam" hidden>
     <div class="ust"><span></span><div class="marka"><b>RE/MAX DOĞUŞ</b><small>FİKİRTEPE · KADIKÖY</small></div><span></span></div>
-    <div class="tamam-bas"><div class="muhur">✓</div><h1 class="cap gold" id="tamamBaslik">Teşekkürler!</h1><p>Sonucun Broker'ımıza ulaştı. Şimdi Gölge Gün'ün için sana uyan zamanı seç.</p></div>
+    <div class="tamam-bas"><div class="muhur">✓</div><h1 class="cap gold" id="tamamBaslik">Tebrikler!</h1><p id="tamamAlt">İşte yetenek haritan. Güçlü yanların, gelişim alanın ve sana özel yol haritan aşağıda.</p></div>
     <div class="kutu" id="golge">
       <h3>Gölge Gün'ünü seç</h3>
-      <p class="golge-p">Bir gün boyunca bir danışmanımızın yanındasın. Seçtiğin zamanı Broker'ımız arayıp onaylar.</p>
+      <p class="golge-p">Bir gün boyunca bir danışmanımızın yanında işi içeriden gör. Gün ve saatini seç, WhatsApp'tan bize yaz; Broker'ımız onaylasın.</p>
       <div class="gunler" id="gunler" role="group" aria-label="Gün"></div>
       <div class="saatler" id="saatler" role="group" aria-label="Saat"><button type="button" data-s="10:00">10:00</button><button type="button" data-s="14:00">14:00</button></div>
       <p class="hata" id="golgeHata" role="alert" hidden></p>
-      <button type="button" class="btn" id="golgeGonder" disabled>Bu zamanı ayır →</button>
-      <div style="text-align:center;margin-top:6px"><button type="button" class="lnk" id="golgeAra">Bu günler uymuyor, beni arayın</button></div>
+      <button type="button" class="btn" id="golgeGonder" disabled>WhatsApp'tan ayır →</button>
+      <div style="text-align:center;margin-top:6px"><button type="button" class="lnk" id="golgeAra">Bu günler uymuyor, WhatsApp'tan yaz</button></div>
     </div>
     <div class="kutu"><h3>Senin yetenek haritan</h3><div class="harita" id="harita"></div>
       <p class="gelisim" id="gelisim"></p>
@@ -468,8 +474,9 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
       <p class="alinti">“Dört yetenek. Tek hedef.”<br><span id="tumSoz">Sıradaki başarı hikâyesi senin olsun.</span></p></div>
     <div class="ekip-yalniz" style="margin-bottom:18px"><button type="button" class="story" id="story2">📸 Sonucunu hikâyende paylaş</button><p class="paylas-not" style="text-align:center">Paylaşınca adaylar da kendi karakterini merak etsin.</p></div>
     <div class="son">
-      <a class="btn" href="./" style="text-decoration:none">RE/MAX Doğuş'ta kariyer fırsatlarını keşfet →</a>
-      <a class="lnk" href="./#program">Eğitim programını gör</a>
+      <button type="button" class="story aday-yalniz" id="arkadas" style="background:#25D366">💬 Arkadaşına gönder</button>
+      <a class="btn" id="sonKanca" href="https://yenifikirtepeburada.com/kariyer.html" target="_blank" rel="noopener" style="text-decoration:none">Masan hazır. Ofisini tanı →</a>
+      <a class="lnk" href="https://yenifikirtepeburada.com/kariyer.html#program" target="_blank" rel="noopener">Sıfırdan sahaya: 11 derslik programı gör</a>
       <a class="lnk" href="https://www.instagram.com/remaxdogus/" target="_blank" rel="noopener">Instagram'da @remaxdogus</a>
     </div>
     <p class="alt-yazi">"DAHA FAZLASI SENİNLE MÜMKÜN" · FİKİRTEPE · KADIKÖY</p>
@@ -494,12 +501,6 @@ var TANRI={
      m:'Fırsatı herkesten önce görüp harekete geçiyorsun. RE/MAX modeli tam bunun üzerine kurulu: markanın desteğiyle kendi işin.'}
 };
 var SORULAR=[
-  {s:'Cumartesi sabahı tamamen sana ait. Hangisini yapmak sana daha cazip gelir?',f:'s01',c:[
-    ['Arkadaşlarımla buluşmak, yeni insanlarla tanışmak',{i:2}],
-    ['Önümüzdeki haftayı planlayıp yarım kalan işlerimi bitirmek',{d:2}],
-    ['Aklımdaki yeni bir fikri araştırmak',{g:2}],
-    ['Uzun zamandır ertelediğim zor bir işi tamamlamak',{y:2}]],
-   t:'Her seçim bir ipucu. DNA\'n şekilleniyor.'},
   {s:'Hiç tanımadığın birini telefonla araman gerekiyor. Ne yaparsın?',f:'s02',c:[
     ['Kısa bir hazırlık yapar, doğrudan ararım',{i:2,y:1}],
     ['Önce konuşmamı planlar, sonra ararım',{d:2,i:1}],
@@ -512,24 +513,6 @@ var SORULAR=[
     ['Moralim bozulur ama başka fırsatlara yönelirim',{y:1}],
     ['Bir süre yeni teklif vermekten kaçınırım',{}]],
    t:'"Hayır"lar bu meslekte yolun bir parçası. Asıl fark, sonrasında ne yaptığında.'},
-  {s:'Yeni başladığın bir işte ilk 30 gün beklediğin sonucu alamadın. Ne yaparsın?',f:'s04',c:[
-    ['Günlük faaliyetlerimi artırıp devam ederim',{y:2,d:1}],
-    ['Deneyimli birinden destek alıp çalışma planımı yenilerim',{d:1,i:1}],
-    ['Farklı müşteri ve fırsat kaynakları araştırırım',{g:2}],
-    ['Biraz bekleyip şartların değişmesini umarım',{}]],
-   t:'İlk aylar temel atma dönemi. Sabır ve düzen burada fark yaratır.'},
-  {s:'Bir hedef belirlediğinde genellikle nasıl ilerlersin?',f:'s05',c:[
-    ['Hedefimi küçük adımlara böler, düzenli takip ederim',{d:2}],
-    ['Çevremdeki insanlardan destek ve bağlantı oluştururum',{i:2}],
-    ['Farklı yöntemler deneyerek ilerlerim',{g:2}],
-    ['Başlangıçta hızlı ilerlerim ama bazen düzenimi kaybederim',{g:1}]],
-   t:'Yazılan ve takip edilen hedefler, kafada tutulanlardan çok daha kolay gerçekleşir.'},
-  {s:'Çalışma saatlerini tamamen kendin belirliyorsun. Günün nasıl geçer?',f:'s06',c:[
-    ['Kendi çalışma saatlerimi belirler ve büyük ölçüde uyarım',{d:2}],
-    ['Görüşmelerime göre esnek ama düzenli çalışırım',{d:1,i:1}],
-    ['Fırsat gördüğüm işlere ağırlık veririm',{g:2}],
-    ['Dışarıdan yönlendirme olmayınca başlamakta zorlanırım',{}]],
-   t:'Kendi işinin patronu olmak, kendi disiplinini kurmak demek. Yarısına geldin!'},
   {s:'Çevrende birinin evini satmayı düşündüğünü öğrendin. İlk adımın ne olur?',f:'s07',c:[
     ['Kendisiyle konuşup ihtiyacını öğrenirim',{i:2,g:1}],
     ['Bölgedeki fiyatları araştırıp hazırlık yaparım',{d:2}],
@@ -541,7 +524,7 @@ var SORULAR=[
     ['Önce kısa bir metin hazırlar, birkaç deneme yaparım',{d:1,g:1}],
     ['Farklı ve dikkat çekici bir video fikri geliştiririm',{g:2}],
     ['Kamera karşısında olmak istemem ama öğrenmeyi deneyebilirim',{y:1}]],
-   t:'Instagram bugün bir danışmanın vitrini. Kamera karşısında rahatlamayı eğitimde birlikte çalışıyoruz.'},
+   t:'Instagram bugün bir danışmanın vitrini. Kamera karşısında rahatlamayı eğitimde birlikte çalışıyoruz. Yarısını geçtin!'},
   {s:'Bir ay boyunca düzenli çalıştın ama henüz satış yapamadın. Ne düşünürsün?',f:'s09',c:[
     ['Görüşme sayılarımı ve takip sistemimi gözden geçiririm',{d:2,y:1}],
     ['Daha fazla yeni insanla iletişime geçerim',{i:1,y:2}],
@@ -820,7 +803,7 @@ $('geri').addEventListener('click',function(){if(idx>0){idx--;soru()}else goster
 $('geri2').addEventListener('click',function(){if(idx>0){idx--;soru()}});
 $('karakterGeri').addEventListener('click',function(){goster('ekranGiris')});
 $('basla2').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
-$('raporaGit').addEventListener('click',function(){if(EKIP){raporGoster();return}$('cagri').scrollIntoView({behavior:'smooth',block:'start'})});
+$('raporaGit').addEventListener('click',raporGoster);
 $('story2').addEventListener('click',function(){$('story').click()});
 // Cevaplar bitince kısa bir "analiz" anı: paralar sırayla yanar, çubuk dolar
 function analiz(){
@@ -830,6 +813,7 @@ function analiz(){
     paras.forEach(function(p,j){if(o>=(j+1)/4.4)p.classList.add('on')});
     if(o<1)requestAnimationFrame(adim);else setTimeout(sonuc,350)})(t0);
 }
+document.querySelectorAll('.bilgi span:first-child').forEach(function(e){e.textContent=SORULAR.length+' soru'});
 if(EKIP)$('etiket').textContent=EKIP_ROL==='broker'?'LİDERLİK DNA TESTİ':'EKİP DNA TESTİ';
 if(EKIP){$('karakterSoz').textContent='“Tecrüben hangi gücü büyüttü? Birlikte bakalım.”';$('tumSoz').textContent='Ofisimiz bu dört gücün toplamı.'}
 if(EKIP_ROL==='broker'){$('ekipKanca').innerHTML='<b>Ofisin lideri</b> olarak senin DNA\'n hangisi? Liderlik tarzını keşfet.';$('karakterSoz').textContent='“Ekibin sana bakıyor. Sen hangi güçle yönetiyorsun?”'}
@@ -861,7 +845,7 @@ function sonuc(){
   SONUC={puan:yuzde,k:en,profil:t.ad+' · '+t.unvan,detay:SIRA.map(function(k){return TANRI[k].guc+' '+oran[k]}).join(', '),
     cevap:cev.map(function(j){return 'ABCD'[j]}).join(''),oran:oran,guc:sira.slice(0,2).map(function(k){return GUC[k]})};
   $('kahramanImg').src=t.img;$('kahramanImg').alt=t.ad;$('sonucEm').src=document.body.classList.contains('t-mermer')?t.coin:t.em;
-  $('tanriAd').textContent=t.ad.toLocaleUpperCase('tr-TR');$('tanriUnvan').textContent=t.unvan.toLocaleUpperCase('tr-TR');$('tanriSoz').textContent=t.soz;
+  $('tanriAd').textContent=t.ad.toLocaleUpperCase('tr-TR');$('kazancLink').textContent='Bir '+t.ad+' bu işte ne kazanır? Hesapla →';$('tanriUnvan').textContent=t.unvan.toLocaleUpperCase('tr-TR');$('tanriSoz').textContent=t.soz;
   $('kisisel').textContent=(ISIM?ISIM+', ':'')+t.m.charAt(0).toLocaleLowerCase('tr-TR')+t.m.slice(1);
   if(!ISIM)$('kisisel').textContent=t.m;
   $('gucler').innerHTML=SONUC.guc.map(function(g){return '<li>'+g+'</li>'}).join('');
@@ -883,9 +867,9 @@ function raporGoster(){
   $('harita').innerHTML=haritaHTML(o,false);
   $('gelisim').innerHTML='<b>Gelişim alanın:</b> '+GELISIM[sira[3]];
   $('yol').innerHTML=YOL_BASLIK.map(function(b,j){return '<li><b>'+b+'</b>'+YOL[SONUC.k][j]+'</li>'}).join('');
-  $('tamamBaslik').textContent=ISIM?'Teşekkürler '+ISIM+'!':'Teşekkürler!';
+  $('tamamBaslik').textContent=ISIM?'Tebrikler '+ISIM+'!':'Tebrikler!';
   if(EKIP){$('tamamBaslik').textContent=ISIM?'Tebrikler '+ISIM+'!':'Tebrikler!';$('tamamBaslik').nextElementSibling.textContent='İşte '+TANRI[SONUC.k].ad+' haritan. Güçlü yanların ve gelişim alanın aşağıda.'}
-  else gunleriKur();
+  else{gunleriKur();if(!ANAHTAR)adayAcildi()}
   goster('ekranTamam');
   requestAnimationFrame(function(){requestAnimationFrame(function(){$('harita').querySelectorAll('i').forEach(function(i){i.style.width=i.dataset.w+'%'})})});
 }
@@ -935,6 +919,7 @@ var qs=new URLSearchParams(location.search);
 var form=$('form');
 form.addEventListener('submit',function(ev){
   ev.preventDefault();$('hata').hidden=true;
+  if(tasindi){if(SECGUN&&SECSAAT)golgeGonder(SECGUN+' '+SECSAAT);return}
   if(!form.checkValidity()){
     form.classList.add('tried');var ilk=form.querySelector(':invalid');
     $('hata').textContent=ilk&&ilk.id==='kvkk'?'Devam etmek için aydınlatma metnini onayla.':ilk&&ilk.id==='eposta'?'E-posta adresini kontrol et.':'Lütfen * ile işaretli alanları doldur.';
@@ -968,7 +953,20 @@ $('gunler').addEventListener('click',function(e){var b=e.target.closest('button'
   this.querySelectorAll('button').forEach(function(x){x.classList.toggle('sec',x===b)});golgeHazir()});
 $('saatler').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;SECSAAT=b.dataset.s;
   this.querySelectorAll('button').forEach(function(x){x.classList.toggle('sec',x===b)});golgeHazir()});
+// Aday raporu açınca Gölge Gün daveti haritanın altına (rapor önce, davet sonra)
+var tasindi=false;
+function adayAcildi(){
+  if(tasindi)return;tasindi=true;var g=$('golge');
+  var son=document.querySelector('#ekranTamam .kutu.tum');son.parentNode.insertBefore(g,son);
+}
+// Gölge Gün tercihi: aday WhatsApp'tan yazar (form yok); ekip sürümünde Gölge Gün zaten gizli
 function golgeGonder(tercih){
+  if(!ANAHTAR){
+    var ad=TANRI[SONUC.k].ad,m='Merhaba, Gayrimenkul DNA testinde '+ad+' çıktım. '+(tercih==='Beni arayın'?'Gölge Gün için uygun bir gün konuşalım.':'Gölge Gün için '+tercih+' uygun mu?');
+    window.open('https://wa.me/905324724148?text='+encodeURIComponent(m),'_blank');
+    $('golge').innerHTML='<p class="golge-ok">✓ WhatsApp\'ta mesajın hazır, gönder yeter. Broker\'ımız dönüp onaylayacak.</p>';
+    return;
+  }
   var b=$('golgeGonder');b.disabled=true;$('golgeHata').hidden=true;
   fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'adayGolgeGun',anahtar:ANAHTAR,telefon:TEL,golge_gun:tercih})})
   .then(function(r){return r.json()})
@@ -976,6 +974,13 @@ function golgeGonder(tercih){
     $('golge').innerHTML='<p class="golge-ok">'+(tercih==='Beni arayın'?'Tamam, Broker\'ımız seni arayıp birlikte gün belirleyecek.':'✓ '+esc(tercih)+' için yerin ayrıldı. Broker\'ımız arayıp onaylayacak.')+'</p>'})
   .catch(function(){b.disabled=false;$('golgeHata').textContent='Tercihin kaydedilemedi. Tekrar dene ya da WhatsApp\'tan 0532 472 41 48 numarasına yaz.';$('golgeHata').hidden=false});
 }
+// Arkadaşına gönder: telefonda paylaşım menüsü, yoksa WhatsApp
+$('arkadas').addEventListener('click',function(){
+  var url='https://dogusremax.github.io/kariyer/test.html?kaynak=arkadas',
+      m='Gayrimenkul DNA testini çözdüm, ben '+TANRI[SONUC.k].ad+' çıktım! Sen hangisisin? 2 dakika sürüyor:';
+  if(navigator.share){navigator.share({text:m,url:url}).catch(function(){});return}
+  window.open('https://wa.me/?text='+encodeURIComponent(m+' '+url),'_blank');
+});
 $('golgeGonder').addEventListener('click',function(){golgeGonder(SECGUN+' '+SECSAAT)});
 $('golgeAra').addEventListener('click',function(){golgeGonder('Beni arayın')});
 </script>
