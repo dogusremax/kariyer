@@ -103,9 +103,8 @@ body:not(.acik) .sarmal{background:linear-gradient(160deg,rgba(255,255,255,.08),
 .kanca b{color:var(--gold)}
 /* Ekip sürümü (?ekip=1): form ve Gölge Gün yok, harita doğrudan açılır */
 body.ekip .kilit,body.ekip #cagri,body.ekip #form,body.ekip #golge,body.ekip .son{display:none!important}
-/* Aday sürümü: rapor formsuz açılır; ad + telefon yalnız Gölge Gün için istenir */
-.kilit,#cagri,#gonder,#form .guven,#tekrar,#form .alan-ek{display:none!important}
-#golge #form{margin-top:14px}#golge .ikili{display:block}
+/* Aday sürümü: form yok; rapor direkt açılır, Gölge Gün WhatsApp mesajıyla ayrılır */
+.kilit,#cagri,#form{display:none!important}
 .ekip-yalniz{display:none}body.ekip .ekip-yalniz{display:block}body.ekip .aday-yalniz{display:none}
 .baslik2{font-size:27px;font-weight:700;line-height:1.15}
 .seritler{display:flex;gap:6px;height:330px;margin:16px 0 10px}
@@ -426,7 +425,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
     <button class="btn" id="raporaGit" style="margin-bottom:16px">Kişisel raporumu gör →</button>
     <div class="kutu"><div class="ozet"><div class="halka" id="halka"><span><b id="yuzde">%0</b><small>UYUM</small></span></div>
       <div><h3>2 süper gücün</h3><ul class="guc" id="gucler"></ul></div></div></div>
-    <div class="kutu kazanc aday-yalniz"><h3>BU İŞTE KAZANÇ</h3><p><b>Kendi saatlerin, kendi kazancın.</b> Maaş tavanı yok: kazancın, sattığın ve kiraladığın kadar büyür. Deneyim şartı yok, eğitimi ofisimiz veriyor.</p><a href="index.html#kazanc" target="_blank" rel="noopener">Ne kadar kazanabilirsin? Hesapla →</a></div>
+    <div class="kutu kazanc aday-yalniz"><h3>BU İŞTE KAZANÇ</h3><p><b>Kendi saatlerin, kendi kazancın.</b> Maaş tavanı yok: kazancın, sattığın ve kiraladığın kadar büyür. Deneyim şartı yok, eğitimi ofisimiz veriyor.</p><a id="kazancLink" href="https://yenifikirtepeburada.com/kariyer.html#kazanc" target="_blank" rel="noopener">Ne kadar kazanabilirsin? Hesapla →</a></div>
     <button type="button" class="story" id="story">📸 Sonucunu hikâyende paylaş</button>
     <p class="paylas-not" id="paylasNot" role="status"></p>
     <div class="kilit">
@@ -461,12 +460,12 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
     <div class="tamam-bas"><div class="muhur">✓</div><h1 class="cap gold" id="tamamBaslik">Tebrikler!</h1><p id="tamamAlt">İşte yetenek haritan. Güçlü yanların, gelişim alanın ve sana özel yol haritan aşağıda.</p></div>
     <div class="kutu" id="golge">
       <h3>Gölge Gün'ünü seç</h3>
-      <p class="golge-p">Bir gün boyunca bir danışmanımızın yanında işi içeriden gör. Gün ve saatini seç, adını ve telefonunu bırak; Broker'ımız arayıp onaylasın.</p>
+      <p class="golge-p">Bir gün boyunca bir danışmanımızın yanında işi içeriden gör. Gün ve saatini seç, WhatsApp'tan bize yaz; Broker'ımız onaylasın.</p>
       <div class="gunler" id="gunler" role="group" aria-label="Gün"></div>
       <div class="saatler" id="saatler" role="group" aria-label="Saat"><button type="button" data-s="10:00">10:00</button><button type="button" data-s="14:00">14:00</button></div>
       <p class="hata" id="golgeHata" role="alert" hidden></p>
-      <button type="button" class="btn" id="golgeGonder" disabled>Bu zamanı ayır →</button>
-      <div style="text-align:center;margin-top:6px"><button type="button" class="lnk" id="golgeAra">Bu günler uymuyor, beni arayın</button></div>
+      <button type="button" class="btn" id="golgeGonder" disabled>WhatsApp'tan ayır →</button>
+      <div style="text-align:center;margin-top:6px"><button type="button" class="lnk" id="golgeAra">Bu günler uymuyor, WhatsApp'tan yaz</button></div>
     </div>
     <div class="kutu"><h3>Senin yetenek haritan</h3><div class="harita" id="harita"></div>
       <p class="gelisim" id="gelisim"></p>
@@ -475,8 +474,8 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
       <p class="alinti">“Dört yetenek. Tek hedef.”<br><span id="tumSoz">Sıradaki başarı hikâyesi senin olsun.</span></p></div>
     <div class="ekip-yalniz" style="margin-bottom:18px"><button type="button" class="story" id="story2">📸 Sonucunu hikâyende paylaş</button><p class="paylas-not" style="text-align:center">Paylaşınca adaylar da kendi karakterini merak etsin.</p></div>
     <div class="son">
-      <a class="btn" href="./" style="text-decoration:none">RE/MAX Doğuş'ta kariyer fırsatlarını keşfet →</a>
-      <a class="lnk" href="./#program">Eğitim programını gör</a>
+      <a class="btn" id="sonKanca" href="https://yenifikirtepeburada.com/kariyer.html" target="_blank" rel="noopener" style="text-decoration:none">Masan hazır. Ofisini tanı →</a>
+      <a class="lnk" href="https://yenifikirtepeburada.com/kariyer.html#program" target="_blank" rel="noopener">Sıfırdan sahaya: 11 derslik programı gör</a>
       <a class="lnk" href="https://www.instagram.com/remaxdogus/" target="_blank" rel="noopener">Instagram'da @remaxdogus</a>
     </div>
     <p class="alt-yazi">"DAHA FAZLASI SENİNLE MÜMKÜN" · FİKİRTEPE · KADIKÖY</p>
@@ -868,7 +867,7 @@ function sonuc(){
   SONUC={puan:yuzde,k:en,profil:t.ad+' · '+t.unvan,detay:SIRA.map(function(k){return TANRI[k].guc+' '+oran[k]}).join(', '),
     cevap:cev.map(function(j){return 'ABCD'[j]}).join(''),oran:oran,guc:sira.slice(0,2).map(function(k){return GUC[k]})};
   $('kahramanImg').src=t.img;$('kahramanImg').alt=t.ad;$('sonucEm').src=document.body.classList.contains('t-mermer')?t.coin:t.em;
-  $('tanriAd').textContent=t.ad.toLocaleUpperCase('tr-TR');$('tanriUnvan').textContent=t.unvan.toLocaleUpperCase('tr-TR');$('tanriSoz').textContent=t.soz;
+  $('tanriAd').textContent=t.ad.toLocaleUpperCase('tr-TR');$('kazancLink').textContent='Bir '+t.ad+' bu işte ne kazanır? Hesapla →';$('tanriUnvan').textContent=t.unvan.toLocaleUpperCase('tr-TR');$('tanriSoz').textContent=t.soz;
   $('kisisel').textContent=(ISIM?ISIM+', ':'')+t.m.charAt(0).toLocaleLowerCase('tr-TR')+t.m.slice(1);
   if(!ISIM)$('kisisel').textContent=t.m;
   $('gucler').innerHTML=SONUC.guc.map(function(g){return '<li>'+g+'</li>'}).join('');
@@ -976,26 +975,18 @@ $('gunler').addEventListener('click',function(e){var b=e.target.closest('button'
   this.querySelectorAll('button').forEach(function(x){x.classList.toggle('sec',x===b)});golgeHazir()});
 $('saatler').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;SECSAAT=b.dataset.s;
   this.querySelectorAll('button').forEach(function(x){x.classList.toggle('sec',x===b)});golgeHazir()});
-// Aday raporu açınca: form Gölge Gün kutusuna, Gölge Gün haritanın altına (rapor önce, davet sonra)
+// Aday raporu açınca Gölge Gün daveti haritanın altına (rapor önce, davet sonra)
 var tasindi=false;
 function adayAcildi(){
-  if(tasindi)return;tasindi=true;var g=$('golge'),f=$('form');
-  g.insertBefore(f,$('golgeHata'));var son=document.querySelector('#ekranTamam .kutu.tum');son.parentNode.insertBefore(g,son);
+  if(tasindi)return;tasindi=true;var g=$('golge');
+  var son=document.querySelector('#ekranTamam .kutu.tum');son.parentNode.insertBefore(g,son);
 }
-// Gölge Gün tercihi: önce ad + telefonla başvuru kaydı (anahtar), sonra tercih
+// Gölge Gün tercihi: aday WhatsApp'tan yazar (form yok); ekip sürümünde Gölge Gün zaten gizli
 function golgeGonder(tercih){
-  if(!ANAHTAR&&!EKIP){
-    var form=$('form');$('golgeHata').hidden=true;
-    if(!form.checkValidity()){form.classList.add('tried');var ilk=form.querySelector(':invalid');
-      $('golgeHata').textContent=ilk&&ilk.id==='kvkk'?'Devam etmek için aydınlatma metnini onayla.':'Adını ve telefonunu yaz.';$('golgeHata').hidden=false;if(ilk)ilk.focus();return}
-    var veri={action:'adayBasvuru',utm:(qs.get('kaynak')||qs.get('utm_source')||'').slice(0,60),
-      test_puan:SONUC.puan,test_profil:SONUC.profil,test_detay:SONUC.detay,test_cevap:SONUC.cevap};
-    new FormData(form).forEach(function(v,k){veri[k]=v});
-    $('golgeGonder').disabled=true;
-    fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(veri)})
-    .then(function(r){return r.json()})
-    .then(function(j){if(!j.success)throw new Error(j.error||'');ANAHTAR=j.anahtar||'';TEL=veri.telefon;golgeGonder(tercih)})
-    .catch(function(e){golgeHazir();$('golgeHata').textContent=(e&&e.message&&e.message.indexOf('etch')<0&&e.message.indexOf('JSON')<0&&e.message)||'Gönderilemedi. Tekrar dene ya da WhatsApp\'tan 0532 472 41 48 numarasına yaz.';$('golgeHata').hidden=false});
+  if(!ANAHTAR){
+    var ad=TANRI[SONUC.k].ad,m='Merhaba, Gayrimenkul DNA testinde '+ad+' çıktım. '+(tercih==='Beni arayın'?'Gölge Gün için uygun bir gün konuşalım.':'Gölge Gün için '+tercih+' uygun mu?');
+    window.open('https://wa.me/905324724148?text='+encodeURIComponent(m),'_blank');
+    $('golge').innerHTML='<p class="golge-ok">✓ WhatsApp\'ta mesajın hazır, gönder yeter. Broker\'ımız dönüp onaylayacak.</p>';
     return;
   }
   var b=$('golgeGonder');b.disabled=true;$('golgeHata').hidden=true;
