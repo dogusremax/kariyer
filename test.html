@@ -474,6 +474,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
       <p class="alinti">“Dört yetenek. Tek hedef.”<br><span id="tumSoz">Sıradaki başarı hikâyesi senin olsun.</span></p></div>
     <div class="ekip-yalniz" style="margin-bottom:18px"><button type="button" class="story" id="story2">📸 Sonucunu hikâyende paylaş</button><p class="paylas-not" style="text-align:center">Paylaşınca adaylar da kendi karakterini merak etsin.</p></div>
     <div class="son">
+      <button type="button" class="story aday-yalniz" id="arkadas" style="background:#25D366">💬 Arkadaşına gönder</button>
       <a class="btn" id="sonKanca" href="https://yenifikirtepeburada.com/kariyer.html" target="_blank" rel="noopener" style="text-decoration:none">Masan hazır. Ofisini tanı →</a>
       <a class="lnk" href="https://yenifikirtepeburada.com/kariyer.html#program" target="_blank" rel="noopener">Sıfırdan sahaya: 11 derslik programı gör</a>
       <a class="lnk" href="https://www.instagram.com/remaxdogus/" target="_blank" rel="noopener">Instagram'da @remaxdogus</a>
@@ -996,6 +997,13 @@ function golgeGonder(tercih){
     $('golge').innerHTML='<p class="golge-ok">'+(tercih==='Beni arayın'?'Tamam, Broker\'ımız seni arayıp birlikte gün belirleyecek.':'✓ '+esc(tercih)+' için yerin ayrıldı. Broker\'ımız arayıp onaylayacak.')+'</p>'})
   .catch(function(){b.disabled=false;$('golgeHata').textContent='Tercihin kaydedilemedi. Tekrar dene ya da WhatsApp\'tan 0532 472 41 48 numarasına yaz.';$('golgeHata').hidden=false});
 }
+// Arkadaşına gönder: telefonda paylaşım menüsü, yoksa WhatsApp
+$('arkadas').addEventListener('click',function(){
+  var url='https://dogusremax.github.io/kariyer/test.html?kaynak=arkadas',
+      m='Gayrimenkul DNA testini çözdüm, ben '+TANRI[SONUC.k].ad+' çıktım! Sen hangisisin? 2 dakika sürüyor:';
+  if(navigator.share){navigator.share({text:m,url:url}).catch(function(){});return}
+  window.open('https://wa.me/?text='+encodeURIComponent(m+' '+url),'_blank');
+});
 $('golgeGonder').addEventListener('click',function(){golgeGonder(SECGUN+' '+SECSAAT)});
 $('golgeAra').addEventListener('click',function(){golgeGonder('Beni arayın')});
 </script>
