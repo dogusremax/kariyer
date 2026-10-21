@@ -183,6 +183,9 @@ body.ekip .kilit,body.ekip #cagri,body.ekip #form,body.ekip #golge,body.ekip .so
 .kisisel{margin:16px 0 14px;text-align:center;font-size:14.5px;color:#D7DCE6}
 .kutu{border:1px solid var(--line2);background:rgba(255,255,255,.035);border-radius:16px;padding:15px 16px;margin-bottom:12px}
 .kutu h3{font:700 12px var(--cap);letter-spacing:.14em;color:var(--gold);margin-bottom:10px}
+.kazanc p{font-size:14px;line-height:1.55;color:#D7DCE6}.kazanc p b{color:#fff}
+.kazanc a{display:inline-block;margin-top:10px;font:800 14px var(--body);color:var(--gold);text-decoration:none}
+body.acik .kazanc p{color:#34445E}body.acik .kazanc p b{color:#0C1E3F}
 .ozet{display:flex;align-items:center;gap:14px}
 .halka{--p:0;width:78px;height:78px;flex:0 0 78px;border-radius:50%;background:conic-gradient(var(--gold) calc(var(--p)*1%),rgba(255,255,255,.08) 0);display:flex;align-items:center;justify-content:center}
 .halka span{width:64px;height:64px;border-radius:50%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 19px var(--cap);color:var(--gold)}
@@ -420,6 +423,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
     <button class="btn" id="raporaGit" style="margin-bottom:16px">Kişisel raporumu gör →</button>
     <div class="kutu"><div class="ozet"><div class="halka" id="halka"><span><b id="yuzde">%0</b><small>UYUM</small></span></div>
       <div><h3>2 süper gücün</h3><ul class="guc" id="gucler"></ul></div></div></div>
+    <div class="kutu kazanc aday-yalniz"><h3>BU İŞTE KAZANÇ</h3><p><b>Kendi saatlerin, kendi kazancın.</b> Maaş tavanı yok: kazancın, sattığın ve kiraladığın kadar büyür. Deneyim şartı yok, eğitimi ofisimiz veriyor.</p><a href="index.html#kazanc" target="_blank" rel="noopener">Ne kadar kazanabilirsin? Hesapla →</a></div>
     <button type="button" class="story" id="story">📸 Sonucunu hikâyende paylaş</button>
     <p class="paylas-not" id="paylasNot" role="status"></p>
     <div class="kilit">
@@ -431,7 +435,7 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
       <div class="alan"><label for="ad">Ad Soyad *</label><input id="ad" name="ad_soyad" autocomplete="name" required placeholder="Adın ve soyadın"></div>
       <div class="ikili">
         <div class="alan"><label for="tel">Telefon *</label><input id="tel" name="telefon" type="tel" inputmode="tel" autocomplete="tel" placeholder="05__ ___ __ __" required></div>
-        <div class="alan"><label for="ilce">İlçe *</label><input id="ilce" name="ilce" required placeholder="Örn. Kadıköy"></div>
+        <div class="alan"><label for="ilce">İlçe (isteğe bağlı)</label><input id="ilce" name="ilce" placeholder="Örn. Kadıköy"></div>
       </div>
       <div class="alan"><label for="eposta">E-posta (isteğe bağlı)</label><input id="eposta" name="eposta" type="email" autocomplete="email" placeholder="ornek@eposta.com"></div>
       <div class="hp" aria-hidden="true"><label for="ws">Web sitesi</label><input id="ws" name="web_sitesi" tabindex="-1" autocomplete="off"></div>
