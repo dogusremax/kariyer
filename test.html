@@ -103,6 +103,9 @@ body:not(.acik) .sarmal{background:linear-gradient(160deg,rgba(255,255,255,.08),
 .kanca b{color:var(--gold)}
 /* Ekip sürümü (?ekip=1): form ve Gölge Gün yok, harita doğrudan açılır */
 body.ekip .kilit,body.ekip #cagri,body.ekip #form,body.ekip #golge,body.ekip .son{display:none!important}
+/* Aday sürümü: rapor formsuz açılır; ad + telefon yalnız Gölge Gün için istenir */
+.kilit,#cagri,#gonder,#form .guven,#tekrar,#form .alan-ek{display:none!important}
+#golge #form{margin-top:14px}#golge .ikili{display:block}
 .ekip-yalniz{display:none}body.ekip .ekip-yalniz{display:block}body.ekip .aday-yalniz{display:none}
 .baslik2{font-size:27px;font-weight:700;line-height:1.15}
 .seritler{display:flex;gap:6px;height:330px;margin:16px 0 10px}
@@ -435,9 +438,9 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
       <div class="alan"><label for="ad">Ad Soyad *</label><input id="ad" name="ad_soyad" autocomplete="name" required placeholder="Adın ve soyadın"></div>
       <div class="ikili">
         <div class="alan"><label for="tel">Telefon *</label><input id="tel" name="telefon" type="tel" inputmode="tel" autocomplete="tel" placeholder="05__ ___ __ __" required></div>
-        <div class="alan"><label for="ilce">İlçe (isteğe bağlı)</label><input id="ilce" name="ilce" placeholder="Örn. Kadıköy"></div>
+        <div class="alan alan-ek"><label for="ilce">İlçe (isteğe bağlı)</label><input id="ilce" name="ilce" placeholder="Örn. Kadıköy"></div>
       </div>
-      <div class="alan"><label for="eposta">E-posta (isteğe bağlı)</label><input id="eposta" name="eposta" type="email" autocomplete="email" placeholder="ornek@eposta.com"></div>
+      <div class="alan alan-ek"><label for="eposta">E-posta (isteğe bağlı)</label><input id="eposta" name="eposta" type="email" autocomplete="email" placeholder="ornek@eposta.com"></div>
       <div class="hp" aria-hidden="true"><label for="ws">Web sitesi</label><input id="ws" name="web_sitesi" tabindex="-1" autocomplete="off"></div>
       <label class="kvkk"><input type="checkbox" id="kvkk" name="kvkk" value="1" required>
         <span><button type="button" class="lnk" id="kvkkAc" aria-controls="kvkkMetin" aria-expanded="false">Aydınlatma metnini</button> okudum; başvurumun değerlendirilmesi için kişisel verilerimin ve test cevaplarımın işlenmesini kabul ediyorum. *</span></label>
@@ -455,10 +458,10 @@ body.t-mermer .kahraman::after{background:linear-gradient(180deg,rgba(251,248,24
   <!-- Teşekkür -->
   <section class="ekran" id="ekranTamam" hidden>
     <div class="ust"><span></span><div class="marka"><b>RE/MAX DOĞUŞ</b><small>FİKİRTEPE · KADIKÖY</small></div><span></span></div>
-    <div class="tamam-bas"><div class="muhur">✓</div><h1 class="cap gold" id="tamamBaslik">Teşekkürler!</h1><p>Sonucun Broker'ımıza ulaştı. Şimdi Gölge Gün'ün için sana uyan zamanı seç.</p></div>
+    <div class="tamam-bas"><div class="muhur">✓</div><h1 class="cap gold" id="tamamBaslik">Tebrikler!</h1><p id="tamamAlt">İşte yetenek haritan. Güçlü yanların, gelişim alanın ve sana özel yol haritan aşağıda.</p></div>
     <div class="kutu" id="golge">
       <h3>Gölge Gün'ünü seç</h3>
-      <p class="golge-p">Bir gün boyunca bir danışmanımızın yanındasın. Seçtiğin zamanı Broker'ımız arayıp onaylar.</p>
+      <p class="golge-p">Bir gün boyunca bir danışmanımızın yanında işi içeriden gör. Gün ve saatini seç, adını ve telefonunu bırak; Broker'ımız arayıp onaylasın.</p>
       <div class="gunler" id="gunler" role="group" aria-label="Gün"></div>
       <div class="saatler" id="saatler" role="group" aria-label="Saat"><button type="button" data-s="10:00">10:00</button><button type="button" data-s="14:00">14:00</button></div>
       <p class="hata" id="golgeHata" role="alert" hidden></p>
@@ -824,7 +827,7 @@ $('geri').addEventListener('click',function(){if(idx>0){idx--;soru()}else goster
 $('geri2').addEventListener('click',function(){if(idx>0){idx--;soru()}});
 $('karakterGeri').addEventListener('click',function(){goster('ekranGiris')});
 $('basla2').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
-$('raporaGit').addEventListener('click',function(){if(EKIP){raporGoster();return}$('cagri').scrollIntoView({behavior:'smooth',block:'start'})});
+$('raporaGit').addEventListener('click',raporGoster);
 $('story2').addEventListener('click',function(){$('story').click()});
 // Cevaplar bitince kısa bir "analiz" anı: paralar sırayla yanar, çubuk dolar
 function analiz(){
@@ -887,9 +890,9 @@ function raporGoster(){
   $('harita').innerHTML=haritaHTML(o,false);
   $('gelisim').innerHTML='<b>Gelişim alanın:</b> '+GELISIM[sira[3]];
   $('yol').innerHTML=YOL_BASLIK.map(function(b,j){return '<li><b>'+b+'</b>'+YOL[SONUC.k][j]+'</li>'}).join('');
-  $('tamamBaslik').textContent=ISIM?'Teşekkürler '+ISIM+'!':'Teşekkürler!';
+  $('tamamBaslik').textContent=ISIM?'Tebrikler '+ISIM+'!':'Tebrikler!';
   if(EKIP){$('tamamBaslik').textContent=ISIM?'Tebrikler '+ISIM+'!':'Tebrikler!';$('tamamBaslik').nextElementSibling.textContent='İşte '+TANRI[SONUC.k].ad+' haritan. Güçlü yanların ve gelişim alanın aşağıda.'}
-  else gunleriKur();
+  else{gunleriKur();if(!ANAHTAR)adayAcildi()}
   goster('ekranTamam');
   requestAnimationFrame(function(){requestAnimationFrame(function(){$('harita').querySelectorAll('i').forEach(function(i){i.style.width=i.dataset.w+'%'})})});
 }
@@ -939,6 +942,7 @@ var qs=new URLSearchParams(location.search);
 var form=$('form');
 form.addEventListener('submit',function(ev){
   ev.preventDefault();$('hata').hidden=true;
+  if(tasindi){if(SECGUN&&SECSAAT)golgeGonder(SECGUN+' '+SECSAAT);return}
   if(!form.checkValidity()){
     form.classList.add('tried');var ilk=form.querySelector(':invalid');
     $('hata').textContent=ilk&&ilk.id==='kvkk'?'Devam etmek için aydınlatma metnini onayla.':ilk&&ilk.id==='eposta'?'E-posta adresini kontrol et.':'Lütfen * ile işaretli alanları doldur.';
@@ -972,7 +976,28 @@ $('gunler').addEventListener('click',function(e){var b=e.target.closest('button'
   this.querySelectorAll('button').forEach(function(x){x.classList.toggle('sec',x===b)});golgeHazir()});
 $('saatler').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;SECSAAT=b.dataset.s;
   this.querySelectorAll('button').forEach(function(x){x.classList.toggle('sec',x===b)});golgeHazir()});
+// Aday raporu açınca: form Gölge Gün kutusuna, Gölge Gün haritanın altına (rapor önce, davet sonra)
+var tasindi=false;
+function adayAcildi(){
+  if(tasindi)return;tasindi=true;var g=$('golge'),f=$('form');
+  g.insertBefore(f,$('golgeHata'));var son=document.querySelector('#ekranTamam .kutu.tum');son.parentNode.insertBefore(g,son);
+}
+// Gölge Gün tercihi: önce ad + telefonla başvuru kaydı (anahtar), sonra tercih
 function golgeGonder(tercih){
+  if(!ANAHTAR&&!EKIP){
+    var form=$('form');$('golgeHata').hidden=true;
+    if(!form.checkValidity()){form.classList.add('tried');var ilk=form.querySelector(':invalid');
+      $('golgeHata').textContent=ilk&&ilk.id==='kvkk'?'Devam etmek için aydınlatma metnini onayla.':'Adını ve telefonunu yaz.';$('golgeHata').hidden=false;if(ilk)ilk.focus();return}
+    var veri={action:'adayBasvuru',utm:(qs.get('kaynak')||qs.get('utm_source')||'').slice(0,60),
+      test_puan:SONUC.puan,test_profil:SONUC.profil,test_detay:SONUC.detay,test_cevap:SONUC.cevap};
+    new FormData(form).forEach(function(v,k){veri[k]=v});
+    $('golgeGonder').disabled=true;
+    fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(veri)})
+    .then(function(r){return r.json()})
+    .then(function(j){if(!j.success)throw new Error(j.error||'');ANAHTAR=j.anahtar||'';TEL=veri.telefon;golgeGonder(tercih)})
+    .catch(function(e){golgeHazir();$('golgeHata').textContent=(e&&e.message&&e.message.indexOf('etch')<0&&e.message.indexOf('JSON')<0&&e.message)||'Gönderilemedi. Tekrar dene ya da WhatsApp\'tan 0532 472 41 48 numarasına yaz.';$('golgeHata').hidden=false});
+    return;
+  }
   var b=$('golgeGonder');b.disabled=true;$('golgeHata').hidden=true;
   fetch(BASVURU_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'adayGolgeGun',anahtar:ANAHTAR,telefon:TEL,golge_gun:tercih})})
   .then(function(r){return r.json()})
