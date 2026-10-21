@@ -818,7 +818,7 @@ if(EKIP)$('etiket').textContent=EKIP_ROL==='broker'?'LİDERLİK DNA TESTİ':'EK�
 if(EKIP){$('karakterSoz').textContent='“Tecrüben hangi gücü büyüttü? Birlikte bakalım.”';$('tumSoz').textContent='Ofisimiz bu dört gücün toplamı.'}
 if(EKIP_ROL==='broker'){$('ekipKanca').innerHTML='<b>Ofisin lideri</b> olarak senin DNA\'n hangisi? Liderlik tarzını keşfet.';$('karakterSoz').textContent='“Ekibin sana bakıyor. Sen hangi güçle yönetiyorsun?”'}
 if(EKIP_AD){$('isim').value=EKIP_AD;$('isimAlan').querySelector('label').textContent='Hoş geldin '+EKIP_AD+'!'}
-$('basla').addEventListener('click',function(){ISIM=$('isim').value.trim().split(/\s+/)[0]||'';ISIM=ISIM.charAt(0).toLocaleUpperCase('tr-TR')+ISIM.slice(1);goster('ekranKarakter');seritSec(0);seritBaslat()});
+$('basla').addEventListener('click',function(){ISIM=$('isim').value.trim().split(/\s+/)[0]||'';ISIM=ISIM.charAt(0).toLocaleUpperCase('tr-TR')+ISIM.slice(1);goster('ekranKarakter');seritSec(0);seritBaslat();olay('basladi')});
 $('tekrar').addEventListener('click',function(){idx=0;cev=[];goster('ekranSoru');soru()});
 
 // Cevap verdikçe önde giden güç bulanıklıktan çıkar
@@ -853,6 +853,7 @@ function sonuc(){
   if(ISIM&&!$('ad').value)$('ad').value=ISIM+' ';
   $('paylasNot').textContent='';
   if(EKIP){$('raporaGit').textContent='Yetenek haritamı gör →';ekipGonder()}
+  olay('bitirdi');
   goster('ekranSonuc');
   var h=$('halka'),n=0;
   var iv=setInterval(function(){n=Math.min(yuzde,n+2);h.style.setProperty('--p',n);$('yuzde').textContent='%'+n;if(n>=yuzde)clearInterval(iv)},18);
@@ -863,6 +864,7 @@ function ekipGonder(){
     body:JSON.stringify({action:'ekipDna',ad:EKIP_AD||ISIM,test_puan:SONUC.puan,test_profil:SONUC.profil,test_detay:SONUC.detay,test_cevap:SONUC.cevap})}).catch(function(){})}catch(e){}
 }
 function raporGoster(){
+  olay('rapor');
   var o=SONUC.oran,sira=SIRA.slice().sort(function(a,b){return o[b]-o[a]});
   $('harita').innerHTML=haritaHTML(o,false);
   $('gelisim').innerHTML='<b>Gelişim alanın:</b> '+GELISIM[sira[3]];
@@ -963,6 +965,7 @@ function adayAcildi(){
 function golgeGonder(tercih){
   if(!ANAHTAR){
     var ad=TANRI[SONUC.k].ad,m='Merhaba, Gayrimenkul DNA testinde '+ad+' çıktım. '+(tercih==='Beni arayın'?'Gölge Gün için uygun bir gün konuşalım.':'Gölge Gün için '+tercih+' uygun mu?');
+    olay('whatsapp');
     window.open('https://wa.me/905324724148?text='+encodeURIComponent(m),'_blank');
     $('golge').innerHTML='<p class="golge-ok">✓ WhatsApp\'ta mesajın hazır, gönder yeter. Broker\'ımız dönüp onaylayacak.</p>';
     return;
@@ -978,11 +981,17 @@ function golgeGonder(tercih){
 $('arkadas').addEventListener('click',function(){
   var url='https://dogusremax.github.io/kariyer/test.html?kaynak=arkadas',
       m='Gayrimenkul DNA testini çözdüm, ben '+TANRI[SONUC.k].ad+' çıktım! Sen hangisisin? 2 dakika sürüyor:';
+  olay('paylasti');
   if(navigator.share){navigator.share({text:m,url:url}).catch(function(){});return}
   window.open('https://wa.me/?text='+encodeURIComponent(m+' '+url),'_blank');
 });
 $('golgeGonder').addEventListener('click',function(){golgeGonder(SECGUN+' '+SECSAAT)});
 $('golgeAra').addEventListener('click',function(){golgeGonder('Beni arayın')});
+// Aday istatistiği: isimsiz olay (açtı, başladı, bitirdi…) → takip tablosu "Test İstatistik" sekmesi
+var ZID=(function(){try{var z=sessionStorage.getItem('dnaZ');if(!z){z=Math.random().toString(36).slice(2,12);sessionStorage.setItem('dnaZ',z)}return z}catch(e){return Math.random().toString(36).slice(2,12)}})();
+function olay(o){if(EKIP)return;try{fetch(BASVURU_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},
+  body:JSON.stringify({action:'testOlay',olay:o,ziyaret:ZID,kaynak:(new URLSearchParams(location.search).get('kaynak')||''),karakter:SONUC.k?TANRI[SONUC.k].ad:'',puan:SONUC.k?SONUC.puan:''})}).catch(function(){})}catch(e){}}
+olay('acti');
 </script>
 </body>
 </html>
